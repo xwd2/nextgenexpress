@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Onboarding - NextGen Express</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --accent: #3b82f6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .intro-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .intro-section h2 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .intro-section p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Service Selection */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .service-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-header h3 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-header p {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .service-body {
+            padding: 2rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 0.75rem 0;
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .features-list li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .form-button {
+            display: block;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1.125rem;
+            cursor: pointer;
+        }
+
+        .form-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+        }
+
+        /* Form Container */
+        .form-container {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .form-header h3 {
+            font-size: 1.75rem;
+            color: var(--text-dark);
+        }
+
+        .back-button {
+            background: var(--text-light);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background: var(--text-dark);
+        }
+
+        .embedded-form {
+            width: 100%;
+            min-height: 1200px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        /* Help Section */
+        .help-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .help-section h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .help-section p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .contact-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            color: #9ca3af;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .embedded-form {
+                min-height: 1500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-section">
+            <div class="logo-icon">NE</div>
+            <div class="logo-text">NextGen Express</div>
+        </div>
+        <h1>Client Onboarding Portal</h1>
+        <p>Welcome! Select your service below to begin the onboarding process. We'll guide you through everything we need to get started.</p>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Intro Section -->
+        <div class="intro-section" id="intro-section">
+            <h2>Choose Your Service</h2>
+            <p>Select the service you'd like to get started with. Each form is tailored to gather the specific information we need to provide you with excellent service.</p>
+        </div>
+
+        <!-- Service Selection Grid -->
+        <div class="services-grid" id="service-selection">
+            <!-- Fuel Reporting Service -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">📊</div>
+                    <h3>Fuel Reporting Service</h3>
+                    <p>Comprehensive fuel analysis and reporting</p>
+                </div>
+                <div class="service-body">
+                    <ul class="features-list">
+                        <li>Weekly or monthly fuel reports</li>
+                        <li>Detailed cost analysis and trends</li>
+                        <li>Driver and route comparisons</li>
+                        <li>Fraud detection and savings opportunities</li>
+                    </ul>
+                    <button class="form-button" onclick="showForm('fuel')">
+                        Start Fuel Reporting Onboarding →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Reefer Tax Returns Service -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">📋</div>
+                    <h3>Reefer Diesel Tax Returns</h3>
+                    <p>Complete tax preparation and filing</p>
+                </div>
+                <div class="service-body">
+                    <ul class="features-list">
+                        <li>Multi-state tax return preparation</li>
+                        <li>Maximum refund calculations</li>
+                        <li>Timely filing and compliance</li>
+                        <li>Full documentation and support</li>
+                    </ul>
+                    <button class="form-button" onclick="showForm('reefer')">
+                        Start Tax Return Onboarding →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fuel Reporting Form Container -->
+        <div class="form-container" id="fuel-form">
+            <div class="form-header">
+                <h3>Fuel Reporting Onboarding</h3>
+                <button class="back-button" onclick="hideForm()">← Back to Services</button>
+            </div>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfNGkTpUC0v0Wj-pYOo3YJhz8n-aEJHxwdmUmNvRPTfhYdTyQ/viewform?embedded=true" class="embedded-form"></iframe>
+        </div>
+
+        <!-- Reefer Tax Returns Form Container -->
+        <div class="form-container" id="reefer-form">
+            <div class="form-header">
+                <h3>Reefer Diesel Tax Returns Onboarding</h3>
+                <button class="back-button" onclick="hideForm()">← Back to Services</button>
+            </div>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfj5xZPZQPe6yqGa0XrZKRXNxo9aKKTEPBVYMw2HWB_I8fBrQ/viewform?embedded=true" class="embedded-form"></iframe>
+        </div>
+
+        <!-- Help Section -->
+        <div class="help-section">
+            <h3>Need Help?</h3>
+            <p>If you have any questions about the onboarding process, we're here to assist you.</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <a href="mailto:info@nextgenexpress.com">info@nextgenexpress.com</a>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <a href="tel:+15551234567">(555) 123-4567</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 NextGen Express. All rights reserved. | Secure Client Onboarding Portal</p>
+    </footer>
+
+    <script>
+        function showForm(formType) {
+            // Hide service selection
+            document.getElementById('service-selection').style.display = 'none';
+            document.getElementById('intro-section').style.display = 'none';
+            
+            // Show the selected form
+            if (formType === 'fuel') {
+                document.getElementById('fuel-form').classList.add('active');
+            } else if (formType === 'reefer') {
+                document.getElementById('reefer-form').classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function hideForm() {
+            // Hide all forms
+            document.getElementById('fuel-form').classList.remove('active');
+            document.getElementById('reefer-form').classList.remove('active');
+            
+            // Show service selection
+            document.getElementById('service-selection').style.display = 'grid';
+            document.getElementById('intro-section').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
