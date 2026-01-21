@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NextGen Express - Professional Fuel Reporting, IFTA & Tax Services</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚛</text></svg>">
     <style>
         * {
             margin: 0;
@@ -12,22 +13,25 @@
         }
 
         :root {
-            --primary: #1e40af;
-            --primary-dark: #1e3a8a;
-            --primary-darker: #1e293b;
-            --accent: #3b82f6;
-            --success: #10b981;
-            --text-dark: #1f2937;
-            --text-muted: #6b7280;
+            --primary: #1e3a8a;
+            --primary-dark: #1e293b;
+            --primary-darker: #0f172a;
+            --accent: #2563eb;
+            --accent-light: #3b82f6;
+            --success: #059669;
+            --text-dark: #0f172a;
+            --text-body: #334155;
+            --text-muted: #64748b;
             --bg-light: #ffffff;
-            --bg-gray: #f9fafb;
-            --border-color: #e5e7eb;
+            --bg-gray: #f8fafc;
+            --bg-dark: #f1f5f9;
+            --border-color: #e2e8f0;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
+            line-height: 1.7;
+            color: var(--text-body);
             background: var(--bg-light);
             overflow-x: hidden;
         }
@@ -40,7 +44,7 @@
         header {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -65,7 +69,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 3rem;
+            padding: 1.25rem 3rem;
             position: relative;
         }
 
@@ -89,10 +93,10 @@
         }
 
         .logo-icon {
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            filter: drop-shadow(0 4px 12px rgba(30, 64, 175, 0.2));
+            filter: drop-shadow(0 2px 8px rgba(30, 58, 138, 0.15));
         }
 
         .logo-icon svg {
@@ -114,7 +118,7 @@
         }
 
         .nav-links a {
-            color: var(--text-dark);
+            color: var(--text-body);
             text-decoration: none;
             font-weight: 600;
             font-size: 1.05rem;
@@ -146,11 +150,11 @@
             background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
             padding: 0.9rem 2rem;
-            border-radius: 12px;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.4s ease;
-            box-shadow: 0 4px 20px rgba(30, 64, 175, 0.3);
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
             position: relative;
             overflow: hidden;
         }
@@ -171,8 +175,8 @@
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 30px rgba(30, 64, 175, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35);
         }
 
         /* Mobile Menu */
@@ -265,7 +269,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(3px);
             z-index: 98;
             opacity: 0;
@@ -278,11 +282,10 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, rgba(30, 64, 175, 0.95) 0%, rgba(59, 130, 246, 0.9) 100%),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231e40af" width="1200" height="600"/><path fill="%233b82f6" opacity="0.1" d="M0 400 Q300 350 600 400 T1200 400 V600 H0 Z"/></svg>') center/cover;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
             position: relative;
             overflow: hidden;
-            padding: 8rem 3rem;
+            padding: 9rem 3rem;
             text-align: center;
             color: white;
         }
@@ -295,8 +298,8 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
             animation: pulse 8s ease-in-out infinite;
         }
 
@@ -326,19 +329,23 @@
 
         .hero h1 {
             font-size: 4rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             line-height: 1.2;
             font-weight: 800;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
             animation: fadeInUp 1s ease-out 0.2s both;
+            letter-spacing: -0.02em;
         }
 
         .hero p {
-            font-size: 1.45rem;
-            margin-bottom: 3.5rem;
-            line-height: 1.9;
+            font-size: 1.5rem;
+            margin-bottom: 4rem;
+            line-height: 1.8;
             opacity: 0.95;
             animation: fadeInUp 1s ease-out 0.4s both;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-buttons {
@@ -352,13 +359,13 @@
         .button-primary {
             background: white;
             color: var(--primary);
-            padding: 1.2rem 3rem;
-            border-radius: 12px;
+            padding: 1.3rem 3.5rem;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: 700;
             font-size: 1.1rem;
             transition: all 0.4s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
             position: relative;
             overflow: hidden;
         }
@@ -371,7 +378,7 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: rgba(30, 64, 175, 0.1);
+            background: rgba(30, 58, 138, 0.1);
             transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
         }
@@ -382,25 +389,26 @@
         }
 
         .button-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
         }
 
         .button-secondary {
             background: transparent;
             color: white;
-            padding: 1.2rem 3rem;
-            border-radius: 12px;
+            padding: 1.3rem 3.5rem;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: 700;
             font-size: 1.1rem;
-            border: 2px solid white;
+            border: 2px solid rgba(255,255,255,0.8);
             transition: all 0.4s ease;
         }
 
         .button-secondary:hover {
-            background: rgba(255,255,255,0.15);
-            transform: translateY(-4px);
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+            transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
 
@@ -440,7 +448,7 @@
 
         /* Value Prop */
         .value-prop {
-            padding: 7rem 3rem;
+            padding: 8rem 3rem;
             background: white;
             text-align: center;
         }
@@ -451,16 +459,17 @@
         }
 
         .value-prop h2 {
-            font-size: 3rem;
-            margin-bottom: 2rem;
+            font-size: 3.2rem;
+            margin-bottom: 2.5rem;
             color: var(--text-dark);
             font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
         .value-prop p {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--text-muted);
-            line-height: 2;
+            line-height: 1.9;
         }
 
         /* Services Section */
@@ -476,9 +485,10 @@
 
         .section-header h2 {
             font-size: 3.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             color: var(--text-dark);
             font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
         .section-header p {
@@ -486,6 +496,7 @@
             color: var(--text-muted);
             max-width: 850px;
             margin: 0 auto;
+            line-height: 1.8;
         }
 
         .services-grid {
@@ -497,15 +508,15 @@
         }
 
         .service-card {
-            padding: 3.5rem 3rem;
-            border-radius: 20px;
+            padding: 4rem 3.5rem;
+            border-radius: 16px;
             background: white;
             border: 1px solid var(--border-color);
             transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             text-align: center;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
         }
 
         .service-card::before {
@@ -522,9 +533,9 @@
         }
 
         .service-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 50px rgba(30, 64, 175, 0.15);
-            border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(30, 58, 138, 0.12);
+            border-color: var(--accent-light);
         }
 
         .service-card:hover::before {
@@ -539,29 +550,30 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 2.5rem;
+            margin: 0 auto 3rem;
             font-size: 3rem;
-            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.2);
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.2);
             transition: all 0.5s ease;
         }
 
         .service-card:hover .service-icon {
-            transform: scale(1.15) rotate(10deg);
-            box-shadow: 0 15px 40px rgba(30, 64, 175, 0.35);
+            transform: scale(1.12) rotate(10deg);
+            box-shadow: 0 12px 35px rgba(30, 58, 138, 0.3);
         }
 
         .service-card h3 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            font-size: 2.1rem;
+            margin-bottom: 1.75rem;
             color: var(--text-dark);
             font-weight: 700;
+            letter-spacing: -0.01em;
         }
 
         .service-card p {
-            color: var(--text-muted);
-            line-height: 1.9;
-            margin-bottom: 2.5rem;
-            font-size: 1.1rem;
+            color: var(--text-body);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            font-size: 1.15rem;
         }
 
         .service-link {
@@ -594,7 +606,7 @@
             left: 0;
             right: 0;
             height: 100%;
-            background: linear-gradient(180deg, transparent 0%, rgba(30, 64, 175, 0.02) 50%, transparent 100%);
+            background: linear-gradient(180deg, transparent 0%, rgba(248, 250, 252, 0.5) 50%, transparent 100%);
             pointer-events: none;
         }
 
@@ -602,31 +614,31 @@
             max-width: 1300px;
             margin: 0 auto;
             display: grid;
-            gap: 4rem;
+            gap: 4.5rem;
             position: relative;
             z-index: 1;
         }
 
         .step {
             display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 3rem;
+            grid-template-columns: 120px 1fr;
+            gap: 3.5rem;
             align-items: start;
         }
 
         .step-number {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 700;
             flex-shrink: 0;
-            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.25);
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.25);
             transition: all 0.5s ease;
             position: relative;
         }
@@ -653,16 +665,17 @@
         }
 
         .step-content h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
             color: var(--text-dark);
             font-weight: 700;
+            letter-spacing: -0.01em;
         }
 
         .step-content p {
-            color: var(--text-muted);
-            line-height: 1.9;
-            font-size: 1.15rem;
+            color: var(--text-body);
+            line-height: 1.8;
+            font-size: 1.2rem;
         }
 
         /* Testimonials */
@@ -681,9 +694,9 @@
 
         .testimonial-card {
             background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 3.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
             position: relative;
             border: 1px solid var(--border-color);
             transition: all 0.5s ease;
@@ -691,8 +704,8 @@
 
         .testimonial-card:hover {
             transform: translateY(-8px);
-            border-color: var(--primary);
-            box-shadow: 0 15px 45px rgba(30, 64, 175, 0.15);
+            border-color: var(--accent-light);
+            box-shadow: 0 12px 40px rgba(30, 58, 138, 0.12);
         }
 
         .quote-icon {
@@ -701,21 +714,21 @@
             right: 2rem;
             font-size: 4rem;
             color: var(--primary);
-            opacity: 0.1;
+            opacity: 0.08;
         }
 
         .testimonial-text {
-            margin-bottom: 2rem;
-            color: var(--text-muted);
-            line-height: 1.9;
+            margin-bottom: 2.5rem;
+            color: var(--text-body);
+            line-height: 1.8;
             font-style: italic;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
         }
 
         .testimonial-author {
             display: flex;
             align-items: center;
-            gap: 1.25rem;
+            gap: 1.5rem;
         }
 
         .author-avatar {
@@ -738,7 +751,7 @@
         }
 
         .author-info h4 {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-dark);
             margin-bottom: 0.3rem;
             font-weight: 700;
@@ -750,14 +763,14 @@
         }
 
         .stars {
-            color: #fbbf24;
-            margin-bottom: 1.25rem;
-            font-size: 1.2rem;
+            color: #f59e0b;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
         }
 
         /* CTA Section */
         .cta-section {
-            background: linear-gradient(135deg, var(--primary-darker) 0%, var(--primary) 100%);
+            background: linear-gradient(135deg, var(--primary-darker) 0%, var(--primary-dark) 100%);
             color: white;
             padding: 8rem 3rem;
             text-align: center;
@@ -773,8 +786,8 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 70% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+                radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
             animation: pulse 10s ease-in-out infinite;
         }
 
@@ -787,20 +800,22 @@
 
         .cta-section h2 {
             font-size: 3.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
         .cta-section p {
             font-size: 1.5rem;
-            margin-bottom: 3.5rem;
+            margin-bottom: 4rem;
             opacity: 0.95;
+            line-height: 1.7;
         }
 
         /* Footer */
         footer {
             background: var(--primary-darker);
-            color: #e5e7eb;
+            color: #cbd5e1;
             padding: 5rem 3rem 2.5rem;
         }
 
@@ -814,7 +829,7 @@
         }
 
         .footer-section h3 {
-            margin-bottom: 1.75rem;
+            margin-bottom: 2rem;
             color: white;
             font-size: 1.3rem;
             font-weight: 700;
@@ -822,12 +837,13 @@
 
         .footer-section p,
         .footer-section a {
-            color: #cbd5e1;
+            color: #94a3b8;
             text-decoration: none;
             display: block;
-            margin-bottom: 0.9rem;
+            margin-bottom: 1rem;
             transition: all 0.3s ease;
             font-size: 1.05rem;
+            line-height: 1.7;
         }
 
         .footer-section a:hover {
@@ -841,12 +857,16 @@
             padding-top: 2.5rem;
             border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
-            color: #cbd5e1;
+            color: #94a3b8;
         }
 
         @media (max-width: 968px) {
             .hero h1 {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
             }
 
             .nav-center {
@@ -870,14 +890,14 @@
             }
 
             .step {
-                grid-template-columns: 80px 1fr;
-                gap: 2rem;
+                grid-template-columns: 100px 1fr;
+                gap: 2.5rem;
             }
 
             .step-number {
-                width: 80px;
-                height: 80px;
-                font-size: 2rem;
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
             }
 
             .services-grid {
@@ -888,13 +908,18 @@
                 font-size: 2.5rem;
             }
 
+            .value-prop h2 {
+                font-size: 2.3rem;
+            }
+
             .hero {
-                padding: 5rem 2rem;
+                padding: 6rem 2rem;
             }
 
             .services-preview,
             .how-it-works,
-            .testimonials {
+            .testimonials,
+            .value-prop {
                 padding: 5rem 2rem;
             }
         }
@@ -906,25 +931,39 @@
             <a href="/" class="logo">
                 <div class="logo-icon">
                     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Hexagon badge -->
-                        <polygon points="100,10 170,50 170,130 100,170 30,130 30,50" fill="#1e40af" stroke="#94a3b8" stroke-width="4"/>
-                        <polygon points="100,18 163,55 163,125 100,162 37,125 37,55" fill="white"/>
+                        <!-- Modern Semi Truck -->
+                        <!-- Cab -->
+                        <rect x="40" y="90" width="50" height="45" fill="#1e3a8a" rx="4"/>
+                        <rect x="42" y="92" width="46" height="20" fill="#64748b" opacity="0.3" rx="2"/>
                         
-                        <!-- Truck -->
-                        <rect x="60" y="85" width="45" height="28" fill="#1e40af" rx="2"/>
-                        <path d="M105 85 L130 85 L140 100 L140 113 L105 113 Z" fill="#1e40af"/>
-                        <rect x="110" y="90" width="12" height="10" fill="#3b82f6" rx="1"/>
-                        <rect x="125" y="90" width="10" height="10" fill="#3b82f6" rx="1"/>
+                        <!-- Windshield -->
+                        <path d="M 45 92 L 52 85 L 82 85 L 85 92 Z" fill="#3b82f6" opacity="0.5"/>
+                        
+                        <!-- Trailer -->
+                        <rect x="90" y="95" width="80" height="40" fill="#1e3a8a" rx="3"/>
+                        <rect x="95" y="100" width="70" height="25" fill="#64748b" opacity="0.2" rx="2"/>
+                        
+                        <!-- Dual Exhausts -->
+                        <rect x="85" y="85" width="3" height="15" fill="#475569" rx="1.5"/>
+                        <rect x="80" y="85" width="3" height="12" fill="#475569" rx="1.5"/>
+                        <ellipse cx="86.5" cy="84" rx="2" ry="1.5" fill="#94a3b8"/>
+                        <ellipse cx="81.5" cy="84" rx="2" ry="1.5" fill="#94a3b8"/>
                         
                         <!-- Wheels -->
-                        <circle cx="75" cy="118" r="8" fill="#1e293b"/>
-                        <circle cx="75" cy="118" r="4" fill="#cbd5e1"/>
-                        <circle cx="125" cy="118" r="8" fill="#1e293b"/>
-                        <circle cx="125" cy="118" r="4" fill="#cbd5e1"/>
+                        <circle cx="60" cy="140" r="10" fill="#1e293b"/>
+                        <circle cx="60" cy="140" r="5" fill="#64748b"/>
+                        <circle cx="105" cy="140" r="10" fill="#1e293b"/>
+                        <circle cx="105" cy="140" r="5" fill="#64748b"/>
+                        <circle cx="145" cy="140" r="10" fill="#1e293b"/>
+                        <circle cx="145" cy="140" r="5" fill="#64748b"/>
                         
-                        <!-- Growth arrow -->
-                        <path d="M 50 60 L 70 45 L 90 55 L 110 40 L 125 50" stroke="#10b981" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                        <polygon points="125,50 130,40 120,45" fill="#10b981"/>
+                        <!-- Details -->
+                        <rect x="43" y="100" width="8" height="12" fill="#3b82f6" opacity="0.7" rx="1"/>
+                        <rect x="43" y="115" width="8" height="8" fill="#3b82f6" opacity="0.7" rx="1"/>
+                        
+                        <!-- Growth Arrow -->
+                        <path d="M 110 60 L 125 50 L 140 55 L 155 45 L 165 50" stroke="#059669" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polygon points="165,50 170,42 162,46" fill="#059669"/>
                     </svg>
                 </div>
                 NextGen Express
@@ -932,11 +971,11 @@
             <div class="nav-center">
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
-                    <li><a href="services">Services</a></li>
-                    <li><a href="contact">Contact</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
-            <a href="contact" class="cta-button">Get Started</a>
+            <a href="get-started.html" class="cta-button">Get Started</a>
             <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
         </nav>
     </header>
@@ -945,10 +984,10 @@
     <div class="mobile-menu">
         <ul>
             <li><a href="/" onclick="toggleMenu()">Home</a></li>
-            <li><a href="services" onclick="toggleMenu()">Services</a></li>
-            <li><a href="contact" onclick="toggleMenu()">Contact</a></li>
+            <li><a href="services.html" onclick="toggleMenu()">Services</a></li>
+            <li><a href="contact.html" onclick="toggleMenu()">Contact</a></li>
         </ul>
-        <a href="contact" class="cta-button" onclick="toggleMenu()">Get Started</a>
+        <a href="get-started.html" class="cta-button" onclick="toggleMenu()">Get Started</a>
     </div>
 
     <section class="hero">
@@ -956,8 +995,8 @@
             <h1>Professional Fuel Reporting, IFTA & Tax Services for Trucking Companies</h1>
             <p>We handle all your fuel reporting, IFTA quarterly filings, and reefer diesel tax returns so you can focus on running your business. No manual work required on your end.</p>
             <div class="hero-buttons">
-                <a href="contact" class="button-primary">Get Started Today</a>
-                <a href="services" class="button-secondary">View Our Services</a>
+                <a href="get-started.html" class="button-primary">Get Started Today</a>
+                <a href="services.html" class="button-secondary">View Our Services</a>
             </div>
         </div>
     </section>
@@ -979,19 +1018,19 @@
                 <div class="service-icon">📊</div>
                 <h3>Fuel Reporting</h3>
                 <p>Comprehensive fuel reports delivered weekly or monthly. We track every gallon, analyze spending patterns, and identify cost-saving opportunities.</p>
-                <a href="services#fuel-reports" class="service-link">Learn More →</a>
+                <a href="services.html#fuel-reports" class="service-link">Learn More →</a>
             </div>
             <div class="service-card fade-in">
                 <div class="service-icon">📑</div>
                 <h3>IFTA Quarterly Tax Filings</h3>
                 <p>Complete IFTA quarterly tax preparation and filing for all jurisdictions. We calculate your fuel tax obligations and submit everything on time.</p>
-                <a href="services#ifta-filings" class="service-link">Learn More →</a>
+                <a href="services.html#ifta-filings" class="service-link">Learn More →</a>
             </div>
             <div class="service-card fade-in">
                 <div class="service-icon">📋</div>
                 <h3>Reefer Diesel Tax Returns</h3>
                 <p>Complete reefer diesel tax return preparation and filing for all U.S. states. We handle all paperwork so you stay compliant and maximize refunds.</p>
-                <a href="services#tax-returns" class="service-link">Learn More →</a>
+                <a href="services.html#tax-returns" class="service-link">Learn More →</a>
             </div>
         </div>
     </section>
@@ -1076,7 +1115,7 @@
             <h2>Ready to Simplify Your Fuel Reporting & Tax Compliance?</h2>
             <p>Let us handle the paperwork while you focus on what matters most - running your trucking business.</p>
             <div class="hero-buttons">
-                <a href="contact" class="button-primary">Contact Us Today</a>
+                <a href="get-started.html" class="button-primary">Get Started Today</a>
             </div>
         </div>
     </section>
@@ -1089,15 +1128,15 @@
             </div>
             <div class="footer-section">
                 <h3>Services</h3>
-                <a href="services#fuel-reports">Fuel Reporting</a>
-                <a href="services#ifta-filings">IFTA Quarterly Tax Filings</a>
-                <a href="services#tax-returns">Reefer Diesel Tax Returns</a>
+                <a href="services.html#fuel-reports">Fuel Reporting</a>
+                <a href="services.html#ifta-filings">IFTA Quarterly Tax Filings</a>
+                <a href="services.html#tax-returns">Reefer Diesel Tax Returns</a>
             </div>
             <div class="footer-section">
                 <h3>Company</h3>
                 <a href="/">Home</a>
-                <a href="services">Services</a>
-                <a href="contact">Contact</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html">Contact</a>
             </div>
             <div class="footer-section">
                 <h3>Contact</h3>
