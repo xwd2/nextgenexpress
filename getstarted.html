@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started - NextGen Express</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚛</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a8a;
+            --primary-dark: #1e293b;
+            --primary-darker: #0f172a;
+            --accent: #2563eb;
+            --accent-light: #3b82f6;
+            --success: #059669;
+            --text-dark: #0f172a;
+            --text-body: #334155;
+            --text-muted: #64748b;
+            --bg-light: #ffffff;
+            --bg-gray: #f8fafc;
+            --bg-dark: #f1f5f9;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.7;
+            color: var(--text-body);
+            background: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 3rem;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateX(5px);
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            transition: all 0.4s;
+            filter: drop-shadow(0 2px 8px rgba(30, 58, 138, 0.15));
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .nav-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-body);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 101;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.15);
+            transition: right 0.4s;
+            z-index: 99;
+            padding: 7rem 2.5rem 2rem;
+            border-left: 1px solid var(--border-color);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu ul li {
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        .mobile-menu.active ul li {
+            animation: slideInMenu 0.5s forwards;
+        }
+
+        .mobile-menu ul li:nth-child(1) { animation-delay: 0.1s; }
+        .mobile-menu ul li:nth-child(2) { animation-delay: 0.2s; }
+        .mobile-menu ul li:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes slideInMenu {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .mobile-menu ul li a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        .mobile-menu ul li a:hover {
+            color: var(--primary);
+            padding-left: 15px;
+        }
+
+        .mobile-menu .cta-button {
+            display: block;
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(3px);
+            z-index: 98;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            padding: 6rem 3rem;
+            text-align: center;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .page-header p {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Process Steps */
+        .process-section {
+            padding: 8rem 3rem;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .section-header h2 {
+            font-size: 3.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .process-steps {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            gap: 3.5rem;
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 3.5rem;
+            align-items: start;
+            padding: 3.5rem;
+            background: var(--bg-gray);
+            border-radius: 16px;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+        }
+
+        .process-step:hover {
+            border-color: var(--accent-light);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(30, 58, 138, 0.12);
+        }
+
+        .step-number {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.25);
+            transition: all 0.4s ease;
+        }
+
+        .process-step:hover .step-number {
+            transform: scale(1.08) rotate(-5deg);
+        }
+
+        .step-content h3 {
+            font-size: 2.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .step-content p {
+            color: var(--text-body);
+            line-height: 1.8;
+            font-size: 1.15rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .detail-tag {
+            background: white;
+            padding: 0.6rem 1.3rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--primary);
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Service Selection */
+        .service-selection {
+            padding: 8rem 3rem;
+            background: var(--bg-gray);
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .service-option {
+            background: white;
+            padding: 3.5rem;
+            border-radius: 16px;
+            border: 2px solid var(--border-color);
+            transition: all 0.4s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .service-option:hover {
+            border-color: var(--accent-light);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(30, 58, 138, 0.12);
+        }
+
+        .service-option .icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-option h3 {
+            font-size: 1.9rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .service-option p {
+            color: var(--text-body);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .service-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .service-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3);
+        }
+
+        /* Contact Form Section */
+        .contact-form-section {
+            padding: 8rem 3rem;
+            background: white;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-gray);
+            padding: 4.5rem;
+            border-radius: 16px;
+            border: 2px solid var(--border-color);
+        }
+
+        .form-intro {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .form-intro h3 {
+            font-size: 2.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .form-intro p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 1.1rem 1.5rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1.05rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: white;
+            color: var(--text-body);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 160px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1.3rem 3rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35);
+        }
+
+        /* Guarantee Section */
+        .guarantee-section {
+            padding: 6rem 3rem;
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.08), rgba(5, 150, 105, 0.03));
+            text-align: center;
+        }
+
+        .guarantee-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .guarantee-badge {
+            width: 100px;
+            height: 100px;
+            background: var(--success);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 2.5rem;
+            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.3);
+        }
+
+        .guarantee-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .guarantee-content p {
+            font-size: 1.2rem;
+            color: var(--text-body);
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-darker);
+            color: #cbd5e1;
+            padding: 5rem 3rem 2.5rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 2rem;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            padding-left: 8px;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 968px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-center {
+                display: none;
+            }
+
+            nav .nav-links {
+                display: none;
+            }
+
+            nav .cta-button {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .process-step {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .step-number {
+                margin: 0 auto;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="40" y="90" width="50" height="45" fill="#1e3a8a" rx="4"/>
+                        <rect x="42" y="92" width="46" height="20" fill="#64748b" opacity="0.3" rx="2"/>
+                        <path d="M 45 92 L 52 85 L 82 85 L 85 92 Z" fill="#3b82f6" opacity="0.5"/>
+                        <rect x="90" y="95" width="80" height="40" fill="#1e3a8a" rx="3"/>
+                        <rect x="95" y="100" width="70" height="25" fill="#64748b" opacity="0.2" rx="2"/>
+                        <rect x="85" y="85" width="3" height="15" fill="#475569" rx="1.5"/>
+                        <rect x="80" y="85" width="3" height="12" fill="#475569" rx="1.5"/>
+                        <ellipse cx="86.5" cy="84" rx="2" ry="1.5" fill="#94a3b8"/>
+                        <ellipse cx="81.5" cy="84" rx="2" ry="1.5" fill="#94a3b8"/>
+                        <circle cx="60" cy="140" r="10" fill="#1e293b"/>
+                        <circle cx="60" cy="140" r="5" fill="#64748b"/>
+                        <circle cx="105" cy="140" r="10" fill="#1e293b"/>
+                        <circle cx="105" cy="140" r="5" fill="#64748b"/>
+                        <circle cx="145" cy="140" r="10" fill="#1e293b"/>
+                        <circle cx="145" cy="140" r="5" fill="#64748b"/>
+                        <rect x="43" y="100" width="8" height="12" fill="#3b82f6" opacity="0.7" rx="1"/>
+                        <rect x="43" y="115" width="8" height="8" fill="#3b82f6" opacity="0.7" rx="1"/>
+                        <path d="M 110 60 L 125 50 L 140 55 L 155 45 L 165 50" stroke="#059669" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polygon points="165,50 170,42 162,46" fill="#059669"/>
+                    </svg>
+                </div>
+                NextGen Express
+            </a>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <a href="contact.html" class="cta-button">Contact Us</a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        </nav>
+    </header>
+
+    <div class="mobile-overlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+            <li><a href="services.html" onclick="toggleMenu()">Services</a></li>
+            <li><a href="contact.html" onclick="toggleMenu()">Contact</a></li>
+        </ul>
+        <a href="contact.html" class="cta-button" onclick="toggleMenu()">Contact Us</a>
+    </div>
+
+    <section class="page-header">
+        <h1>Let's Get Started</h1>
+        <p>Join hundreds of trucking companies who have simplified their fuel reporting and tax compliance</p>
+    </section>
+
+    <section class="process-section">
+        <div class="section-header">
+            <h2>How We'll Work Together</h2>
+            <p>A simple, transparent process from start to finish</p>
+        </div>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Tell Us About Your Needs</h3>
+                    <p>Fill out our quick contact form below or reach out directly. We'll ask about your business, fleet size, and which services interest you most.</p>
+                    <div class="step-details">
+                        <span class="detail-tag">5 minutes</span>
+                        <span class="detail-tag">No commitment</span>
+                    </div>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Free Consultation Call</h3>
+                    <p>We'll schedule a brief call to understand your specific needs, answer your questions, and explain exactly how we can help. We'll also provide transparent pricing based on your requirements.</p>
+                    <div class="step-details">
+                        <span class="detail-tag">15-20 minutes</span>
+                        <span class="detail-tag">No pressure</span>
+                        <span class="detail-tag">Get all your questions answered</span>
+                    </div>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Simple Onboarding</h3>
+                    <p>Once you're ready to move forward, we'll send you a simple onboarding form to collect basic business information and set up your account. This takes just a few minutes.</p>
+                    <div class="step-details">
+                        <span class="detail-tag">10 minutes</span>
+                        <span class="detail-tag">One-time setup</span>
+                    </div>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>We Take Over From Here</h3>
+                    <p>That's it! We'll handle all the data processing, reporting, and filings. You'll receive your first reports on schedule, and we'll be available anytime you have questions.</p>
+                    <div class="step-details">
+                        <span class="detail-tag">Hassle-free</span>
+                        <span class="detail-tag">Ongoing support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-selection">
+        <div class="section-header">
+            <h2>Choose Your Service</h2>
+            <p>Select the service you're interested in to learn more and get started</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-option">
+                <div class="icon">📊</div>
+                <h3>Fuel Reporting</h3>
+                <p>Comprehensive weekly or monthly fuel reports with detailed analysis and cost-saving insights.</p>
+                <a href="onboarding.html#fuel" class="service-link">Start Fuel Reporting</a>
+            </div>
+            <div class="service-option">
+                <div class="icon">📑</div>
+                <h3>IFTA Quarterly Filings</h3>
+                <p>Complete IFTA tax preparation and filing for all jurisdictions, submitted on time every quarter.</p>
+                <a href="contact.html" class="service-link">Get IFTA Help</a>
+            </div>
+            <div class="service-option">
+                <div class="icon">📋</div>
+                <h3>Reefer Diesel Tax</h3>
+                <p>Full reefer diesel tax return preparation and filing for all U.S. states.</p>
+                <a href="onboarding.html#reefer" class="service-link">Start Reefer Tax Service</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-form-section">
+        <div class="form-container">
+            <div class="form-intro">
+                <h3>Have Questions? Let's Talk</h3>
+                <p>Send us a message and we'll get back to you within 24 hours</p>
+            </div>
+            <form class="contact-form" action="https://formspree.io/f/xlggwyrj" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="John Smith">
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company Name *</label>
+                        <input type="text" id="company" name="company" required placeholder="Your Company">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="john@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="service">Which service interests you? *</label>
+                    <select id="service" name="service" required>
+                        <option value="">Select a service</option>
+                        <option value="fuel-reporting">Fuel Reporting</option>
+                        <option value="ifta">IFTA Quarterly Filings</option>
+                        <option value="reefer-tax">Reefer Diesel Tax Returns</option>
+                        <option value="multiple">Multiple Services</option>
+                        <option value="not-sure">Not Sure Yet</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fleet-size">Approximate Fleet Size</label>
+                    <select id="fleet-size" name="fleet-size">
+                        <option value="">Select fleet size</option>
+                        <option value="1-5">1-5 trucks</option>
+                        <option value="6-10">6-10 trucks</option>
+                        <option value="11-25">11-25 trucks</option>
+                        <option value="26-50">26-50 trucks</option>
+                        <option value="50+">50+ trucks</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Tell us about your needs (optional)</label>
+                    <textarea id="message" name="message" placeholder="Any specific questions or requirements?"></textarea>
+                </div>
+                <button type="submit" class="submit-button">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="guarantee-section">
+        <div class="guarantee-content">
+            <div class="guarantee-badge">✓</div>
+            <h3>Our Commitment to You</h3>
+            <p>We respond to every inquiry within 24 hours. No pressure, no pushy sales tactics – just honest answers to your questions. If we're not the right fit for your business, we'll tell you upfront and even point you in the right direction.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>NextGen Express</h3>
+                <p>Professional fuel reporting, IFTA, and tax services for trucking companies across the United States.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <a href="services.html#fuel-reports">Fuel Reporting</a>
+                <a href="services.html#ifta-filings">IFTA Quarterly Tax Filings</a>
+                <a href="services.html#tax-returns">Reefer Diesel Tax Returns</a>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: info@nextgenexp.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 NextGen Express. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.mobile-overlay');
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            if (menu.classList.contains('active')) {
+                overlay.style.display = 'block';
+            } else {
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 300);
+            }
+        }
+    </script>
+</body>
+</html>
