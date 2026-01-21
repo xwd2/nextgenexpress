@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NextGen Express - Professional Fuel Reporting, IFTA & Tax Services</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22></text></svg>">
+    <link rel="icon" href="/assets/logo.png" type="image/png">
     <style>
         * {
             margin: 0;
@@ -24,7 +24,6 @@
             --text-muted: #64748b;
             --bg-light: #ffffff;
             --bg-gray: #f8fafc;
-            --bg-dark: #f1f5f9;
             --border-color: #e2e8f0;
         }
 
@@ -40,7 +39,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Header */
         header {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
@@ -49,18 +47,6 @@
             top: 0;
             z-index: 100;
             border-bottom: 1px solid var(--border-color);
-            animation: slideDown 0.6s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
         }
 
         nav {
@@ -69,17 +55,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.25rem 3rem;
-            position: relative;
+            padding: 1rem 3rem;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
             display: flex;
             align-items: center;
-            gap: 1rem;
             text-decoration: none;
             transition: all 0.3s ease;
         }
@@ -88,20 +69,14 @@
             transform: translateX(5px);
         }
 
-        .logo:hover .logo-icon {
-            transform: scale(1.08) rotate(-3deg);
-        }
-
-        .logo-icon {
-            width: 60px;
+        .logo img {
             height: 60px;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            filter: drop-shadow(0 2px 8px rgba(30, 58, 138, 0.15));
+            width: auto;
+            transition: all 0.3s ease;
         }
 
-        .logo-icon svg {
-            width: 100%;
-            height: 100%;
+        .logo:hover img {
+            transform: scale(1.05);
         }
 
         .nav-center {
@@ -155,23 +130,6 @@
             font-weight: 600;
             transition: all 0.4s ease;
             box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
         }
 
         .cta-button:hover {
@@ -179,7 +137,6 @@
             box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35);
         }
 
-        /* Mobile Menu */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -189,12 +146,6 @@
             cursor: pointer;
             padding: 0.5rem;
             z-index: 101;
-            transition: all 0.3s;
-        }
-
-        .mobile-menu-btn:hover {
-            color: var(--primary);
-            transform: scale(1.1);
         }
 
         .mobile-menu {
@@ -206,7 +157,7 @@
             height: 100vh;
             background: white;
             box-shadow: -5px 0 30px rgba(0,0,0,0.15);
-            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: right 0.4s;
             z-index: 99;
             padding: 7rem 2.5rem 2rem;
             border-left: 1px solid var(--border-color);
@@ -222,23 +173,6 @@
 
         .mobile-menu ul li {
             margin-bottom: 2rem;
-            opacity: 0;
-            transform: translateX(50px);
-        }
-
-        .mobile-menu.active ul li {
-            animation: slideInMenu 0.5s forwards;
-        }
-
-        .mobile-menu ul li:nth-child(1) { animation-delay: 0.1s; }
-        .mobile-menu ul li:nth-child(2) { animation-delay: 0.2s; }
-        .mobile-menu ul li:nth-child(3) { animation-delay: 0.3s; }
-
-        @keyframes slideInMenu {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .mobile-menu ul li a {
@@ -280,51 +214,16 @@
             opacity: 1;
         }
 
-        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-            position: relative;
-            overflow: hidden;
             padding: 9rem 3rem;
             text-align: center;
             color: white;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
-            animation: pulse 8s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
         .hero-content {
             max-width: 1100px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .hero h1 {
@@ -332,8 +231,6 @@
             margin-bottom: 2.5rem;
             line-height: 1.2;
             font-weight: 800;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease-out 0.2s both;
             letter-spacing: -0.02em;
         }
 
@@ -342,7 +239,6 @@
             margin-bottom: 4rem;
             line-height: 1.8;
             opacity: 0.95;
-            animation: fadeInUp 1s ease-out 0.4s both;
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
@@ -353,7 +249,6 @@
             gap: 2rem;
             justify-content: center;
             flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out 0.6s both;
         }
 
         .button-primary {
@@ -366,26 +261,6 @@
             font-size: 1.1rem;
             transition: all 0.4s ease;
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .button-primary::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(30, 58, 138, 0.1);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .button-primary:hover::before {
-            width: 300px;
-            height: 300px;
         }
 
         .button-primary:hover {
@@ -409,44 +284,8 @@
             background: rgba(255,255,255,0.1);
             border-color: white;
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
 
-        /* Scroll Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .slide-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .slide-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Value Prop */
         .value-prop {
             padding: 8rem 3rem;
             background: white;
@@ -472,7 +311,6 @@
             line-height: 1.9;
         }
 
-        /* Services Section */
         .services-preview {
             padding: 8rem 3rem;
             background: var(--bg-gray);
@@ -503,7 +341,7 @@
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3rem;
         }
 
@@ -512,34 +350,15 @@
             border-radius: 16px;
             background: white;
             border: 1px solid var(--border-color);
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: all 0.5s;
             text-align: center;
-            position: relative;
-            overflow: hidden;
             box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
         }
 
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 12px 40px rgba(30, 58, 138, 0.12);
             border-color: var(--accent-light);
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
         }
 
         .service-icon {
@@ -553,12 +372,6 @@
             margin: 0 auto 3rem;
             font-size: 3rem;
             box-shadow: 0 8px 25px rgba(30, 58, 138, 0.2);
-            transition: all 0.5s ease;
-        }
-
-        .service-card:hover .service-icon {
-            transform: scale(1.12) rotate(10deg);
-            box-shadow: 0 12px 35px rgba(30, 58, 138, 0.3);
         }
 
         .service-card h3 {
@@ -566,7 +379,6 @@
             margin-bottom: 1.75rem;
             color: var(--text-dark);
             font-weight: 700;
-            letter-spacing: -0.01em;
         }
 
         .service-card p {
@@ -581,33 +393,16 @@
             text-decoration: none;
             font-weight: 700;
             font-size: 1.1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
             transition: all 0.3s ease;
         }
 
         .service-link:hover {
-            gap: 1.2rem;
             color: var(--accent);
         }
 
-        /* How It Works */
         .how-it-works {
             background: white;
             padding: 8rem 3rem;
-            position: relative;
-        }
-
-        .how-it-works::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            background: linear-gradient(180deg, transparent 0%, rgba(248, 250, 252, 0.5) 50%, transparent 100%);
-            pointer-events: none;
         }
 
         .steps {
@@ -615,8 +410,6 @@
             margin: 0 auto;
             display: grid;
             gap: 4.5rem;
-            position: relative;
-            z-index: 1;
         }
 
         .step {
@@ -637,31 +430,7 @@
             justify-content: center;
             font-size: 3rem;
             font-weight: 700;
-            flex-shrink: 0;
             box-shadow: 0 8px 25px rgba(30, 58, 138, 0.25);
-            transition: all 0.5s ease;
-            position: relative;
-        }
-
-        .step-number::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 2px solid var(--primary);
-            transform: scale(1.2);
-            opacity: 0;
-            transition: all 0.5s ease;
-        }
-
-        .step:hover .step-number {
-            transform: scale(1.1) rotate(360deg);
-        }
-
-        .step:hover .step-number::after {
-            transform: scale(1.4);
-            opacity: 0.5;
         }
 
         .step-content h3 {
@@ -669,7 +438,6 @@
             margin-bottom: 1.5rem;
             color: var(--text-dark);
             font-weight: 700;
-            letter-spacing: -0.01em;
         }
 
         .step-content p {
@@ -678,7 +446,6 @@
             font-size: 1.2rem;
         }
 
-        /* Testimonials */
         .testimonials {
             padding: 8rem 3rem;
             background: var(--bg-gray);
@@ -688,7 +455,7 @@
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3rem;
         }
 
@@ -697,24 +464,25 @@
             padding: 3.5rem;
             border-radius: 16px;
             box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
-            position: relative;
             border: 1px solid var(--border-color);
             transition: all 0.5s ease;
         }
 
         .testimonial-card:hover {
             transform: translateY(-8px);
-            border-color: var(--accent-light);
             box-shadow: 0 12px 40px rgba(30, 58, 138, 0.12);
         }
 
         .quote-icon {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
             font-size: 4rem;
             color: var(--primary);
             opacity: 0.08;
+        }
+
+        .stars {
+            color: #f59e0b;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
         }
 
         .testimonial-text {
@@ -742,18 +510,11 @@
             color: white;
             font-weight: 700;
             font-size: 1.4rem;
-            flex-shrink: 0;
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-card:hover .author-avatar {
-            transform: scale(1.1);
         }
 
         .author-info h4 {
             font-size: 1.15rem;
             color: var(--text-dark);
-            margin-bottom: 0.3rem;
             font-weight: 700;
         }
 
@@ -762,40 +523,16 @@
             color: var(--text-muted);
         }
 
-        .stars {
-            color: #f59e0b;
-            margin-bottom: 1.5rem;
-            font-size: 1.25rem;
-        }
-
-        /* CTA Section */
         .cta-section {
             background: linear-gradient(135deg, var(--primary-darker) 0%, var(--primary-dark) 100%);
             color: white;
             padding: 8rem 3rem;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
-            animation: pulse 10s ease-in-out infinite;
         }
 
         .cta-content {
             max-width: 1000px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
         .cta-section h2 {
@@ -812,7 +549,6 @@
             line-height: 1.7;
         }
 
-        /* Footer */
         footer {
             background: var(--primary-darker);
             color: #cbd5e1;
@@ -861,23 +597,15 @@
         }
 
         @media (max-width: 968px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            nav {
+                padding: 1rem 1.5rem;
             }
 
-            .hero p {
-                font-size: 1.2rem;
+            .logo img {
+                height: 50px;
             }
 
-            .nav-center {
-                display: none;
-            }
-
-            nav .nav-links {
-                display: none;
-            }
-
-            nav .cta-button {
+            .nav-center, nav .nav-links, nav .cta-button {
                 display: none;
             }
 
@@ -889,38 +617,97 @@
                 display: block;
             }
 
-            .step {
-                grid-template-columns: 100px 1fr;
-                gap: 2.5rem;
+            .hero {
+                padding: 5rem 1.5rem;
             }
 
-            .step-number {
-                width: 100px;
-                height: 100px;
-                font-size: 2.5rem;
+            .hero h1 {
+                font-size: 2.2rem;
+                margin-bottom: 2rem;
             }
 
-            .services-grid {
-                grid-template-columns: 1fr;
+            .hero p {
+                font-size: 1.15rem;
+                margin-bottom: 3rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1.5rem;
+                align-items: center;
+            }
+
+            .button-primary, .button-secondary {
+                width: 100%;
+                max-width: 400px;
+                text-align: center;
+            }
+
+            .value-prop, .services-preview, .how-it-works, .testimonials, .cta-section {
+                padding: 5rem 1.5rem;
+            }
+
+            .value-prop h2 {
+                font-size: 2.2rem;
+            }
+
+            .value-prop p {
+                font-size: 1.15rem;
             }
 
             .section-header h2 {
                 font-size: 2.5rem;
             }
 
-            .value-prop h2 {
-                font-size: 2.3rem;
+            .section-header p {
+                font-size: 1.15rem;
             }
 
-            .hero {
-                padding: 6rem 2rem;
+            .services-grid {
+                grid-template-columns: 1fr;
             }
 
-            .services-preview,
-            .how-it-works,
-            .testimonials,
-            .value-prop {
-                padding: 5rem 2rem;
+            .service-card {
+                padding: 3rem 2rem;
+            }
+
+            .step {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .step-number {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+                margin: 0 auto;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .cta-section p {
+                font-size: 1.2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -929,50 +716,13 @@
     <header>
         <nav>
             <a href="/" class="logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Modern Semi Truck -->
-                        <!-- Cab -->
-                        <rect x="40" y="90" width="50" height="45" fill="#1e3a8a" rx="4"/>
-                        <rect x="42" y="92" width="46" height="20" fill="#64748b" opacity="0.3" rx="2"/>
-                        
-                        <!-- Windshield -->
-                        <path d="M 45 92 L 52 85 L 82 85 L 85 92 Z" fill="#3b82f6" opacity="0.5"/>
-                        
-                        <!-- Trailer -->
-                        <rect x="90" y="95" width="80" height="40" fill="#1e3a8a" rx="3"/>
-                        <rect x="95" y="100" width="70" height="25" fill="#64748b" opacity="0.2" rx="2"/>
-                        
-                        <!-- Dual Exhausts -->
-                        <rect x="85" y="85" width="3" height="15" fill="#475569" rx="1.5"/>
-                        <rect x="80" y="85" width="3" height="12" fill="#475569" rx="1.5"/>
-                        <ellipse cx="86.5" cy="84" rx="2" ry="1.5" fill="#94a3b8"/>
-                        <ellipse cx="81.5" cy="84" rx="2" ry="1.5" fill="#94a3b8"/>
-                        
-                        <!-- Wheels -->
-                        <circle cx="60" cy="140" r="10" fill="#1e293b"/>
-                        <circle cx="60" cy="140" r="5" fill="#64748b"/>
-                        <circle cx="105" cy="140" r="10" fill="#1e293b"/>
-                        <circle cx="105" cy="140" r="5" fill="#64748b"/>
-                        <circle cx="145" cy="140" r="10" fill="#1e293b"/>
-                        <circle cx="145" cy="140" r="5" fill="#64748b"/>
-                        
-                        <!-- Details -->
-                        <rect x="43" y="100" width="8" height="12" fill="#3b82f6" opacity="0.7" rx="1"/>
-                        <rect x="43" y="115" width="8" height="8" fill="#3b82f6" opacity="0.7" rx="1"/>
-                        
-                        <!-- Growth Arrow -->
-                        <path d="M 110 60 L 125 50 L 140 55 L 155 45 L 165 50" stroke="#059669" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                        <polygon points="165,50 170,42 162,46" fill="#059669"/>
-                    </svg>
-                </div>
-                NextGen Express
+                <img src="/assets/logo.png" alt="NextGen Express">
             </a>
             <div class="nav-center">
                 <ul class="nav-links">
-                    <a href="/">Home</a>
-                    <a href="/services">Services</a>
-                    <a href="/contact">Contact</a>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/contact">Contact</a></li>
                 </ul>
             </div>
             <a href="/get-started" class="cta-button">Get Started</a>
@@ -1001,7 +751,7 @@
         </div>
     </section>
 
-    <section class="value-prop fade-in">
+    <section class="value-prop">
         <div class="value-prop-content">
             <h2>We Do All The Work For You</h2>
             <p>No apps to download. No data to upload. No manual tracking. Simply send us your information, and we'll deliver comprehensive fuel reports, handle your IFTA quarterly tax filings, and process reefer diesel tax returns. It's that simple.</p>
@@ -1009,24 +759,24 @@
     </section>
 
     <section class="services-preview">
-        <div class="section-header fade-in">
+        <div class="section-header">
             <h2>Our Services</h2>
             <p>Professional reporting and tax services tailored for trucking companies</p>
         </div>
         <div class="services-grid">
-            <div class="service-card fade-in">
+            <div class="service-card">
                 <div class="service-icon">📊</div>
                 <h3>Fuel Reporting</h3>
                 <p>Comprehensive fuel reports delivered weekly or monthly. We track every gallon, analyze spending patterns, and identify cost-saving opportunities.</p>
                 <a href="/services#fuel-reports" class="service-link">Learn More →</a>
             </div>
-            <div class="service-card fade-in">
+            <div class="service-card">
                 <div class="service-icon">📑</div>
                 <h3>IFTA Quarterly Tax Filings</h3>
                 <p>Complete IFTA quarterly tax preparation and filing for all jurisdictions. We calculate your fuel tax obligations and submit everything on time.</p>
                 <a href="/services#ifta-filings" class="service-link">Learn More →</a>
             </div>
-            <div class="service-card fade-in">
+            <div class="service-card">
                 <div class="service-icon">📋</div>
                 <h3>Reefer Diesel Tax Returns</h3>
                 <p>Complete reefer diesel tax return preparation and filing for all U.S. states. We handle all paperwork so you stay compliant and maximize refunds.</p>
@@ -1036,26 +786,26 @@
     </section>
 
     <section class="how-it-works">
-        <div class="section-header fade-in">
+        <div class="section-header">
             <h2>How It Works</h2>
             <p>Simple, stress-free process</p>
         </div>
         <div class="steps">
-            <div class="step slide-in-left">
+            <div class="step">
                 <div class="step-number">1</div>
                 <div class="step-content">
                     <h3>Share Your Information</h3>
                     <p>Contact us and provide your fuel receipts, purchase records, or fuel card data. We accept information in any format that works for you.</p>
                 </div>
             </div>
-            <div class="step slide-in-right">
+            <div class="step">
                 <div class="step-number">2</div>
                 <div class="step-content">
                     <h3>We Handle Everything</h3>
                     <p>Our team processes your data, analyzes your fuel spending, prepares detailed reports, calculates IFTA taxes, and handles all filings.</p>
                 </div>
             </div>
-            <div class="step slide-in-left">
+            <div class="step">
                 <div class="step-number">3</div>
                 <div class="step-content">
                     <h3>Receive Your Reports</h3>
@@ -1066,12 +816,12 @@
     </section>
 
     <section class="testimonials">
-        <div class="section-header fade-in">
+        <div class="section-header">
             <h2>What Our Clients Say</h2>
             <p>Trucking companies trust us with their fuel reporting and tax needs</p>
         </div>
         <div class="testimonials-grid">
-            <div class="testimonial-card fade-in">
+            <div class="testimonial-card">
                 <div class="quote-icon">"</div>
                 <div class="stars">★★★★★</div>
                 <p class="testimonial-text">NextGen Express takes all the headache out of fuel tracking. I just send them my receipts and they handle everything. Best decision I made for my business.</p>
@@ -1083,7 +833,7 @@
                     </div>
                 </div>
             </div>
-            <div class="testimonial-card fade-in">
+            <div class="testimonial-card">
                 <div class="quote-icon">"</div>
                 <div class="stars">★★★★★</div>
                 <p class="testimonial-text">The reefer diesel tax service saved me countless hours. They handle all the state filings and I never have to worry about missing deadlines.</p>
@@ -1095,7 +845,7 @@
                     </div>
                 </div>
             </div>
-            <div class="testimonial-card fade-in">
+            <div class="testimonial-card">
                 <div class="quote-icon">"</div>
                 <div class="stars">★★★★★</div>
                 <p class="testimonial-text">I was spending hours every week tracking fuel costs. Now I get comprehensive reports delivered to my inbox and can focus on growing my business.</p>
@@ -1110,7 +860,7 @@
         </div>
     </section>
 
-    <section class="cta-section fade-in">
+    <section class="cta-section">
         <div class="cta-content">
             <h2>Ready to Simplify Your Fuel Reporting & Tax Compliance?</h2>
             <p>Let us handle the paperwork while you focus on what matters most - running your trucking business.</p>
@@ -1158,41 +908,9 @@
             if (menu.classList.contains('active')) {
                 overlay.style.display = 'block';
             } else {
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 300);
+                setTimeout(() => overlay.style.display = 'none', 300);
             }
         }
-
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach((el) => {
-            observer.observe(el);
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
     </script>
 </body>
 </html>
