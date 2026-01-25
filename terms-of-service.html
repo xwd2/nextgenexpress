@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - NextGen Express</title>
+    <link rel="icon" href="/assets/logo.png" type="image/png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a8a;
+            --primary-dark: #1e293b;
+            --primary-darker: #0f172a;
+            --accent: #2563eb;
+            --accent-light: #3b82f6;
+            --text-dark: #0f172a;
+            --text-body: #1e293b;
+            --text-muted: #475569;
+            --bg-light: #f1f5f9;
+            --border-color: #cbd5e1;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.7; color: var(--text-body); background: var(--bg-light); overflow-x: hidden; }
+        html { scroll-behavior: smooth; }
+        
+        header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); transition: all 0.3s; }
+        header:hover { box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 3rem; position: relative; }
+        .logo { display: flex; align-items: center; gap: 1rem; text-decoration: none; transition: all 0.3s; }
+        .logo:hover { transform: translateX(5px); }
+        .logo img { height: 80px; width: auto; transition: all 0.3s; filter: drop-shadow(0 2px 6px rgba(30, 58, 138, 0.2)); }
+        .logo:hover img { transform: scale(1.05) rotate(-2deg); filter: drop-shadow(0 4px 10px rgba(30, 58, 138, 0.3)); }
+        .logo-text { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -0.02em; }
+        .nav-center { position: absolute; left: 50%; transform: translateX(-50%); }
+        .nav-links { display: flex; gap: 3rem; list-style: none; align-items: center; }
+        .nav-links a { color: var(--text-body); text-decoration: none; font-weight: 600; font-size: 1.05rem; transition: all 0.3s; position: relative; padding: 0.5rem 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: width 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover::after { width: 100%; }
+        .cta-button { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 0.9rem 2rem; border-radius: 10px; text-decoration: none; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3); position: relative; overflow: hidden; }
+        .cta-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
+        .cta-button:hover::before { left: 100%; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4); }
+        
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-dark); font-size: 1.8rem; cursor: pointer; padding: 0.5rem; z-index: 101; transition: all 0.3s; }
+        .mobile-menu-btn:hover { transform: scale(1.1) rotate(90deg); }
+        .mobile-menu { display: none; position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background: white; box-shadow: -5px 0 30px rgba(0,0,0,0.2); transition: right 0.4s; z-index: 99; padding: 7rem 2.5rem 2rem; border-left: 1px solid var(--border-color); }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu ul { list-style: none; }
+        .mobile-menu ul li { margin-bottom: 2rem; opacity: 0; transform: translateX(50px); }
+        .mobile-menu.active ul li { animation: slideInMenu 0.5s forwards; }
+        .mobile-menu ul li:nth-child(1) { animation-delay: 0.1s; }
+        .mobile-menu ul li:nth-child(2) { animation-delay: 0.2s; }
+        .mobile-menu ul li:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes slideInMenu { to { opacity: 1; transform: translateX(0); } }
+        .mobile-menu ul li a { color: var(--text-dark); text-decoration: none; font-size: 1.3rem; font-weight: 600; transition: all 0.3s; display: block; padding: 0.5rem 0; }
+        .mobile-menu ul li a:hover { color: var(--primary); padding-left: 15px; }
+        .mobile-menu .cta-button { display: block; text-align: center; margin-top: 2.5rem; }
+        .mobile-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(5px); z-index: 98; opacity: 0; transition: opacity 0.3s; }
+        .mobile-overlay.active { opacity: 1; }
+        
+        .page-header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%); padding: 5rem 3rem; text-align: center; color: white; position: relative; overflow: hidden; }
+        .page-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 70%); animation: pulse 6s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        .page-header h1 { font-size: 3rem; margin-bottom: 1rem; font-weight: 700; letter-spacing: -0.02em; position: relative; z-index: 1; }
+        .page-header p { font-size: 1.2rem; opacity: 0.9; position: relative; z-index: 1; }
+        
+        .terms-content { max-width: 900px; margin: 0 auto; padding: 6rem 3rem; background: white; }
+        .last-updated { text-align: center; color: var(--text-muted); font-size: 1rem; margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 2px solid var(--border-color); }
+        .terms-section { margin-bottom: 3.5rem; }
+        .terms-section h2 { font-size: 1.9rem; color: var(--text-dark); margin-bottom: 1.5rem; font-weight: 700; letter-spacing: -0.01em; }
+        .terms-section h3 { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 1rem; margin-top: 2rem; font-weight: 600; }
+        .terms-section p { margin-bottom: 1.2rem; line-height: 1.8; font-size: 1.05rem; color: var(--text-body); }
+        .terms-section ul { margin-left: 2rem; margin-bottom: 1.5rem; }
+        .terms-section li { margin-bottom: 0.8rem; line-height: 1.7; color: var(--text-body); font-size: 1.05rem; }
+        .important-notice { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 1.5rem; border-radius: 8px; margin: 2rem 0; }
+        .important-notice strong { color: #92400e; display: block; margin-bottom: 0.5rem; font-size: 1.1rem; }
+        
+        footer { background: var(--primary-darker); color: #cbd5e1; padding: 5rem 3rem 2.5rem; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; margin-bottom: 3.5rem; }
+        .footer-section h3 { margin-bottom: 2rem; color: white; font-size: 1.3rem; font-weight: 700; }
+        .footer-section p, .footer-section a { color: #94a3b8; text-decoration: none; display: block; margin-bottom: 1rem; transition: all 0.3s; font-size: 1.05rem; line-height: 1.7; }
+        .footer-section a:hover { color: white; padding-left: 8px; }
+        .footer-bottom { max-width: 1400px; margin: 0 auto; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #94a3b8; }
+        
+        @media (max-width: 968px) {
+            nav { padding: 1rem 1.5rem; }
+            .logo img { height: 50px; }
+            .logo-text { font-size: 1.3rem; }
+            .page-header { padding: 4rem 1.5rem; }
+            .page-header h1 { font-size: 2.2rem; }
+            .nav-center, nav .nav-links, nav .cta-button { display: none; }
+            .mobile-menu-btn { display: block; }
+            .mobile-menu { display: block; }
+            .terms-content { padding: 4rem 1.5rem; }
+            .footer-content { grid-template-columns: 1fr; gap: 3rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">
+                <img src="/assets/logo.png" alt="NextGen Express">
+                <span class="logo-text">NextGen Express</span>
+            </a>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <a href="/contact" class="cta-button">Contact Us</a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        </nav>
+    </header>
+
+    <div class="mobile-overlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="/" onclick="toggleMenu()">Home</a></li>
+            <li><a href="/services" onclick="toggleMenu()">Services</a></li>
+            <li><a href="/contact" onclick="toggleMenu()">Contact</a></li>
+        </ul>
+        <a href="/contact" class="cta-button" onclick="toggleMenu()">Contact Us</a>
+    </div>
+
+    <section class="page-header">
+        <h1>Terms of Service</h1>
+        <p>Please read these terms carefully before using our services</p>
+    </section>
+
+    <div class="terms-content">
+        <div class="last-updated">
+            <strong>Last Updated:</strong> January 25, 2026
+        </div>
+
+        <div class="terms-section">
+            <h2>1. Agreement to Terms</h2>
+            <p>By engaging NextGen Express for services, you ("Client") agree to be bound by these Terms of Service. These terms constitute a legally binding agreement between you and NextGen Express ("Company," "we," "us," or "our").</p>
+            <p>If you do not agree to these terms, please do not use our services.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>2. Services Provided</h2>
+            <p>NextGen Express provides compliance and administrative services for trucking companies, including but not limited to:</p>
+            <ul>
+                <li>Fuel reporting and data analysis</li>
+                <li>IFTA (International Fuel Tax Agreement) quarterly tax return preparation and filing</li>
+                <li>Reefer diesel tax return preparation and filing</li>
+                <li>Related compliance documentation services</li>
+            </ul>
+            
+            <div class="important-notice">
+                <strong>Important Notice:</strong>
+                <p>NextGen Express is a compliance service provider that prepares and files tax returns on behalf of clients. We are NOT tax advisors, certified public accountants (CPAs), or tax attorneys. We do not provide tax advice, tax planning services, or legal counsel.</p>
+            </div>
+
+            <h3>2.1 Nature of Service</h3>
+            <p>Our services consist solely of:</p>
+            <ul>
+                <li>Collecting data and documentation provided by the Client</li>
+                <li>Organizing and processing that information</li>
+                <li>Preparing tax returns and compliance reports based on Client-provided information</li>
+                <li>Filing completed returns with appropriate jurisdictions on behalf of the Client</li>
+                <li>Providing copies of filed documents to the Client</li>
+            </ul>
+
+            <h3>2.2 What We Do NOT Provide</h3>
+            <p>We explicitly do not provide:</p>
+            <ul>
+                <li>Tax advice or recommendations</li>
+                <li>Tax planning or tax strategy services</li>
+                <li>Legal advice of any kind</li>
+                <li>Audit representation or defense services</li>
+                <li>Interpretation of tax laws or regulations</li>
+                <li>Recommendations on business structure or operations</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>3. Client Responsibilities</h2>
+            
+            <h3>3.1 Accurate Information</h3>
+            <p>The Client is solely responsible for:</p>
+            <ul>
+                <li>Providing complete, accurate, and timely information and documentation</li>
+                <li>Maintaining proper records and supporting documentation</li>
+                <li>Ensuring all data submitted to NextGen Express is truthful and correct</li>
+                <li>Reviewing all prepared returns before we file them on your behalf</li>
+                <li>Notifying us immediately of any errors or changes needed</li>
+            </ul>
+
+            <h3>3.2 Independent Verification</h3>
+            <p>Clients should consult with a qualified tax advisor, CPA, or tax attorney regarding:</p>
+            <ul>
+                <li>Tax planning strategies</li>
+                <li>Interpretation of tax laws</li>
+                <li>Specific tax advice for their business situation</li>
+                <li>Any questions about tax obligations or compliance requirements</li>
+            </ul>
+
+            <h3>3.3 Authorization</h3>
+            <p>By using our services, the Client authorizes NextGen Express to:</p>
+            <ul>
+                <li>File tax returns and reports on their behalf</li>
+                <li>Communicate with relevant tax authorities as necessary for filing purposes</li>
+                <li>Access Client accounts for the limited purpose of filing returns</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>4. Limitation of Liability</h2>
+            
+            <h3>4.1 Accuracy of Client Data</h3>
+            <p>NextGen Express is not responsible for errors, omissions, or inaccuracies in tax returns that result from incorrect, incomplete, or misleading information provided by the Client. The Client bears full responsibility for the accuracy of all data and documentation provided to us.</p>
+
+            <h3>4.2 Tax Liabilities</h3>
+            <p>The Client remains solely responsible for all tax liabilities, penalties, and interest assessed by any tax authority. We do not guarantee any particular tax outcome or amount owed/refunded.</p>
+
+            <h3>4.3 Changes in Law</h3>
+            <p>Tax laws and regulations change frequently. While we make reasonable efforts to stay informed of current requirements, we are not responsible for changes in tax law that occur after services are rendered, unless we have been specifically engaged to update previous work.</p>
+
+            <h3>4.4 Service Limitations</h3>
+            <p>To the maximum extent permitted by law, our total liability for any claims arising from our services shall not exceed the fees paid by the Client for the specific service giving rise to the claim.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>5. Confidentiality</h2>
+            <p>We maintain strict confidentiality of all Client information and data. We will not disclose Client information to third parties except:</p>
+            <ul>
+                <li>As necessary to file returns and reports with appropriate tax authorities</li>
+                <li>When required by law or court order</li>
+                <li>With the Client's explicit written consent</li>
+                <li>To trusted service providers who assist in delivering our services (under confidentiality agreements)</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>6. Fees and Payment</h2>
+            
+            <h3>6.1 Service Fees</h3>
+            <p>Fees for services are agreed upon between NextGen Express and the Client before services begin. Fees may be based on fleet size, service complexity, or other factors as communicated to the Client.</p>
+
+            <h3>6.2 Payment Terms</h3>
+            <p>Payment terms will be specified in the service agreement or invoice. Services may be suspended or terminated if payment is not received according to agreed terms.</p>
+
+            <h3>6.3 Late Payments</h3>
+            <p>Late payments may be subject to additional fees or interest as specified in the service agreement.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>7. Service Delivery and Deadlines</h2>
+            
+            <h3>7.1 Timely Filing</h3>
+            <p>We make every reasonable effort to file returns by applicable deadlines. However, timely filing depends on:</p>
+            <ul>
+                <li>Client providing all necessary information with sufficient lead time</li>
+                <li>Client reviewing and approving prepared returns in a timely manner</li>
+                <li>No technical issues with filing systems or tax authority portals</li>
+            </ul>
+
+            <h3>7.2 Client Delays</h3>
+            <p>If deadlines are missed due to Client delays in providing information or approving prepared returns, the Client remains responsible for any late filing penalties or interest.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>8. Termination</h2>
+            
+            <h3>8.1 By Client</h3>
+            <p>The Client may terminate services at any time by providing written notice. The Client remains responsible for payment for services rendered up to the termination date.</p>
+
+            <h3>8.2 By Company</h3>
+            <p>We reserve the right to terminate services if:</p>
+            <ul>
+                <li>The Client fails to provide necessary information or documentation</li>
+                <li>Payment obligations are not met</li>
+                <li>The Client engages in fraudulent or illegal activities</li>
+                <li>Continuing the relationship would violate applicable laws or regulations</li>
+            </ul>
+
+            <h3>8.3 Effect of Termination</h3>
+            <p>Upon termination, we will provide the Client with all documents and files in our possession related to their account.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>9. Disclaimers</h2>
+            
+            <div class="important-notice">
+                <strong>No Tax Advice:</strong>
+                <p>NextGen Express does not provide tax advice. Any information provided by our team members is for administrative purposes only and should not be construed as professional tax advice. Clients should consult with a qualified tax professional for advice specific to their situation.</p>
+            </div>
+
+            <p>Our services are provided "as is" without warranties of any kind, either express or implied. We do not warrant that:</p>
+            <ul>
+                <li>Our services will result in any particular tax outcome</li>
+                <li>All information we provide will be complete or error-free</li>
+                <li>Our services will meet all of the Client's specific needs</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>10. Indemnification</h2>
+            <p>The Client agrees to indemnify and hold harmless NextGen Express, its employees, and contractors from any claims, damages, losses, or expenses (including reasonable attorney fees) arising from:</p>
+            <ul>
+                <li>Inaccurate or incomplete information provided by the Client</li>
+                <li>The Client's violation of these Terms of Service</li>
+                <li>The Client's violation of any applicable laws or regulations</li>
+                <li>Any third-party claims related to the Client's business operations</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>11. Dispute Resolution</h2>
+            
+            <h3>11.1 Governing Law</h3>
+            <p>These Terms shall be governed by and construed in accordance with the laws of the State of Washington, United States, without regard to its conflict of law provisions.</p>
+
+            <h3>11.2 Dispute Process</h3>
+            <p>In the event of any dispute arising from these Terms or our services, the parties agree to first attempt to resolve the matter through good-faith negotiation. If negotiation fails, disputes may be resolved through mediation or arbitration before pursuing litigation.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>12. Changes to Terms</h2>
+            <p>We reserve the right to modify these Terms of Service at any time. Changes will be effective immediately upon posting to our website. Continued use of our services after changes are posted constitutes acceptance of the modified terms.</p>
+            <p>Clients will be notified of material changes via email to the address on file.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>13. Professional Advice Recommendation</h2>
+            <p>We strongly encourage all Clients to:</p>
+            <ul>
+                <li>Maintain a relationship with a qualified CPA or tax advisor</li>
+                <li>Consult with tax professionals regarding complex tax situations</li>
+                <li>Seek legal counsel when appropriate</li>
+                <li>Review all filed returns with their own advisors</li>
+            </ul>
+            <p>NextGen Express serves as an administrative compliance service to support your business operations, not replace professional tax or legal counsel.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>14. Contact Information</h2>
+            <p>For questions about these Terms of Service or our services, please contact us at:</p>
+            <p><strong>Email:</strong> info@nextgenexp.com</p>
+            <p><strong>Website:</strong> www.nextgenexp.com</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>15. Severability</h2>
+            <p>If any provision of these Terms is found to be unenforceable or invalid, that provision will be limited or eliminated to the minimum extent necessary so that these Terms will otherwise remain in full force and effect.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>16. Entire Agreement</h2>
+            <p>These Terms of Service, together with any service agreement or engagement letter, constitute the entire agreement between NextGen Express and the Client regarding the use of our services and supersede all prior agreements and understandings.</p>
+        </div>
+
+        <div class="important-notice" style="margin-top: 3rem;">
+            <strong>Acknowledgment:</strong>
+            <p>By using NextGen Express services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service. You further acknowledge that NextGen Express is not providing tax advice and that you are responsible for consulting with qualified tax professionals regarding your specific tax situation.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>NextGen Express</h3>
+                <p>Professional fuel reporting, IFTA, and tax services for trucking companies across the United States.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <a href="/services#fuel-reports">Fuel Reporting</a>
+                <a href="/services#ifta-filings">IFTA Quarterly Tax Filings</a>
+                <a href="/services#tax-returns">Reefer Diesel Tax Returns</a>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <a href="/">Home</a>
+                <a href="/services">Services</a>
+                <a href="/contact">Contact</a>
+                <a href="/terms-of-service">Terms of Service</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: info@nextgenexp.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 NextGen Express. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.mobile-overlay');
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            if (menu.classList.contains('active')) {
+                overlay.style.display = 'block';
+            } else {
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 300);
+            }
+        }
+    </script>
+</body>
+</html>
