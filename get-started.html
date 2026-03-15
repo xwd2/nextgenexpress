@@ -1,340 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Started - NextGen Express</title>
-    <link rel="icon" href="/assets/logo.png" type="image/png">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary: #1e3a8a;
-            --primary-dark: #1e293b;
-            --primary-darker: #0f172a;
-            --accent: #2563eb;
-            --accent-light: #3b82f6;
-            --success: #059669;
-            --text-dark: #0f172a;
-            --text-body: #1e293b;
-            --text-muted: #475569;
-            --bg-light: #f1f5f9;
-            --bg-gray: #e2e8f0;
-            --border-color: #cbd5e1;
-        }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.7; color: var(--text-body); background: var(--bg-light); overflow-x: hidden; }
-        html { scroll-behavior: smooth; }
-        
-        header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); transition: all 0.3s; }
-        header:hover { box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15); }
-        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 3rem; position: relative; }
-        .logo { display: flex; align-items: center; gap: 1rem; text-decoration: none; transition: all 0.3s; }
-        .logo:hover { transform: translateX(5px); }
-        .logo img { height: 80px; width: auto; transition: all 0.3s; filter: drop-shadow(0 2px 6px rgba(30, 58, 138, 0.2)); }
-        .logo:hover img { transform: scale(1.05) rotate(-2deg); filter: drop-shadow(0 4px 10px rgba(30, 58, 138, 0.3)); }
-        .logo-text { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -0.02em; }
-        .nav-center { position: absolute; left: 50%; transform: translateX(-50%); }
-        .nav-links { display: flex; gap: 3rem; list-style: none; align-items: center; }
-        .nav-links a { color: var(--text-body); text-decoration: none; font-weight: 600; font-size: 1.05rem; transition: all 0.3s; position: relative; padding: 0.5rem 0; }
-        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: width 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-links a:hover::after { width: 100%; }
-        .cta-button { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 0.9rem 2rem; border-radius: 10px; text-decoration: none; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3); position: relative; overflow: hidden; }
-        .cta-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
-        .cta-button:hover::before { left: 100%; }
-        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4); }
-        
-        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-dark); font-size: 1.8rem; cursor: pointer; padding: 0.5rem; z-index: 101; transition: all 0.3s; }
-        .mobile-menu-btn:hover { transform: scale(1.1) rotate(90deg); }
-        .mobile-menu { display: none; position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background: white; box-shadow: -5px 0 30px rgba(0,0,0,0.2); transition: right 0.4s; z-index: 99; padding: 7rem 2.5rem 2rem; border-left: 1px solid var(--border-color); }
-        .mobile-menu.active { right: 0; }
-        .mobile-menu ul { list-style: none; }
-        .mobile-menu ul li { margin-bottom: 2rem; opacity: 0; transform: translateX(50px); }
-        .mobile-menu.active ul li { animation: slideInMenu 0.5s forwards; }
-        .mobile-menu ul li:nth-child(1) { animation-delay: 0.1s; }
-        .mobile-menu ul li:nth-child(2) { animation-delay: 0.2s; }
-        .mobile-menu ul li:nth-child(3) { animation-delay: 0.3s; }
-        @keyframes slideInMenu { to { opacity: 1; transform: translateX(0); } }
-        .mobile-menu ul li a { color: var(--text-dark); text-decoration: none; font-size: 1.3rem; font-weight: 600; transition: all 0.3s; display: block; padding: 0.5rem 0; }
-        .mobile-menu ul li a:hover { color: var(--primary); padding-left: 15px; }
-        .mobile-menu .cta-button { display: block; text-align: center; margin-top: 2.5rem; }
-        .mobile-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(5px); z-index: 98; opacity: 0; transition: opacity 0.3s; }
-        .mobile-overlay.active { opacity: 1; }
-        
-        .page-header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%); padding: 6rem 3rem; text-align: center; color: white; position: relative; overflow: hidden; }
-        .page-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 70%); animation: pulse 6s ease-in-out infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-        .page-header h1 { font-size: 3.5rem; margin-bottom: 1.5rem; font-weight: 700; letter-spacing: -0.02em; position: relative; z-index: 1; animation: fadeInUp 0.8s ease-out; }
-        .page-header p { font-size: 1.4rem; opacity: 0.95; max-width: 800px; margin: 0 auto; line-height: 1.7; position: relative; z-index: 1; animation: fadeInUp 1s ease-out; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .process-section { padding: 8rem 3rem; background: white; }
-        .section-header { text-align: center; margin-bottom: 6rem; }
-        .section-header h2 { font-size: 3.2rem; margin-bottom: 2rem; color: var(--text-dark); font-weight: 700; letter-spacing: -0.02em; }
-        .section-header p { font-size: 1.3rem; color: var(--text-muted); max-width: 700px; margin: 0 auto; line-height: 1.8; }
-        
-        .process-steps { max-width: 1200px; margin: 0 auto; display: grid; gap: 3.5rem; }
-        .process-step { display: grid; grid-template-columns: 120px 1fr; gap: 3.5rem; align-items: start; padding: 3.5rem; background: var(--bg-light); border-radius: 16px; border: 2px solid transparent; transition: all 0.3s; position: relative; overflow: hidden; }
-        .process-step::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 16px; opacity: 0; transition: opacity 0.3s; z-index: -1; }
-        .process-step:hover::before { opacity: 0.1; }
-        .process-step:hover { border-color: var(--accent-light); transform: translateY(-5px); box-shadow: 0 12px 40px rgba(30, 58, 138, 0.12); }
-        .step-number { width: 120px; height: 120px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; font-weight: 700; flex-shrink: 0; box-shadow: 0 8px 25px rgba(30, 58, 138, 0.3); transition: all 0.3s; }
-        .process-step:hover .step-number { transform: scale(1.1) rotate(-5deg); box-shadow: 0 12px 35px rgba(30, 58, 138, 0.4); }
-        .step-content h3 { font-size: 2.1rem; margin-bottom: 1.5rem; color: var(--text-dark); font-weight: 700; letter-spacing: -0.01em; }
-        .step-content p { color: var(--text-body); line-height: 1.8; font-size: 1.15rem; margin-bottom: 1.5rem; }
-        .step-details { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
-        .detail-tag { background: white; padding: 0.6rem 1.3rem; border-radius: 8px; font-size: 0.95rem; color: var(--primary); font-weight: 600; border: 1px solid var(--border-color); transition: all 0.3s; }
-        .detail-tag:hover { background: var(--primary); color: white; transform: translateY(-2px); }
-        
-        .contact-form-section { padding: 8rem 3rem; background: var(--bg-gray); }
-        .form-container { max-width: 800px; margin: 0 auto; background: white; padding: 4.5rem; border-radius: 16px; border: 2px solid var(--border-color); transition: all 0.3s; }
-        .form-container:hover { box-shadow: 0 8px 25px rgba(15, 23, 42, 0.1); }
-        .form-intro { text-align: center; margin-bottom: 3.5rem; }
-        .form-intro h3 { font-size: 2.3rem; margin-bottom: 1.5rem; color: var(--text-dark); font-weight: 700; letter-spacing: -0.01em; }
-        .form-intro p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.7; }
-        .contact-form { display: grid; gap: 2rem; }
-        .form-group { display: grid; gap: 0.75rem; }
-        .form-group label { font-weight: 600; color: var(--text-dark); font-size: 1.05rem; }
-        .form-group input, .form-group select, .form-group textarea { padding: 1.1rem 1.5rem; border: 2px solid var(--border-color); border-radius: 10px; font-size: 1.05rem; font-family: inherit; transition: all 0.3s; background: white; color: var(--text-body); }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); transform: translateY(-2px); }
-        .form-group textarea { resize: vertical; min-height: 160px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        .submit-button { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 1.3rem 3rem; border: none; border-radius: 10px; font-size: 1.15rem; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3); position: relative; overflow: hidden; }
-        .submit-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
-        .submit-button:hover::before { left: 100%; }
-        .submit-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4); }
-        
-        .guarantee-section { padding: 6rem 3rem; background: linear-gradient(135deg, rgba(5, 150, 105, 0.08), rgba(5, 150, 105, 0.03)); text-align: center; position: relative; overflow: hidden; }
-        .guarantee-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 50%, rgba(5, 150, 105, 0.05) 0%, transparent 70%); animation: pulse 6s ease-in-out infinite; }
-        .guarantee-content { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
-        .guarantee-badge { width: 100px; height: 100px; background: var(--success); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 0 auto 2.5rem; box-shadow: 0 8px 25px rgba(5, 150, 105, 0.3); transition: all 0.3s; animation: float 3s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        .guarantee-badge:hover { transform: scale(1.1) rotate(5deg); box-shadow: 0 12px 35px rgba(5, 150, 105, 0.4); }
-        .guarantee-content h3 { font-size: 2.5rem; margin-bottom: 2rem; color: var(--text-dark); font-weight: 700; letter-spacing: -0.01em; }
-        .guarantee-content p { font-size: 1.2rem; color: var(--text-body); line-height: 1.8; }
-        
-        footer { background: var(--primary-darker); color: #cbd5e1; padding: 5rem 3rem 2.5rem; }
-        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; margin-bottom: 3.5rem; }
-        .footer-section h3 { margin-bottom: 2rem; color: white; font-size: 1.3rem; font-weight: 700; }
-        .footer-section p, .footer-section a { color: #94a3b8; text-decoration: none; display: block; margin-bottom: 1rem; transition: all 0.3s; font-size: 1.05rem; line-height: 1.7; }
-        .footer-section a:hover { color: white; padding-left: 8px; }
-        .footer-bottom { max-width: 1400px; margin: 0 auto; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #94a3b8; }
-        
-        @media (max-width: 968px) {
-            nav { padding: 1rem 1.5rem; }
-            .logo img { height: 50px; }
-            .logo-text { font-size: 1.3rem; }
-            .page-header { padding: 5rem 1.5rem; }
-            .page-header h1 { font-size: 2.5rem; }
-            .nav-center, nav .nav-links, nav .cta-button { display: none; }
-            .mobile-menu-btn { display: block; }
-            .mobile-menu { display: block; }
-            .process-section, .contact-form-section, .guarantee-section { padding: 5rem 1.5rem; }
-            .process-step { grid-template-columns: 1fr; text-align: center; padding: 3rem 2rem; }
-            .step-number { width: 100px; height: 100px; font-size: 2.5rem; margin: 0 auto; }
-            .form-row { grid-template-columns: 1fr; }
-            .form-container { padding: 3rem 2rem; }
-            .footer-content { grid-template-columns: 1fr; gap: 3rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Started — NextGen Express</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0f1e;--bg2:#0d1426;--surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.07);--cyan:#38bdf8;--cyan2:#7dd3fc;--cyanDim:rgba(56,189,248,0.12);--cyanGlow:rgba(56,189,248,0.2);--border:rgba(255,255,255,0.09);--border2:rgba(56,189,248,0.3);--white:#fff;--text1:#f1f5f9;--text2:#cbd5e1;--text3:#94a3b8;--text4:#64748b;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text1);overflow-x:hidden;line-height:1.6;min-height:100vh;display:flex;flex-direction:column;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,15,30,0.92);backdrop-filter:blur(24px);box-shadow:0 1px 0 var(--border);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2.5px;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--cyan);}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{color:var(--text3);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform .25s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-cta{background:var(--cyan)!important;color:#050d1a!important;padding:9px 22px;border-radius:6px;font-weight:700!important;transition:background .2s,box-shadow .2s!important;}
+.nav-cta::after{display:none!important;}
+.nav-cta:hover{background:var(--cyan2)!important;box-shadow:0 6px 20px var(--cyanGlow)!important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text2);border-radius:2px;transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-nav{display:none;position:fixed;inset:0;background:rgba(8,12,24,.97);z-index:190;flex-direction:column;align-items:center;justify-content:center;gap:40px;backdrop-filter:blur(20px);}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:2px;color:var(--text2);text-decoration:none;transition:color .2s,transform .2s;}
+.mobile-nav a:hover{color:var(--cyan);transform:translateX(8px);}
+.mobile-nav .mob-cta{font-size:28px;background:var(--cyan);color:#050d1a;padding:14px 48px;border-radius:8px;}
+
+.page-header{padding:130px 48px 80px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.ph-mesh{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(56,189,248,.07),transparent 65%);pointer-events:none;}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(56,189,248,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.03) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 90% 80% at 50% 50%,black,transparent);pointer-events:none;}
+.ph-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;position:relative;z-index:2;opacity:.8;}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,96px);line-height:.9;margin-bottom:18px;position:relative;z-index:2;}
+.ph-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--cyan);}
+.ph-sub{font-size:17px;color:var(--text2);max-width:580px;margin:0 auto;line-height:1.7;position:relative;z-index:2;font-weight:300;}
+
+.process-section{padding:96px 48px;border-bottom:1px solid var(--border);position:relative;z-index:2;}
+.ps-inner{max-width:860px;margin:0 auto;}
+.sec-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;opacity:.8;}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5.5vw,60px);line-height:.93;margin-bottom:10px;}
+.sec-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--cyan);}
+.sec-sub{font-size:15px;color:var(--text3);margin-bottom:56px;font-weight:300;}
+
+.steps{display:flex;flex-direction:column;}
+.step{display:grid;grid-template-columns:72px 1fr;gap:24px;padding:36px 0;border-bottom:1px solid var(--border);transition:all .3s;}
+.step:first-child{padding-top:0;}
+.step:last-child{border-bottom:none;}
+.step-wrap{display:flex;flex-direction:column;align-items:center;}
+.step-num{width:52px;height:52px;background:var(--cyanDim);border:1px solid rgba(56,189,248,.25);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--cyan);flex-shrink:0;transition:background .3s,box-shadow .3s;}
+.step:hover .step-num{background:rgba(56,189,248,.2);box-shadow:0 0 20px var(--cyanDim);}
+.step-connector{flex:1;width:2px;background:var(--border);margin:10px auto 0;min-height:20px;}
+.step:last-child .step-connector{display:none;}
+.step-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.5px;margin-bottom:9px;color:var(--text1);}
+.step-body{font-size:14px;color:var(--text3);line-height:1.75;margin-bottom:14px;font-weight:300;}
+.step-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.step-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.5px;padding:5px 13px;border:1px solid rgba(56,189,248,.2);color:var(--cyan);border-radius:100px;opacity:.8;}
+
+.form-section{flex:1;padding:96px 48px 110px;position:relative;z-index:2;background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);}
+.form-inner{max-width:740px;margin:0 auto;}
+
+.form-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;position:relative;}
+.form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--cyan2),transparent);}
+.form-hd{padding:28px 36px;border-bottom:1px solid var(--border);}
+.form-hd h2{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:var(--text1);}
+.form-hd p{font-size:13px;color:var(--text3);margin-top:4px;}
+.form-body{padding:36px;}
+
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.f-row.full{grid-template-columns:1fr;}
+.field{display:flex;flex-direction:column;gap:7px;}
+.field label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);}
+.field input,.field select,.field textarea{background:var(--surface2);border:1px solid rgba(255,255,255,0.12);color:var(--text1);font-family:'DM Sans',sans-serif;font-size:14px;padding:13px 16px;border-radius:8px;outline:none;transition:border-color .2s,background .2s,box-shadow .2s;width:100%;}
+.field input::placeholder,.field textarea::placeholder{color:var(--text4);}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(56,189,248,.5);background:rgba(56,189,248,.06);box-shadow:0 0 0 3px rgba(56,189,248,.08);}
+.field select{appearance:none;cursor:pointer;}
+.field select option{background:#0d1426;color:var(--text1);}
+.field textarea{resize:vertical;min-height:130px;}
+.f-divider{height:1px;background:var(--border);margin:20px 0;}
+.btn-submit{width:100%;background:var(--cyan);color:#050d1a;padding:16px;border-radius:8px;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:6px;}
+.btn-submit:hover{background:var(--cyan2);transform:translateY(-2px);box-shadow:0 12px 36px var(--cyanGlow);}
+.form-note{font-size:12px;color:var(--text4);font-family:'DM Mono',monospace;text-align:center;margin-top:12px;}
+
+.commit-box{margin-top:28px;padding:28px 32px;background:var(--cyanDim);border:1px solid rgba(56,189,248,.18);border-radius:10px;display:flex;align-items:flex-start;gap:18px;}
+.commit-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
+.commit-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--cyan);margin-bottom:6px;}
+.commit-body{font-size:13px;color:var(--text2);line-height:1.75;}
+
+footer{padding:56px 48px 32px;border-top:1px solid var(--border);display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;background:var(--bg2);position:relative;z-index:2;}
+.foot-brand .nav-logo{display:block;margin-bottom:12px;font-size:22px;}
+.foot-brand p{font-size:13px;color:var(--text4);line-height:1.7;max-width:240px;}
+.foot-col h4{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;opacity:.8;}
+.foot-col a,.foot-col p{display:block;color:var(--text4);text-decoration:none;font-size:13px;margin-bottom:8px;transition:color .2s;}
+.foot-col a:hover{color:var(--text2);}
+.foot-btm{padding:18px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg2);position:relative;z-index:2;}
+.foot-btm p{font-size:11px;color:var(--text4);font-family:'DM Mono',monospace;}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-d1{transition-delay:.1s;}.reveal-d2{transition-delay:.2s;}.reveal-d3{transition-delay:.3s;}
+
+@media(max-width:960px){
+  nav{padding:0 20px;}.nav-links{display:none;}.hamburger{display:flex;}
+  .page-header{padding:100px 24px 60px;}
+  .process-section{padding:72px 24px;}
+  .step{grid-template-columns:60px 1fr;gap:18px;}
+  .form-section{padding:72px 24px 80px;}
+  .f-row{grid-template-columns:1fr;}
+  .form-hd{padding:20px 22px;}.form-body{padding:22px;}
+  .commit-box{flex-direction:column;gap:12px;}
+  footer{grid-template-columns:1fr 1fr;padding:36px 24px 20px;gap:28px;}
+  .foot-btm{padding:14px 24px;flex-direction:column;gap:4px;text-align:center;}
+}
+@media(max-width:480px){
+  footer{grid-template-columns:1fr;}
+  .step{grid-template-columns:1fr;}
+  .step-wrap{flex-direction:row;gap:12px;align-items:center;margin-bottom:10px;}
+  .step-connector{display:none;}
+}
+</style>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/" class="logo">
-                <img src="/assets/logo.png" alt="NextGen Express">
-                <span class="logo-text">NextGen Express</span>
-            </a>
-            <div class="nav-center">
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
-            </div>
-            <a href="/contact" class="cta-button">Contact Us</a>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
-        </nav>
-    </header>
+<nav>
+  <a href="/" class="nav-logo">NEXT<span>GEN</span> EXPRESS</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/#why">Why Us</a>
+    <a href="/contact" class="nav-cta">Contact</a>
+  </div>
+  <button class="hamburger" id="hb" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-nav" id="mn">
+  <a href="/" onclick="closeNav()">Home</a>
+  <a href="/services" onclick="closeNav()">Services</a>
+  <a href="/#why" onclick="closeNav()">Why Us</a>
+  <a href="/contact" class="mob-cta" onclick="closeNav()">Contact</a>
+</div>
 
-    <div class="mobile-overlay" onclick="toggleMenu()"></div>
-    <div class="mobile-menu">
-        <ul>
-            <li><a href="/" onclick="toggleMenu()">Home</a></li>
-            <li><a href="/services" onclick="toggleMenu()">Services</a></li>
-            <li><a href="/contact" onclick="toggleMenu()">Contact</a></li>
-        </ul>
-        <a href="/contact" class="cta-button" onclick="toggleMenu()">Contact Us</a>
+<div class="page-header">
+  <div class="ph-mesh"></div><div class="ph-grid"></div>
+  <div class="ph-label">Start Here</div>
+  <h1 class="ph-title">LET'S GET <em>STARTED</em></h1>
+  <p class="ph-sub">Join trucking companies who have simplified their fuel reporting and tax compliance with NextGen Express.</p>
+</div>
+
+<div class="process-section">
+  <div class="ps-inner">
+    <div class="sec-label reveal">Simple Process</div>
+    <h2 class="sec-title reveal reveal-d1">HOW WE'LL<br><em>WORK TOGETHER</em></h2>
+    <p class="sec-sub reveal reveal-d1">A simple, transparent process from start to finish</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-wrap"><div class="step-num">1</div><div class="step-connector"></div></div>
+        <div><div class="step-title">Tell Us About Your Needs</div><p class="step-body">Fill out the quick form below or reach out directly. We'll ask about your business, fleet size, and which services interest you most.</p><div class="step-tags"><span class="step-tag">5 minutes</span><span class="step-tag">No commitment</span></div></div>
+      </div>
+      <div class="step reveal reveal-d1">
+        <div class="step-wrap"><div class="step-num">2</div><div class="step-connector"></div></div>
+        <div><div class="step-title">Free Consultation Call</div><p class="step-body">We'll schedule a brief call to understand your specific needs, answer your questions, and explain exactly how we can help. We'll provide transparent pricing based on your requirements.</p><div class="step-tags"><span class="step-tag">15–20 minutes</span><span class="step-tag">No pressure</span><span class="step-tag">All questions answered</span></div></div>
+      </div>
+      <div class="step reveal reveal-d2">
+        <div class="step-wrap"><div class="step-num">3</div><div class="step-connector"></div></div>
+        <div><div class="step-title">Simple Onboarding</div><p class="step-body">Once you're ready, we'll walk you through a quick process to collect your business information and get your account set up. Takes just a few minutes.</p><div class="step-tags"><span class="step-tag">10 minutes</span><span class="step-tag">One-time setup</span></div></div>
+      </div>
+      <div class="step reveal reveal-d3">
+        <div class="step-wrap"><div class="step-num">4</div><div class="step-connector"></div></div>
+        <div><div class="step-title">We Take Over From Here</div><p class="step-body">That's it. We handle all data processing, reporting, and filings. You'll receive your first reports on schedule and we're available any time you have questions.</p><div class="step-tags"><span class="step-tag">Hassle-free</span><span class="step-tag">Ongoing support</span></div></div>
+      </div>
     </div>
+  </div>
+</div>
 
-    <section class="page-header">
-        <h1>Let's Get Started</h1>
-        <p>Join hundreds of trucking companies who have simplified their fuel reporting and tax compliance</p>
-    </section>
+<div class="form-section">
+  <div class="form-inner">
+    <div class="form-card reveal">
+      <div class="form-hd">
+        <h2>READY TO GET STARTED?</h2>
+        <p>Fill out the form and we'll get back to you within 24 hours to schedule your free consultation</p>
+      </div>
+      <div class="form-body">
+        <form action="https://formspree.io/f/xlggwyrj" method="POST">
+          <div class="f-row">
+            <div class="field"><label>Your Name *</label><input type="text" name="name" placeholder="John Smith" required></div>
+            <div class="field"><label>Company Name *</label><input type="text" name="company" placeholder="ABC Trucking LLC" required></div>
+          </div>
+          <div class="f-row">
+            <div class="field"><label>Email Address *</label><input type="email" name="email" placeholder="john@company.com" required></div>
+            <div class="field"><label>Phone Number</label><input type="tel" name="phone" placeholder="(555) 123-4567"></div>
+          </div>
+          <div class="f-divider"></div>
+          <div class="f-row full">
+            <div class="field"><label>Which service interests you? *</label>
+              <select name="service" required>
+                <option value="" disabled selected>Select a service</option>
+                <option>Fuel Reporting</option>
+                <option>IFTA Quarterly Filings</option>
+                <option>Reefer Diesel Tax Returns</option>
+                <option>Multiple Services</option>
+                <option>Not Sure Yet</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-row full">
+            <div class="field"><label>Approximate Fleet Size</label>
+              <select name="fleet_size">
+                <option value="" disabled selected>Select fleet size</option>
+                <option>1–5 trucks</option>
+                <option>6–10 trucks</option>
+                <option>11–25 trucks</option>
+                <option>26–50 trucks</option>
+                <option>50+ trucks</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-row full">
+            <div class="field"><label>Tell us about your needs (optional)</label><textarea name="message" placeholder="Any specific questions or requirements?"></textarea></div>
+          </div>
+          <input type="hidden" name="_subject" value="Get Started Inquiry — NextGen Express">
+          <input type="text" name="_gotcha" style="display:none">
+          <button type="submit" class="btn-submit">Send Message →</button>
+          <p class="form-note">We respond to every inquiry within 24 hours. No spam, no pressure.</p>
+        </form>
+      </div>
+    </div>
+    <div class="commit-box reveal reveal-d1">
+      <span class="commit-icon">✓</span>
+      <div>
+        <div class="commit-title">Our Commitment to You</div>
+        <p class="commit-body">We respond to every inquiry within 24 hours. No pressure, no pushy sales — just honest answers. If we're not the right fit for your business, we'll tell you upfront and point you in the right direction.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <section class="process-section">
-        <div class="section-header">
-            <h2>How We'll Work Together</h2>
-            <p>A simple, transparent process from start to finish</p>
-        </div>
-        <div class="process-steps">
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Tell Us About Your Needs</h3>
-                    <p>Fill out our quick contact form below or reach out directly. We'll ask about your business, fleet size, and which services interest you most.</p>
-                    <div class="step-details">
-                        <span class="detail-tag">5 minutes</span>
-                        <span class="detail-tag">No commitment</span>
-                    </div>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Free Consultation Call</h3>
-                    <p>We'll schedule a brief call to understand your specific needs, answer your questions, and explain exactly how we can help. We'll also provide transparent pricing based on your requirements.</p>
-                    <div class="step-details">
-                        <span class="detail-tag">15-20 minutes</span>
-                        <span class="detail-tag">No pressure</span>
-                        <span class="detail-tag">Get all your questions answered</span>
-                    </div>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Simple Onboarding</h3>
-                    <p>Once you're ready to move forward, we'll send you a simple onboarding form to collect basic business information and set up your account. This takes just a few minutes.</p>
-                    <div class="step-details">
-                        <span class="detail-tag">10 minutes</span>
-                        <span class="detail-tag">One-time setup</span>
-                    </div>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h3>We Take Over From Here</h3>
-                    <p>That's it! We'll handle all the data processing, reporting, and filings. You'll receive your first reports on schedule, and we'll be available anytime you have questions.</p>
-                    <div class="step-details">
-                        <span class="detail-tag">Hassle-free</span>
-                        <span class="detail-tag">Ongoing support</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<footer>
+  <div class="foot-brand"><a href="/" class="nav-logo">NEXT<span>GEN</span> EXPRESS</a><p>Professional trucking tax compliance. IFTA filings, fuel reporting, and reefer diesel returns.</p></div>
+  <div class="foot-col"><h4>Services</h4><a href="/services#fuel-reports">Fuel Reporting</a><a href="/services#ifta-filings">IFTA Quarterly Filings</a><a href="/services#reefer-returns">Reefer Diesel Returns</a></div>
+  <div class="foot-col"><h4>Company</h4><a href="/">Home</a><a href="/services">Services</a><a href="/contact">Contact</a></div>
+  <div class="foot-col"><h4>Legal</h4><a href="/terms-of-service">Terms of Service</a><p>info@nextgenexp.com</p></div>
+</footer>
+<div class="foot-btm"><p>© 2026 NextGen Express. All rights reserved.</p><p>nextgenexp.com</p></div>
 
-    <section class="contact-form-section">
-        <div class="form-container">
-            <div class="form-intro">
-                <h3>Ready to Get Started?</h3>
-                <p>Fill out the form below and we'll get back to you within 24 hours to schedule your free consultation</p>
-            </div>
-            <form class="contact-form" action="https://formspree.io/f/xlggwyrj" method="POST">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">Your Name *</label>
-                        <input type="text" id="name" name="name" required placeholder="John Smith">
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company Name *</label>
-                        <input type="text" id="company" name="company" required placeholder="Your Company">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required placeholder="john@company.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="service">Which service interests you? *</label>
-                    <select id="service" name="service" required>
-                        <option value="">Select a service</option>
-                        <option value="fuel-reporting">Fuel Reporting</option>
-                        <option value="ifta">IFTA Quarterly Filings</option>
-                        <option value="reefer-tax">Reefer Diesel Tax Returns</option>
-                        <option value="multiple">Multiple Services</option>
-                        <option value="not-sure">Not Sure Yet</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="fleet-size">Approximate Fleet Size</label>
-                    <select id="fleet-size" name="fleet-size">
-                        <option value="">Select fleet size</option>
-                        <option value="1-5">1-5 trucks</option>
-                        <option value="6-10">6-10 trucks</option>
-                        <option value="11-25">11-25 trucks</option>
-                        <option value="26-50">26-50 trucks</option>
-                        <option value="50+">50+ trucks</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="message">Tell us about your needs (optional)</label>
-                    <textarea id="message" name="message" placeholder="Any specific questions or requirements?"></textarea>
-                </div>
-                <button type="submit" class="submit-button">Send Message</button>
-            </form>
-        </div>
-    </section>
-
-    <section class="guarantee-section">
-        <div class="guarantee-content">
-            <div class="guarantee-badge">✓</div>
-            <h3>Our Commitment to You</h3>
-            <p>We respond to every inquiry within 24 hours. No pressure, no pushy sales tactics – just honest answers to your questions. If we're not the right fit for your business, we'll tell you upfront and even point you in the right direction.</p>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>NextGen Express</h3>
-                <p>Professional fuel reporting, IFTA, and tax services for trucking companies across the United States.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Services</h3>
-                <a href="/services#fuel-reports">Fuel Reporting</a>
-                <a href="/services#ifta-filings">IFTA Quarterly Tax Filings</a>
-                <a href="/services#tax-returns">Reefer Diesel Tax Returns</a>
-            </div>
-            <div class="footer-section">
-                <h3>Company</h3>
-                <a href="/">Home</a>
-                <a href="/services">Services</a>
-                <a href="/contact">Contact</a>
-                <a href="/terms-of-service">Terms of Service</a>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <p>Email: info@nextgenexp.com</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 NextGen Express. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        function toggleMenu() {
-            const menu = document.querySelector('.mobile-menu');
-            const overlay = document.querySelector('.mobile-overlay');
-            menu.classList.toggle('active');
-            overlay.classList.toggle('active');
-            
-            if (menu.classList.contains('active')) {
-                overlay.style.display = 'block';
-            } else {
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 300);
-            }
-        }
-    </script>
+<script>
+function toggleNav(){const mn=document.getElementById('mn'),hb=document.getElementById('hb');const o=mn.classList.toggle('open');hb.classList.toggle('open');document.body.style.overflow=o?'hidden':'';}
+function closeNav(){document.getElementById('mn').classList.remove('open');document.getElementById('hb').classList.remove('open');document.body.style.overflow='';}
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
 </body>
 </html>
