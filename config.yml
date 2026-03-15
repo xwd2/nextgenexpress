@@ -1,0 +1,11 @@
+# NextGen Express - GitHub Pages Config
+title: NextGen Express
+description: Professional Trucking Tax Compliance Services
+url: "https://nextgenexp.com"
+
+permalink: pretty
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
