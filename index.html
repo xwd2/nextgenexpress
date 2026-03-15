@@ -550,16 +550,19 @@ footer{padding:64px 56px 40px;border-top:1px solid var(--border);background:var(
       <div class="process-visual reveal-r d1">
         <div class="pv-header">
           <div class="pv-tabs">
-            <div class="pv-tab active">Overview</div>
-            <div class="pv-tab">Deadlines</div>
+            <div class="pv-tab active" onclick="switchPvTab(this,'pv-overview')">Overview</div>
+            <div class="pv-tab" onclick="switchPvTab(this,'pv-deadlines-panel')">Deadlines</div>
           </div>
         </div>
+        <div id="pv-overview">
         <div class="pv-stats">
           <div class="pv-stat"><div class="pv-n" data-count="60" data-suffix="+">60+</div><div class="pv-l">Jurisdictions</div></div>
           <div class="pv-stat"><div class="pv-n" data-count="4" data-suffix="×">4×</div><div class="pv-l">Per Year</div></div>
           <div class="pv-stat"><div class="pv-n" data-count="100" data-suffix="%">100%</div><div class="pv-l">On-Time Rate</div></div>
           <div class="pv-stat"><div class="pv-n" data-count="0">0</div><div class="pv-l">Software Needed</div></div>
         </div>
+        </div><!-- /pv-overview -->
+        <div id="pv-deadlines-panel" style="display:none;">
         <div class="pv-deadlines">
           <div class="pv-dl-title">Quarterly IFTA Deadlines</div>
           <div class="pv-dl-row"><span class="pv-dl-q">Q1 — January to March</span><span class="pv-dl-d">April 30</span></div>
@@ -567,6 +570,7 @@ footer{padding:64px 56px 40px;border-top:1px solid var(--border);background:var(
           <div class="pv-dl-row"><span class="pv-dl-q">Q3 — July to September</span><span class="pv-dl-d">Oct 31</span></div>
           <div class="pv-dl-row"><span class="pv-dl-q">Q4 — October to December</span><span class="pv-dl-d">Jan 31</span></div>
         </div>
+        </div><!-- /pv-deadlines-panel -->
       </div>
     </div>
   </div>
@@ -685,6 +689,18 @@ function runCounters(parent){
 }
 const co=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){runCounters(e.target);co.unobserve(e.target);}}),{threshold:.3});
 document.querySelectorAll('.hp-stats,.pv-stats').forEach(el=>co.observe(el));
+
+/* ── PROCESS PANEL TABS ── */
+function switchPvTab(tab, panelId) {
+  // Update tab active states
+  tab.closest('.pv-tabs').querySelectorAll('.pv-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  // Show/hide panels
+  ['pv-overview','pv-deadlines-panel'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = id === panelId ? 'block' : 'none';
+  });
+}
 
 /* ── AUTO IFTA DEADLINE ── */
 (function(){
