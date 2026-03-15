@@ -1,552 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Onboarding - NextGen Express</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Onboarding — NextGen Express</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0a0f1e;--bg2:#0d1426;
+  --cyan:#2dd4bf;
+  --cyan2:#5eead4;
+  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);
+  --white:  #ffffff;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background:var(--bg); color: var(--white); overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1; opacity: 0.35;
+}
 
-        :root {
-            --primary: #3b82f6;
-            --primary-dark: #2563eb;
-            --primary-darker: #1d4ed8;
-            --accent: #60a5fa;
-            --dark-bg: #0f172a;
-            --dark-card: #1e293b;
-            --dark-card-hover: #334155;
-            --text-light: #e2e8f0;
-            --text-muted: #94a3b8;
-            --success: #10b981;
-            --border-color: #334155;
-        }
+/* TOP BAR */
+.top-bar {
+  padding: 18px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  position: relative; z-index: 10;
+  background:rgba(15,25,35,0.88); backdrop-filter: blur(20px);
+}
+.bar-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--white); text-decoration: none; }
+.bar-logo span { color:var(--cyan); }
+.bar-badge {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color:var(--text4);
+  border: 1px solid var(--border); padding: 6px 14px; border-radius: 2px;
+}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            line-height: 1.6;
-            color: var(--text-light);
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow-x: hidden;
-        }
+/* MAIN */
+.main { flex: 1; padding: 64px 48px 100px; position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; width: 100%; }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(96, 165, 250, 0.08) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
+.page-eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color:var(--cyan); margin-bottom: 14px; }
+.page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 80px); line-height: 0.92; letter-spacing: 1px; margin-bottom: 16px; }
+.page-intro { font-size: 15px; color:var(--text3); line-height: 1.8; max-width: 580px; font-weight: 300; margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
 
-        /* Header */
-        .header {
-            padding: 4rem 2.5rem 2.5rem;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
+/* HOW IT WORKS */
+.how-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-bottom: 64px; }
+.how-step { padding: 24px 20px; border: 1px solid var(--border); background: rgba(255,255,255,0.018); text-align: center; }
+.how-n { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: rgba(45,212,191,0.18); line-height: 1; margin-bottom: 10px; }
+.how-title { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 1px; margin-bottom: 6px; }
+.how-desc { font-size: 11px; color:var(--text4); line-height: 1.6; font-family: 'DM Mono', monospace; }
 
-        .logo-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1.25rem;
-            margin-bottom: 2.5rem;
-        }
+/* SERVICE SELECTOR */
+.selector-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color:var(--text4); margin-bottom: 14px; }
+.service-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 48px; }
+.svc-tab {
+  padding: 24px 20px; border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02); cursor: pointer;
+  transition: background 0.2s, border-color 0.2s; position: relative; overflow: hidden;
+  text-align: left;
+}
+.svc-tab::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--cyan); transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+}
+.svc-tab.active { background:rgba(45,212,191,0.07); border-color: rgba(45,212,191,0.3); }
+.svc-tab.active::before { transform: scaleX(1); }
+.svc-tab:hover:not(.active) { background:rgba(45,212,191,0.03); }
+.tab-num { font-family: 'DM Mono', monospace; font-size: 10px; color:var(--cyan); letter-spacing: 2px; opacity: 0.5; margin-bottom: 10px; }
+.tab-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+.tab-name { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 1px; margin-bottom: 4px; line-height: 1; }
+.tab-desc { font-size: 11px; color:var(--text4); line-height: 1.5; font-family: 'DM Mono', monospace; }
 
-        .logo-icon {
-            width: 85px;
-            height: 85px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 2.5rem;
-            box-shadow: 0 10px 35px rgba(59, 130, 246, 0.4);
-        }
+/* FORM PANELS */
+.form-panel { display: none; }
+.form-panel.active { display: block; }
 
-        .logo-text {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--text-light);
-        }
+.form-panel-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border);
+}
+.panel-icon { font-size: 28px; }
+.panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; }
+.panel-sub { font-size: 13px; color:var(--text3); margin-top: 4px; }
 
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 1.25rem;
-            font-weight: 600;
-            color: var(--text-light);
-        }
+/* GOOGLE FORM WRAPPER */
+.gform-wrap {
+  background: rgba(255,255,255,0.025); border: 1px solid var(--border);
+  border-radius:10px; overflow: hidden; position: relative;
+}
+.gform-wrap::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--cyan), transparent); z-index: 1; }
+.gform-wrap iframe {
+  width: 100%; border: none; display: block;
+  min-height: 900px;
+  /* Override Google Forms white background */
+  filter: invert(0);
+}
 
-        .header p {
-            font-size: 1.3rem;
-            color: var(--text-muted);
-            max-width: 850px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
+/* Loading state */
+.gform-loading {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 80px 40px; gap: 16px;
+  position: absolute; inset: 0; background: rgba(8,10,15,0.9); z-index: 2;
+  transition: opacity 0.4s;
+}
+.gform-loading.hidden { opacity: 0; pointer-events: none; }
+.loading-dot-row { display: flex; gap: 8px; }
+.loading-dot { width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; animation: loadBounce 1.2s infinite; }
+.loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.loading-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes loadBounce { 0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; } 40% { transform: scale(1); opacity: 1; } }
+.loading-text { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color:var(--text4); }
 
-        /* Main Content */
-        .container {
-            flex: 1;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem 2.5rem 5rem;
-            width: 100%;
-            position: relative;
-            z-index: 1;
-        }
+/* FOOTER */
+.onboard-footer {
+  border-top: 1px solid var(--border); padding: 20px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  position: relative; z-index: 2;
+}
+.onboard-footer p { font-size: 11px; color:var(--text4); font-family: 'DM Mono', monospace; }
+.onboard-footer a { color:var(--text4); text-decoration: none; font-size: 11px; font-family: 'DM Mono', monospace; transition: color 0.2s; }
+.onboard-footer a:hover { color: rgba(255,255,255,0.5); }
 
-        /* Steps Section */
-        .steps-section {
-            background: var(--dark-card);
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 12px 45px rgba(0,0,0,0.4);
-            margin-bottom: 4rem;
-            border: 1px solid var(--border-color);
-        }
-
-        .steps-section h2 {
-            text-align: center;
-            font-size: 2.2rem;
-            color: var(--text-light);
-            margin-bottom: 3rem;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .step {
-            text-align: center;
-        }
-
-        .step-number {
-            width: 75px;
-            height: 75px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 700;
-            margin: 0 auto 1.5rem;
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-        }
-
-        .step h3 {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 0.75rem;
-        }
-
-        .step p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-        }
-
-        /* Service Cards */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-            gap: 3rem;
-            margin-bottom: 4rem;
-        }
-
-        .service-card {
-            background: var(--dark-card);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 12px 45px rgba(0,0,0,0.4);
-            transition: all 0.4s;
-            position: relative;
-            border: 1px solid var(--border-color);
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            transform: scaleX(0);
-            transition: transform 0.4s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
-            border-color: var(--primary);
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-header {
-            background: linear-gradient(135deg, var(--primary-darker), var(--primary));
-            color: white;
-            padding: 3.5rem 2.5rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.4; }
-            50% { transform: scale(1.15) rotate(90deg); opacity: 0.7; }
-        }
-
-        .service-icon {
-            font-size: 5rem;
-            margin-bottom: 1.75rem;
-            display: block;
-            position: relative;
-            z-index: 1;
-        }
-
-        .service-header h3 {
-            font-size: 2.2rem;
-            margin-bottom: 0.85rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .service-header p {
-            font-size: 1.2rem;
-            opacity: 0.95;
-            position: relative;
-            z-index: 1;
-        }
-
-        .service-body {
-            padding: 3rem;
-        }
-
-        .service-description {
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            line-height: 1.9;
-            font-size: 1.1rem;
-        }
-
-        .features-list {
-            list-style: none;
-            margin-bottom: 3rem;
-        }
-
-        .features-list li {
-            padding: 1rem 0;
-            display: flex;
-            align-items: start;
-            gap: 1.25rem;
-            color: var(--text-light);
-            border-bottom: 1px solid var(--border-color);
-            font-size: 1.05rem;
-        }
-
-        .features-list li:last-child {
-            border-bottom: none;
-        }
-
-        .features-list li::before {
-            content: "✓";
-            color: var(--success);
-            font-weight: bold;
-            font-size: 1.7rem;
-            flex-shrink: 0;
-            width: 28px;
-            height: 28px;
-            background: rgba(16, 185, 129, 0.15);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .onboard-button {
-            display: block;
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 1.4rem 2.5rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            text-align: center;
-            transition: all 0.3s;
-            font-size: 1.2rem;
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-        }
-
-        .onboard-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(59, 130, 246, 0.6);
-        }
-
-        .onboard-button:active {
-            transform: translateY(-1px);
-        }
-
-        /* Info Box */
-        .info-box {
-            background: var(--dark-card);
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 12px 45px rgba(0,0,0,0.4);
-            text-align: center;
-            border: 1px solid var(--border-color);
-        }
-
-        .info-box h2 {
-            font-size: 2.2rem;
-            color: var(--text-light);
-            margin-bottom: 1.25rem;
-        }
-
-        .info-box p {
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 3.5rem;
-            flex-wrap: wrap;
-            padding-top: 2rem;
-            border-top: 2px solid var(--border-color);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .contact-item a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .contact-item a:hover {
-            color: var(--accent);
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(2, 6, 23, 0.6);
-            backdrop-filter: blur(10px);
-            color: var(--text-muted);
-            padding: 2.5rem;
-            text-align: center;
-            margin-top: auto;
-            border-top: 1px solid var(--border-color);
-            position: relative;
-            z-index: 1;
-        }
-
-        footer p {
-            opacity: 0.9;
-        }
-
-        @media (max-width: 968px) {
-            .header h1 {
-                font-size: 2.2rem;
-            }
-
-            .logo-text {
-                font-size: 2rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .steps-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-
-            .service-header h3 {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
+/* MOBILE */
+@media (max-width: 900px) {
+  .top-bar { padding: 16px 24px; }
+  .main { padding: 48px 24px 80px; }
+  .how-row { grid-template-columns: 1fr 1fr; }
+  .service-tabs { grid-template-columns: 1fr; }
+  .gform-wrap iframe { min-height: 1100px; }
+  .onboard-footer { padding: 16px 24px; flex-direction: column; gap: 8px; text-align: center; }
+}
+@media (max-width: 480px) {
+  .how-row { grid-template-columns: 1fr; }
+  .top-bar { padding: 14px 16px; }
+  .bar-logo { font-size: 18px; }
+}
+.form-launch-card {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; position: relative; text-align: center;
+}
+.form-launch-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--cyan2), transparent); }
+.flc-inner { padding: 56px 40px; }
+.flc-icon { font-size: 44px; margin-bottom: 20px; display: block; }
+.flc-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; color: var(--text1); margin-bottom: 10px; }
+.flc-body { font-size: 14px; color: var(--text3); line-height: 1.75; max-width: 420px; margin: 0 auto 32px; }
+.flc-btn{display:inline-flex;align-items:center;gap:12px;background:var(--cyan);color:#051a17;
+  padding: 16px 44px; border-radius: 8px;
+  font-weight: 700; font-size: 15px; text-decoration: none; letter-spacing: .3px;
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+.flc-btn:hover { background: var(--cyan2); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(45,212,191,.25); }
+.flc-note { margin-top: 16px; font-size: 12px; color: var(--text4); font-family: 'DM Mono', monospace; letter-spacing: .5px; }
+.flc-checklist { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0 auto 28px; max-width: 500px; }
+.flc-check { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2); background:rgba(45,212,191,.07); border: 1px solid rgba(45,212,191,.15); padding: 7px 14px; border-radius: 100px; }
+.flc-check::before { content: '✓'; color:var(--cyan); font-size: 11px; font-weight: 700; }
+.cursor{position:fixed;width:10px;height:10px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid var(--cyan);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .1s ease;opacity:.6;}
+.cursor.hover{width:16px;height:16px;}.cursor-ring.hover{width:56px;height:56px;opacity:.3;}
+@media(max-width:768px){.cursor,.cursor-ring{display:none;}body{cursor:auto;}}
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <div class="header">
-        <div class="logo-section">
-            <div class="logo-icon">NE</div>
-            <div class="logo-text">NextGen Express</div>
-        </div>
-        <h1>Secure Client Onboarding</h1>
-        <p>Choose your service below and complete our secure onboarding form to get started with professional fuel reporting, IFTA, and tax services.</p>
+
+<!-- TOP BAR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="top-bar">
+  <a href="/" class="bar-logo">NEXT<span>GEN</span> EXPRESS</a>
+  <div class="bar-badge">Client Onboarding</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="page-eyebrow">Secure Onboarding</div>
+  <h1 class="page-title">CLIENT<br>ONBOARDING</h1>
+  <p class="page-intro">Select the service you need below and complete the onboarding form. We'll follow up within 24 hours to confirm your setup and walk you through next steps.</p>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-row">
+    <div class="how-step">
+      <div class="how-n">01</div>
+      <div class="how-title">Choose Service</div>
+      <p class="how-desc">Select the service tab below</p>
     </div>
-
-    <!-- Main Container -->
-    <div class="container">
-        
-        <!-- How It Works -->
-        <div class="steps-section">
-            <h2>How Onboarding Works</h2>
-            <div class="steps-grid">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Select Service</h3>
-                    <p>Choose the service you need below</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Complete Form</h3>
-                    <p>Fill out our secure onboarding form</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Upload Documents</h3>
-                    <p>Attach your fuel receipts and records</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Get Started</h3>
-                    <p>We'll contact you within 24 hours</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Service Cards -->
-        <div class="services-grid">
-            
-            <!-- Fuel Reporting Service -->
-            <div class="service-card">
-                <div class="service-header">
-                    <span class="service-icon">📊</span>
-                    <h3>Fuel Reporting</h3>
-                    <p>Comprehensive analysis & insights</p>
-                </div>
-                <div class="service-body">
-                    <p class="service-description">
-                        Get detailed fuel reports delivered weekly or monthly. We track every gallon, analyze spending patterns, and identify cost-saving opportunities.
-                    </p>
-                    <ul class="features-list">
-                        <li>Weekly or monthly reporting</li>
-                        <li>Detailed cost analysis & trends</li>
-                        <li>Driver and route comparisons</li>
-                        <li>Fraud detection alerts</li>
-                        <li>Savings recommendations</li>
-                    </ul>
-                    <a href="https://forms.gle/ZzyFvLsTAw2orrRF8" class="onboard-button" target="_blank">
-                        Start Fuel Reporting Onboarding →
-                    </a>
-                </div>
-            </div>
-
-            <!-- IFTA Service -->
-            <div class="service-card">
-                <div class="service-header">
-                    <span class="service-icon">📑</span>
-                    <h3>IFTA Quarterly Tax Filings</h3>
-                    <p>Complete preparation & filing</p>
-                </div>
-                <div class="service-body">
-                    <p class="service-description">
-                        We handle all aspects of your IFTA quarterly reporting. From tracking mileage to calculating taxes by jurisdiction, we ensure compliance every quarter.
-                    </p>
-                    <ul class="features-list">
-                        <li>Quarterly IFTA tax preparation</li>
-                        <li>Multi-jurisdiction calculations</li>
-                        <li>Mileage & fuel tracking</li>
-                        <li>Timely filing & compliance</li>
-                        <li>Complete record keeping</li>
-                    </ul>
-                    <a href="https://forms.gle/of6nErXJ2RjhaK5U6" class="onboard-button" target="_blank">
-                        Start IFTA Filing Onboarding →
-                    </a>
-                </div>
-            </div>
-
-            <!-- Reefer Tax Returns Service -->
-            <div class="service-card">
-                <div class="service-header">
-                    <span class="service-icon">📋</span>
-                    <h3>Reefer Diesel Tax Returns</h3>
-                    <p>Complete preparation & filing</p>
-                </div>
-                <div class="service-body">
-                    <p class="service-description">
-                        We handle all aspects of your reefer diesel tax return preparation and filing for all U.S. states. Maximize refunds and ensure compliance.
-                    </p>
-                    <ul class="features-list">
-                        <li>Multi-state tax preparation</li>
-                        <li>Maximum refund calculations</li>
-                        <li>Timely filing & compliance</li>
-                        <li>Full documentation support</li>
-                        <li>Direct state communication</li>
-                    </ul>
-                    <a href="https://forms.gle/93XCEffkqh5vhiyT7" class="onboard-button" target="_blank">
-                        Start Tax Return Onboarding →
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Help Section -->
-        <div class="info-box">
-            <h2>Need Help Getting Started?</h2>
-            <p>If you have any questions about the onboarding process or which service is right for you, our team is here to help.</p>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <p>Email: info@nextgenexp.com</p>
-            </div>
-        </div>
-
+    <div class="how-step">
+      <div class="how-n">02</div>
+      <div class="how-title">Complete Form</div>
+      <p class="how-desc">Fill out the onboarding form</p>
     </div>
+    <div class="how-step">
+      <div class="how-n">03</div>
+      <div class="how-title">Submit</div>
+      <p class="how-desc">Send your info securely</p>
+    </div>
+    <div class="how-step">
+      <div class="how-n">04</div>
+      <div class="how-title">We Follow Up</div>
+      <p class="how-desc">Hear from us within 24 hrs</p>
+    </div>
+  </div>
 
-    <!-- Footer -->
-    <fo
+  <!-- SERVICE SELECTOR TABS -->
+  <div class="selector-label">Select Your Service</div>
+  <div class="service-tabs">
+    <div class="svc-tab active" data-svc="fuel" onclick="switchTab('fuel', this)">
+      <div class="tab-num">01</div>
+      <span class="tab-icon">⛽</span>
+      <div class="tab-name">Fuel Reporting</div>
+      <div class="tab-desc">Weekly or monthly fuel reports</div>
+    </div>
+    <div class="svc-tab" data-svc="ifta" onclick="switchTab('ifta', this)">
+      <div class="tab-num">02</div>
+      <span class="tab-icon">📑</span>
+      <div class="tab-name">IFTA Quarterly</div>
+      <div class="tab-desc">Quarterly IFTA tax filings</div>
+    </div>
+    <div class="svc-tab" data-svc="reefer" onclick="switchTab('reefer', this)">
+      <div class="tab-num">03</div>
+      <span class="tab-icon">❄️</span>
+      <div class="tab-name">Reefer Diesel Returns</div>
+      <div class="tab-desc">State diesel tax refund returns</div>
+    </div>
+  </div>
+
+  <!-- FUEL REPORTING PANEL -->
+  <div class="form-panel active" id="panel-fuel">
+    <div class="form-panel-header">
+      <span class="panel-icon">⛽</span>
+      <div>
+        <div class="panel-title">Fuel Reporting Onboarding</div>
+        <div class="panel-sub">Complete the form below — we'll set up your reporting schedule within 24 hours</div>
+      </div>
+    </div>
+    <div class="form-launch-card">
+      <div class="flc-inner">
+        <span class="flc-icon">⛽</span>
+        <div class="flc-title">Fuel Reporting Onboarding Form</div>
+        <p class="flc-body">Complete the secure Google Form to get your fuel reporting set up. Takes about 5 minutes — we'll follow up within 24 hours to confirm your schedule.</p>
+        <div class="flc-checklist">
+          <span class="flc-check">Company details</span>
+          <span class="flc-check">Fleet size</span>
+          <span class="flc-check">Report frequency</span>
+          <span class="flc-check">Data format</span>
+        </div>
+        <a href="https://forms.gle/ZzyFvLsTAw2orrRF8" target="_blank" rel="noopener" class="flc-btn">
+          Open Onboarding Form →
+        </a>
+        <p class="flc-note">Opens securely in a new tab · Powered by Google Forms</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- IFTA PANEL -->
+  <div class="form-panel" id="panel-ifta">
+    <div class="form-panel-header">
+      <span class="panel-icon">📑</span>
+      <div>
+        <div class="panel-title">IFTA Quarterly Filing Onboarding</div>
+        <div class="panel-sub">Complete the form below — we'll prepare for your first quarterly filing within 24 hours</div>
+      </div>
+    </div>
+    <div class="form-launch-card">
+      <div class="flc-inner">
+        <span class="flc-icon">📑</span>
+        <div class="flc-title">IFTA Quarterly Filing Onboarding Form</div>
+        <p class="flc-body">Complete the secure Google Form to get your IFTA quarterly filings set up. We'll need your base jurisdiction, fleet details, and mileage tracking method.</p>
+        <div class="flc-checklist">
+          <span class="flc-check">Base jurisdiction</span>
+          <span class="flc-check">Fleet & vehicles</span>
+          <span class="flc-check">States operated</span>
+          <span class="flc-check">Mileage tracking</span>
+        </div>
+        <a href="https://forms.gle/of6nErXJ2RjhaK5U6" target="_blank" rel="noopener" class="flc-btn">
+          Open Onboarding Form →
+        </a>
+        <p class="flc-note">Opens securely in a new tab · Powered by Google Forms</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- REEFER PANEL -->
+  <div class="form-panel" id="panel-reefer">
+    <div class="form-panel-header">
+      <span class="panel-icon">❄️</span>
+      <div>
+        <div class="panel-title">Reefer Diesel Tax Return Onboarding</div>
+        <div class="panel-sub">Complete the form below — we'll identify your refund opportunities within 24 hours</div>
+      </div>
+    </div>
+    <div class="form-launch-card">
+      <div class="flc-inner">
+        <span class="flc-icon">❄️</span>
+        <div class="flc-title">Reefer Diesel Tax Return Onboarding Form</div>
+        <p class="flc-body">Complete the secure Google Form to maximize your reefer diesel refunds. We'll need your reefer unit details, states operated, and fuel records information.</p>
+        <div class="flc-checklist">
+          <span class="flc-check">Reefer unit details</span>
+          <span class="flc-check">States operated</span>
+          <span class="flc-check">Fuel volume</span>
+          <span class="flc-check">Existing records</span>
+        </div>
+        <a href="https://forms.gle/93XCEffkqh5vhiyT7" target="_blank" rel="noopener" class="flc-btn">
+          Open Onboarding Form →
+        </a>
+        <p class="flc-note">Opens securely in a new tab · Powered by Google Forms</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<div class="onboard-footer">
+  <p>© 2026 NextGen Express. All rights reserved.</p>
+  <a href="/terms-of-service.html">Terms of Service</a>
+</div>
+
+<script>
+function switchTab(svc, el) {
+  document.querySelectorAll('.svc-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+  // Find the tab element if not passed (e.g. from hash routing)
+  if (!el) el = document.querySelector('[data-svc="' + svc + '"]');
+  if (el) el.classList.add('active');
+  document.getElementById('panel-' + svc).classList.add('active');
+  setTimeout(() => {
+    document.getElementById('panel-' + svc).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 80);
+}
+
+
+
+// Handle anchor links from get-started.html (#fuel, #ifta, #reefer)
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.replace('#', '');
+  const validTabs = ['fuel', 'ifta', 'reefer'];
+  if (hash && validTabs.includes(hash)) {
+    switchTab(hash, null);
+  }
+});
+
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+if(cur&&ring){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});(function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.classList.add('hover');ring.classList.add('hover');});el.addEventListener('mouseleave',()=>{cur.classList.remove('hover');ring.classList.remove('hover');});});}
+
+</script>
+</body>
+</html>
