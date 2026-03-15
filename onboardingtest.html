@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Onboarding — NextGen Express</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0a0f1e;--bg2:#0d1426;
+  --cyan:   #38bdf8;
+  --cyan2:  #7dd3fc;
+  --border: rgba(255,255,255,0.07);
+  --white:  #ffffff;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--white); overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1; opacity: 0.35;
+}
+
+/* TOP BAR */
+.top-bar {
+  padding: 18px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  position: relative; z-index: 10;
+  background: rgba(10,15,30,0.92); backdrop-filter: blur(20px);
+}
+.bar-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--white); text-decoration: none; }
+.bar-logo span { color: var(--cyan); }
+.bar-badge {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: #64748b;
+  border: 1px solid var(--border); padding: 6px 14px; border-radius: 2px;
+}
+
+/* MAIN */
+.main { flex: 1; padding: 64px 48px 100px; position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; width: 100%; }
+
+.page-eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); margin-bottom: 14px; }
+.page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 80px); line-height: 0.92; letter-spacing: 1px; margin-bottom: 16px; }
+.page-intro { font-size: 15px; color: #94a3b8; line-height: 1.8; max-width: 580px; font-weight: 300; margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+
+/* HOW IT WORKS */
+.how-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-bottom: 64px; }
+.how-step { padding: 24px 20px; border: 1px solid var(--border); background: rgba(255,255,255,0.018); text-align: center; }
+.how-n { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: rgba(56,189,248,0.18); line-height: 1; margin-bottom: 10px; }
+.how-title { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 1px; margin-bottom: 6px; }
+.how-desc { font-size: 11px; color: #64748b; line-height: 1.6; font-family: 'DM Mono', monospace; }
+
+/* SERVICE SELECTOR */
+.selector-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #64748b; margin-bottom: 14px; }
+.service-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 48px; }
+.svc-tab {
+  padding: 24px 20px; border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02); cursor: pointer;
+  transition: background 0.2s, border-color 0.2s; position: relative; overflow: hidden;
+  text-align: left;
+}
+.svc-tab::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--cyan); transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+}
+.svc-tab.active { background: rgba(56,189,248,0.07); border-color: rgba(56,189,248,0.3); }
+.svc-tab.active::before { transform: scaleX(1); }
+.svc-tab:hover:not(.active) { background: rgba(56,189,248,0.03); }
+.tab-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--cyan); letter-spacing: 2px; opacity: 0.5; margin-bottom: 10px; }
+.tab-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+.tab-name { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 1px; margin-bottom: 4px; line-height: 1; }
+.tab-desc { font-size: 11px; color: #64748b; line-height: 1.5; font-family: 'DM Mono', monospace; }
+
+/* FORM PANELS */
+.form-panel { display: none; }
+.form-panel.active { display: block; }
+
+.form-panel-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border);
+}
+.panel-icon { font-size: 28px; }
+.panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; }
+.panel-sub { font-size: 13px; color: #94a3b8; margin-top: 4px; }
+
+/* GOOGLE FORM WRAPPER */
+.gform-wrap {
+  background: rgba(255,255,255,0.025); border: 1px solid var(--border);
+  border-radius: 4px; overflow: hidden; position: relative;
+}
+.gform-wrap::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--cyan), transparent); z-index: 1; }
+.gform-wrap iframe {
+  width: 100%; border: none; display: block;
+  min-height: 900px;
+  /* Override Google Forms white background */
+  filter: invert(0);
+}
+
+/* Loading state */
+.gform-loading {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 80px 40px; gap: 16px;
+  position: absolute; inset: 0; background: rgba(8,10,15,0.9); z-index: 2;
+  transition: opacity 0.4s;
+}
+.gform-loading.hidden { opacity: 0; pointer-events: none; }
+.loading-dot-row { display: flex; gap: 8px; }
+.loading-dot { width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; animation: loadBounce 1.2s infinite; }
+.loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.loading-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes loadBounce { 0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; } 40% { transform: scale(1); opacity: 1; } }
+.loading-text { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #64748b; }
+
+/* FOOTER */
+.onboard-footer {
+  border-top: 1px solid var(--border); padding: 20px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  position: relative; z-index: 2;
+}
+.onboard-footer p { font-size: 11px; color: #64748b; font-family: 'DM Mono', monospace; }
+.onboard-footer a { color: #64748b; text-decoration: none; font-size: 11px; font-family: 'DM Mono', monospace; transition: color 0.2s; }
+.onboard-footer a:hover { color: rgba(255,255,255,0.5); }
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .top-bar { padding: 16px 24px; }
+  .main { padding: 48px 24px 80px; }
+  .how-row { grid-template-columns: 1fr 1fr; }
+  .service-tabs { grid-template-columns: 1fr; }
+  .gform-wrap iframe { min-height: 1100px; }
+  .onboard-footer { padding: 16px 24px; flex-direction: column; gap: 8px; text-align: center; }
+}
+@media (max-width: 480px) {
+  .how-row { grid-template-columns: 1fr; }
+  .top-bar { padding: 14px 16px; }
+  .bar-logo { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <a href="/" class="bar-logo">NEXT<span>GEN</span> EXPRESS</a>
+  <div class="bar-badge">Client Onboarding</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="page-eyebrow">Secure Onboarding</div>
+  <h1 class="page-title">CLIENT<br>ONBOARDING</h1>
+  <p class="page-intro">Select the service you need below and complete the onboarding form. We'll follow up within 24 hours to confirm your setup and walk you through next steps.</p>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-row">
+    <div class="how-step">
+      <div class="how-n">01</div>
+      <div class="how-title">Choose Service</div>
+      <p class="how-desc">Select the service tab below</p>
+    </div>
+    <div class="how-step">
+      <div class="how-n">02</div>
+      <div class="how-title">Complete Form</div>
+      <p class="how-desc">Fill out the onboarding form</p>
+    </div>
+    <div class="how-step">
+      <div class="how-n">03</div>
+      <div class="how-title">Submit</div>
+      <p class="how-desc">Send your info securely</p>
+    </div>
+    <div class="how-step">
+      <div class="how-n">04</div>
+      <div class="how-title">We Follow Up</div>
+      <p class="how-desc">Hear from us within 24 hrs</p>
+    </div>
+  </div>
+
+  <!-- SERVICE SELECTOR TABS -->
+  <div class="selector-label">Select Your Service</div>
+  <div class="service-tabs">
+    <div class="svc-tab active" data-svc="fuel" onclick="switchTab('fuel', this)">
+      <div class="tab-num">01</div>
+      <span class="tab-icon">⛽</span>
+      <div class="tab-name">Fuel Reporting</div>
+      <div class="tab-desc">Weekly or monthly fuel reports</div>
+    </div>
+    <div class="svc-tab" data-svc="ifta" onclick="switchTab('ifta', this)">
+      <div class="tab-num">02</div>
+      <span class="tab-icon">📑</span>
+      <div class="tab-name">IFTA Quarterly</div>
+      <div class="tab-desc">Quarterly IFTA tax filings</div>
+    </div>
+    <div class="svc-tab" data-svc="reefer" onclick="switchTab('reefer', this)">
+      <div class="tab-num">03</div>
+      <span class="tab-icon">❄️</span>
+      <div class="tab-name">Reefer Diesel Returns</div>
+      <div class="tab-desc">State diesel tax refund returns</div>
+    </div>
+  </div>
+
+  <!-- FUEL REPORTING PANEL -->
+  <div class="form-panel active" id="panel-fuel">
+    <div class="form-panel-header">
+      <span class="panel-icon">⛽</span>
+      <div>
+        <div class="panel-title">Fuel Reporting Onboarding</div>
+        <div class="panel-sub">Complete the form below — we'll set up your reporting schedule within 24 hours</div>
+      </div>
+    </div>
+    <div class="gform-wrap">
+      <div class="gform-loading" id="loading-fuel">
+        <div class="loading-dot-row">
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+        </div>
+        <div class="loading-text">Loading form...</div>
+      </div>
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfQz6kEJcjxr1r0X0OFXwdp3ADNFAzqFRB28e1B87X7LTpbkQ/viewform?embedded=true&hl=en&usp=pp_url"
+        onload="hideLoader('loading-fuel')"
+        title="Fuel Reporting Onboarding Form"
+        loading="lazy">
+        Loading…
+      </iframe>
+    </div>
+    <p style="font-size:12px; color:rgba(255,255,255,0.22); font-family:'DM Mono',monospace; margin-top:12px; text-align:center; letter-spacing:1px;">
+      Having trouble with the form? <a href="https://forms.gle/ZzyFvLsTAw2orrRF8" target="_blank" rel="noopener" style="color:var(--cyan); text-decoration:none;">Open in new tab →</a>
+    </p>
+  </div>
+
+  <!-- IFTA PANEL -->
+  <div class="form-panel" id="panel-ifta">
+    <div class="form-panel-header">
+      <span class="panel-icon">📑</span>
+      <div>
+        <div class="panel-title">IFTA Quarterly Filing Onboarding</div>
+        <div class="panel-sub">Complete the form below — we'll prepare for your first quarterly filing within 24 hours</div>
+      </div>
+    </div>
+    <div class="gform-wrap">
+      <div class="gform-loading" id="loading-ifta">
+        <div class="loading-dot-row">
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+        </div>
+        <div class="loading-text">Loading form...</div>
+      </div>
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSeJYz-RlWz5P4hK8GqWxNuFHxD_VBzuIrqJJK_tqVGlQ3Z2oA/viewform?embedded=true&hl=en&usp=pp_url"
+        onload="hideLoader('loading-ifta')"
+        title="IFTA Quarterly Filing Onboarding Form"
+        loading="lazy">
+        Loading…
+      </iframe>
+    </div>
+    <p style="font-size:12px; color:rgba(255,255,255,0.22); font-family:'DM Mono',monospace; margin-top:12px; text-align:center; letter-spacing:1px;">
+      Having trouble with the form? <a href="https://forms.gle/of6nErXJ2RjhaK5U6" target="_blank" rel="noopener" style="color:var(--cyan); text-decoration:none;">Open in new tab →</a>
+    </p>
+  </div>
+
+  <!-- REEFER PANEL -->
+  <div class="form-panel" id="panel-reefer">
+    <div class="form-panel-header">
+      <span class="panel-icon">❄️</span>
+      <div>
+        <div class="panel-title">Reefer Diesel Tax Return Onboarding</div>
+        <div class="panel-sub">Complete the form below — we'll identify your refund opportunities within 24 hours</div>
+      </div>
+    </div>
+    <div class="gform-wrap">
+      <div class="gform-loading" id="loading-reefer">
+        <div class="loading-dot-row">
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+        </div>
+        <div class="loading-text">Loading form...</div>
+      </div>
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfoTHqnwFHT6OkDEqVcADJq8NW1bNpVhNqNJRJt_GIJ5bLpEw/viewform?embedded=true&hl=en&usp=pp_url"
+        onload="hideLoader('loading-reefer')"
+        title="Reefer Diesel Tax Return Onboarding Form"
+        loading="lazy">
+        Loading…
+      </iframe>
+    </div>
+    <p style="font-size:12px; color:rgba(255,255,255,0.22); font-family:'DM Mono',monospace; margin-top:12px; text-align:center; letter-spacing:1px;">
+      Having trouble with the form? <a href="https://forms.gle/93XCEffkqh5vhiyT7" target="_blank" rel="noopener" style="color:var(--cyan); text-decoration:none;">Open in new tab →</a>
+    </p>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<div class="onboard-footer">
+  <p>© 2026 NextGen Express. All rights reserved.</p>
+  <a href="/terms-of-service.html">Terms of Service</a>
+</div>
+
+<script>
+function switchTab(svc, el) {
+  document.querySelectorAll('.svc-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+  // Find the tab element if not passed (e.g. from hash routing)
+  if (!el) el = document.querySelector('[data-svc="' + svc + '"]');
+  if (el) el.classList.add('active');
+  document.getElementById('panel-' + svc).classList.add('active');
+  setTimeout(() => {
+    document.getElementById('panel-' + svc).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 80);
+}
+
+function hideLoader(id) {
+  const loader = document.getElementById(id);
+  if (loader) loader.classList.add('hidden');
+}
+
+// Handle anchor links from get-started.html (#fuel, #ifta, #reefer)
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.replace('#', '');
+  const validTabs = ['fuel', 'ifta', 'reefer'];
+  if (hash && validTabs.includes(hash)) {
+    switchTab(hash, null);
+  }
+});
+</script>
+</body>
+</html>
