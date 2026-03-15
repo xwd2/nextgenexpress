@@ -1,341 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services - NextGen Express</title>
-    <link rel="icon" href="/assets/logo.png" type="image/png">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary: #1e3a8a;
-            --primary-dark: #1e293b;
-            --primary-darker: #0f172a;
-            --accent: #2563eb;
-            --accent-light: #3b82f6;
-            --success: #059669;
-            --text-dark: #0f172a;
-            --text-body: #1e293b;
-            --text-muted: #475569;
-            --bg-light: #f1f5f9;
-            --bg-gray: #e2e8f0;
-            --border-color: #cbd5e1;
-        }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.7; color: var(--text-body); background: var(--bg-light); overflow-x: hidden; }
-        html { scroll-behavior: smooth; }
-        
-        header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); transition: all 0.3s ease; }
-        header:hover { box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15); }
-        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 3rem; }
-        .logo { display: flex; align-items: center; gap: 1rem; text-decoration: none; transition: all 0.3s ease; }
-        .logo:hover { transform: translateX(5px); }
-        .logo img { height: 80px; width: auto; transition: all 0.3s ease; filter: drop-shadow(0 2px 6px rgba(30, 58, 138, 0.2)); }
-        .logo:hover img { transform: scale(1.05) rotate(-2deg); filter: drop-shadow(0 4px 10px rgba(30, 58, 138, 0.3)); }
-        .logo-text { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -0.02em; }
-        .nav-center { position: absolute; left: 50%; transform: translateX(-50%); }
-        .nav-links { display: flex; gap: 3rem; list-style: none; align-items: center; }
-        .nav-links a { color: var(--text-body); text-decoration: none; font-weight: 600; font-size: 1.05rem; transition: all 0.3s; position: relative; padding: 0.5rem 0; }
-        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: width 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-links a:hover::after { width: 100%; }
-        .cta-button { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 0.9rem 2rem; border-radius: 10px; text-decoration: none; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3); position: relative; overflow: hidden; }
-        .cta-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
-        .cta-button:hover::before { left: 100%; }
-        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4); }
-        
-        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-dark); font-size: 1.8rem; cursor: pointer; padding: 0.5rem; z-index: 101; transition: all 0.3s; }
-        .mobile-menu-btn:hover { transform: scale(1.1) rotate(90deg); }
-        .mobile-menu { display: none; position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background: white; box-shadow: -5px 0 30px rgba(0,0,0,0.2); transition: right 0.4s; z-index: 99; padding: 7rem 2.5rem 2rem; border-left: 1px solid var(--border-color); }
-        .mobile-menu.active { right: 0; }
-        .mobile-menu ul { list-style: none; }
-        .mobile-menu ul li { margin-bottom: 2rem; opacity: 0; transform: translateX(50px); }
-        .mobile-menu.active ul li { animation: slideInMenu 0.5s forwards; }
-        .mobile-menu ul li:nth-child(1) { animation-delay: 0.1s; }
-        .mobile-menu ul li:nth-child(2) { animation-delay: 0.2s; }
-        .mobile-menu ul li:nth-child(3) { animation-delay: 0.3s; }
-        @keyframes slideInMenu { to { opacity: 1; transform: translateX(0); } }
-        .mobile-menu ul li a { color: var(--text-dark); text-decoration: none; font-size: 1.3rem; font-weight: 600; transition: all 0.3s; display: block; padding: 0.5rem 0; }
-        .mobile-menu ul li a:hover { color: var(--primary); padding-left: 15px; }
-        .mobile-menu .cta-button { display: block; text-align: center; margin-top: 2.5rem; }
-        .mobile-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(5px); z-index: 98; opacity: 0; transition: opacity 0.3s; }
-        .mobile-overlay.active { opacity: 1; }
-        
-        .page-header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%); padding: 6rem 3rem; text-align: center; color: white; position: relative; overflow: hidden; }
-        .page-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 70%); animation: pulse 6s ease-in-out infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-        .page-header h1 { font-size: 3.5rem; margin-bottom: 1.5rem; font-weight: 700; letter-spacing: -0.02em; position: relative; z-index: 1; animation: fadeInUp 0.8s ease-out; }
-        .page-header p { font-size: 1.4rem; opacity: 0.95; max-width: 800px; margin: 0 auto; line-height: 1.7; position: relative; z-index: 1; animation: fadeInUp 1s ease-out; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .service-detail { padding: 8rem 3rem; max-width: 1400px; margin: 0 auto; }
-        .service-detail:nth-child(even) { background: var(--bg-gray); }
-        .service-content { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-        .service-icon-large { width: 120px; height: 120px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 4.5rem; margin-bottom: 3rem; box-shadow: 0 8px 25px rgba(30, 58, 138, 0.3); transition: all 0.3s ease; }
-        .service-icon-large:hover { transform: scale(1.1) rotate(5deg); box-shadow: 0 12px 35px rgba(30, 58, 138, 0.4); }
-        .service-detail h2 { font-size: 2.8rem; margin-bottom: 2rem; color: var(--text-dark); font-weight: 700; letter-spacing: -0.01em; }
-        .service-detail p { font-size: 1.2rem; color: var(--text-body); line-height: 1.8; margin-bottom: 2rem; }
-        .features-list { list-style: none; margin: 3rem 0; }
-        .features-list li { padding: 1.25rem 0; display: flex; align-items: start; gap: 1.5rem; color: var(--text-body); font-size: 1.15rem; border-bottom: 1px solid var(--border-color); transition: all 0.3s; }
-        .features-list li:hover { padding-left: 10px; }
-        .features-list li:last-child { border-bottom: none; }
-        .features-list li::before { content: "✓"; color: var(--success); font-weight: bold; font-size: 1.6rem; flex-shrink: 0; width: 30px; height: 30px; background: rgba(5, 150, 105, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
-        .features-list li:hover::before { background: rgba(5, 150, 105, 0.25); transform: scale(1.1); }
-        .service-details-box { background: white; padding: 3rem; border-radius: 16px; border: 2px solid var(--accent-light); box-shadow: 0 4px 15px rgba(15, 23, 42, 0.1); transition: all 0.3s; position: relative; overflow: hidden; }
-        .service-details-box::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 16px; opacity: 0; transition: opacity 0.3s; z-index: -1; }
-        .service-details-box:hover::before { opacity: 0.1; }
-        .service-details-box:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(15, 23, 42, 0.15); }
-        .service-details-box h3 { color: var(--primary); margin-bottom: 2.5rem; font-size: 1.9rem; font-weight: 700; }
-        .detail-item { margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border-color); transition: all 0.3s; }
-        .detail-item:hover { padding-left: 10px; }
-        .detail-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .detail-item h4 { color: var(--text-dark); margin-bottom: 1rem; font-size: 1.25rem; font-weight: 700; }
-        .detail-item p { color: var(--text-body); margin: 0; line-height: 1.8; font-size: 1.05rem; }
-        
-        .cta-section { background: linear-gradient(135deg, var(--primary-darker), var(--primary-dark)); color: white; padding: 8rem 3rem; text-align: center; position: relative; overflow: hidden; }
-        .cta-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 50%, rgba(37, 99, 235, 0.2) 0%, transparent 50%); animation: pulse 6s ease-in-out infinite; }
-        .cta-content { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
-        .cta-section h2 { font-size: 3.2rem; margin-bottom: 2rem; font-weight: 700; letter-spacing: -0.02em; }
-        .cta-section p { font-size: 1.4rem; margin-bottom: 3.5rem; line-height: 1.7; }
-        .button-primary { background: white; color: var(--primary); padding: 1.3rem 3.5rem; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: all 0.3s; box-shadow: 0 8px 25px rgba(0,0,0,0.3); display: inline-block; position: relative; overflow: hidden; }
-        .button-primary::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background: rgba(30, 58, 138, 0.1); transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s; }
-        .button-primary:hover::before { width: 300px; height: 300px; }
-        .button-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(0,0,0,0.4); }
-        
-        footer { background: var(--primary-darker); color: #cbd5e1; padding: 5rem 3rem 2.5rem; }
-        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; margin-bottom: 3.5rem; }
-        .footer-section h3 { margin-bottom: 2rem; color: white; font-size: 1.3rem; font-weight: 700; }
-        .footer-section p, .footer-section a { color: #94a3b8; text-decoration: none; display: block; margin-bottom: 1rem; transition: all 0.3s; font-size: 1.05rem; line-height: 1.7; }
-        .footer-section a:hover { color: white; padding-left: 8px; }
-        .footer-bottom { max-width: 1400px; margin: 0 auto; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #94a3b8; }
-        
-        @media (max-width: 968px) {
-            nav { padding: 1rem 1.5rem; }
-            .logo img { height: 50px; }
-            .logo-text { font-size: 1.3rem; }
-            .nav-center, nav .nav-links, nav .cta-button { display: none; }
-            .mobile-menu-btn { display: block; }
-            .mobile-menu { display: block; }
-            .page-header { padding: 5rem 1.5rem; }
-            .page-header h1 { font-size: 2.5rem; }
-            .page-header p { font-size: 1.15rem; }
-            .service-detail { padding: 5rem 1.5rem; }
-            .service-content { grid-template-columns: 1fr; gap: 3rem; }
-            .service-details-box { padding: 2.5rem 2rem; }
-            .cta-section { padding: 5rem 1.5rem; }
-            .cta-section h2 { font-size: 2.5rem; }
-            .button-primary { width: 100%; max-width: 400px; }
-            .footer-content { grid-template-columns: 1fr; gap: 3rem; }
-        }
-        @media (max-width: 480px) {
-            .page-header h1 { font-size: 2rem; }
-            .service-detail h2 { font-size: 2.2rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — NextGen Express</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0f1e;--bg2:#0d1426;--bg3:#111827;--surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.07);--surface3:rgba(255,255,255,0.11);--cyan:#38bdf8;--cyan2:#7dd3fc;--cyanDim:rgba(56,189,248,0.12);--cyanGlow:rgba(56,189,248,0.2);--border:rgba(255,255,255,0.09);--border2:rgba(56,189,248,0.3);--white:#fff;--text1:#f1f5f9;--text2:#cbd5e1;--text3:#94a3b8;--text4:#64748b;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text1);overflow-x:hidden;line-height:1.6;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,15,30,0.92);backdrop-filter:blur(24px);box-shadow:0 1px 0 var(--border);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2.5px;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--cyan);}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{color:var(--text3);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform .25s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-cta{background:var(--cyan)!important;color:#050d1a!important;padding:9px 22px;border-radius:6px;font-weight:700!important;transition:background .2s,box-shadow .2s!important;}
+.nav-cta::after{display:none!important;}
+.nav-cta:hover{background:var(--cyan2)!important;box-shadow:0 6px 20px var(--cyanGlow)!important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text2);border-radius:2px;transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-nav{display:none;position:fixed;inset:0;background:rgba(8,12,24,.97);z-index:190;flex-direction:column;align-items:center;justify-content:center;gap:40px;backdrop-filter:blur(20px);}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:2px;color:var(--text2);text-decoration:none;transition:color .2s,transform .2s;}
+.mobile-nav a:hover{color:var(--cyan);transform:translateX(8px);}
+.mobile-nav .mob-cta{font-size:28px;background:var(--cyan);color:#050d1a;padding:14px 48px;border-radius:8px;}
+
+.page-header{padding:120px 48px 72px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.ph-glow{position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(56,189,248,.08),transparent 70%);top:50%;left:-80px;transform:translateY(-50%);pointer-events:none;}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(56,189,248,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.03) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 70% 80% at 15% 50%,black,transparent);pointer-events:none;}
+.ph-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;position:relative;z-index:2;opacity:.8;}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,100px);line-height:.9;letter-spacing:.5px;margin-bottom:18px;position:relative;z-index:2;}
+.ph-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--cyan);}
+.ph-sub{font-size:16px;color:var(--text3);max-width:480px;line-height:1.7;position:relative;z-index:2;font-weight:300;}
+
+.svc-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--bg2);overflow-x:auto;position:sticky;top:68px;z-index:100;}
+.svc-tab{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text4);text-decoration:none;padding:16px 28px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap;flex-shrink:0;}
+.svc-tab:hover{color:var(--text2);}
+.svc-tab.active{color:var(--cyan);border-bottom-color:var(--cyan);}
+
+.svc-section{padding:96px 48px;border-bottom:1px solid var(--border);position:relative;z-index:2;}
+.svc-section:nth-child(even){background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);}
+.svc-layout{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;max-width:1100px;margin:0 auto;}
+
+.svc-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.svc-n{font-family:'DM Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:2px;opacity:.6;}
+.svc-nline{flex:1;max-width:40px;height:1px;background:var(--border2);opacity:.5;}
+
+.svc-badge{display:inline-flex;align-items:center;justify-content:center;width:68px;height:68px;background:var(--cyanDim);border:1px solid rgba(56,189,248,.2);border-radius:10px;font-size:30px;margin-bottom:26px;}
+.svc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,5vw,60px);line-height:.93;margin-bottom:18px;}
+.svc-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--cyan);}
+.svc-body{font-size:15px;color:var(--text3);line-height:1.8;margin-bottom:32px;font-weight:300;}
+
+.feat-list{list-style:none;display:flex;flex-direction:column;gap:0;margin-bottom:32px;}
+.feat-list li{display:flex;align-items:flex-start;gap:14px;padding:13px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--text2);line-height:1.6;transition:color .2s;}
+.feat-list li:last-child{border-bottom:none;}
+.feat-list li:hover{color:var(--text1);}
+.feat-check{width:20px;height:20px;flex-shrink:0;background:var(--cyanDim);border:1px solid rgba(56,189,248,.2);border-radius:4px;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.feat-check::after{content:'✓';font-size:10px;color:var(--cyan);font-weight:700;}
+
+.perfect-for{padding:18px 22px;background:var(--cyanDim);border:1px solid rgba(56,189,248,.15);border-left:3px solid var(--cyan);border-radius:0 6px 6px 0;}
+.pf-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);opacity:.7;margin-bottom:6px;}
+.pf-text{font-size:13px;color:var(--text2);line-height:1.7;}
+
+.detail-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;position:relative;}
+.detail-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--cyan2),transparent);}
+.detail-box-hd{padding:24px 28px;border-bottom:1px solid var(--border);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--cyan);}
+.detail-item{padding:22px 28px;border-bottom:1px solid var(--border);transition:background .2s;}
+.detail-item:last-child{border-bottom:none;}
+.detail-item:hover{background:var(--surface2);}
+.di-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);opacity:.75;margin-bottom:7px;}
+.di-body{font-size:13px;color:var(--text2);line-height:1.7;}
+
+.page-cta{padding:100px 48px;text-align:center;background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);border-top:1px solid var(--border);}
+.cta-inner{max-width:680px;margin:0 auto;}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,82px);line-height:.93;margin-bottom:20px;}
+.cta-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--cyan);}
+.cta-sub{font-size:16px;color:var(--text3);margin-bottom:36px;line-height:1.75;font-weight:300;}
+.cta-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.btn-primary{background:var(--cyan);color:#050d1a;padding:15px 34px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-primary:hover{background:var(--cyan2);transform:translateY(-2px);box-shadow:0 12px 36px var(--cyanGlow);}
+.btn-ghost{color:var(--text2);padding:15px 30px;border:1px solid var(--border);border-radius:8px;font-size:14px;text-decoration:none;font-weight:500;transition:border-color .2s,color .2s,background .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-ghost:hover{border-color:var(--border2);color:var(--cyan);background:var(--cyanDim);}
+
+footer{padding:56px 48px 32px;border-top:1px solid var(--border);display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;position:relative;z-index:2;background:var(--bg2);}
+.foot-brand .nav-logo{display:block;margin-bottom:12px;font-size:22px;}
+.foot-brand p{font-size:13px;color:var(--text4);line-height:1.7;max-width:240px;}
+.foot-col h4{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;opacity:.8;}
+.foot-col a,.foot-col p{display:block;color:var(--text4);text-decoration:none;font-size:13px;margin-bottom:8px;transition:color .2s;}
+.foot-col a:hover{color:var(--text2);}
+.foot-btm{padding:18px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg2);z-index:2;position:relative;}
+.foot-btm p{font-size:11px;color:var(--text4);font-family:'DM Mono',monospace;}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-d1{transition-delay:.1s;}.reveal-d2{transition-delay:.2s;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:960px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .page-header{padding:100px 24px 56px;}
+  .svc-tabs{top:68px;padding:0 8px;}
+  .svc-tab{padding:14px 16px;font-size:10px;}
+  .svc-section{padding:72px 24px;}
+  .svc-layout{grid-template-columns:1fr;gap:44px;}
+  .page-cta{padding:72px 24px;}
+  .cta-btns{flex-direction:column;align-items:stretch;}
+  .cta-btns a{text-align:center;justify-content:center;}
+  footer{grid-template-columns:1fr 1fr;padding:36px 24px 20px;gap:28px;}
+  .foot-btm{padding:14px 24px;flex-direction:column;gap:4px;text-align:center;}
+}
+@media(max-width:480px){
+  footer{grid-template-columns:1fr;}
+}
+</style>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/" class="logo">
-                <img src="/assets/logo.png" alt="NextGen Express">
-                <span class="logo-text">NextGen Express</span>
-            </a>
-            <div class="nav-center">
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
-            </div>
-            <a href="/get-started" class="cta-button">Get Started</a>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
-        </nav>
-    </header>
+<nav>
+  <a href="/" class="nav-logo">NEXT<span>GEN</span> EXPRESS</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/services" class="active">Services</a>
+    <a href="/#why">Why Us</a>
+    <a href="/contact" class="nav-cta">Contact</a>
+  </div>
+  <button class="hamburger" id="hb" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-nav" id="mn">
+  <a href="/" onclick="closeNav()">Home</a>
+  <a href="/services" onclick="closeNav()">Services</a>
+  <a href="/#why" onclick="closeNav()">Why Us</a>
+  <a href="/contact" class="mob-cta" onclick="closeNav()">Contact</a>
+</div>
 
-    <div class="mobile-overlay" onclick="toggleMenu()"></div>
-    <div class="mobile-menu">
-        <ul>
-            <li><a href="/" onclick="toggleMenu()">Home</a></li>
-            <li><a href="/services" onclick="toggleMenu()">Services</a></li>
-            <li><a href="/contact" onclick="toggleMenu()">Contact</a></li>
-        </ul>
-        <a href="/get-started" class="cta-button" onclick="toggleMenu()">Get Started</a>
+<div class="page-header">
+  <div class="ph-grid"></div><div class="ph-glow"></div>
+  <div class="ph-label">What We Offer</div>
+  <h1 class="ph-title">OUR <em>THREE</em><br>CORE SERVICES</h1>
+  <p class="ph-sub">Everything from data processing to filing submission — handled for you, on time, every quarter.</p>
+</div>
+
+<div class="svc-tabs" id="tabs">
+  <a href="#fuel-reports" class="svc-tab active">01 — Fuel Reporting</a>
+  <a href="#ifta-filings" class="svc-tab">02 — IFTA Quarterly</a>
+  <a href="#reefer-returns" class="svc-tab">03 — Reefer Diesel</a>
+</div>
+
+<!-- SERVICE 01 -->
+<section class="svc-section" id="fuel-reports">
+  <div class="svc-layout">
+    <div>
+      <div class="svc-eyebrow"><span class="svc-n">01</span><span class="svc-nline"></span></div>
+      <div class="svc-badge">⛽</div>
+      <h2 class="svc-title reveal">FUEL <em>REPORTING</em><br>SERVICES</h2>
+      <p class="svc-body reveal reveal-d1">Complete visibility into your fuel spending. Send receipts in any format — photos, PDFs, fuel card exports — and we deliver detailed professional reports on your schedule. No spreadsheets, no software, no hassle.</p>
+      <ul class="feat-list reveal reveal-d1">
+        <li><span class="feat-check"></span>Weekly or monthly reporting — your choice</li>
+        <li><span class="feat-check"></span>Breakdown by truck, driver & route</li>
+        <li><span class="feat-check"></span>Cost trend analysis & period comparisons</li>
+        <li><span class="feat-check"></span>Inefficiency flags & savings opportunities</li>
+        <li><span class="feat-check"></span>PDF & CSV delivery</li>
+        <li><span class="feat-check"></span>No software or apps required</li>
+      </ul>
+      <div class="perfect-for reveal reveal-d2">
+        <div class="pf-label">Perfect For</div>
+        <p class="pf-text">Trucking companies of any size who want full visibility into fuel costs without the hassle of manual tracking or spreadsheets.</p>
+      </div>
     </div>
+    <div class="reveal reveal-d2">
+      <div class="detail-box">
+        <div class="detail-box-hd">WHAT'S INCLUDED</div>
+        <div class="detail-item"><div class="di-title">Data Processing</div><p class="di-body">Send receipts in any format — photos, PDFs, fuel card statements. We handle all data entry, organization, and cleanup so you never touch a spreadsheet.</p></div>
+        <div class="detail-item"><div class="di-title">Analysis & Insights</div><p class="di-body">Every report includes spending pattern analysis, period-over-period comparisons, and actionable insights to reduce fuel costs over time.</p></div>
+        <div class="detail-item"><div class="di-title">Custom Schedule</div><p class="di-body">Weekly for tight monitoring or monthly for overview tracking. Reports delivered on time, every time, in your preferred format.</p></div>
+        <div class="detail-item"><div class="di-title">Ongoing Support</div><p class="di-body">Questions about a line item? Our team is available to walk you through every detail of every report.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="page-header">
-        <h1>Our Services</h1>
-        <p>Professional fuel reporting, IFTA, and tax services designed specifically for trucking companies</p>
-    </section>
+<!-- SERVICE 02 -->
+<section class="svc-section" id="ifta-filings">
+  <div class="svc-layout">
+    <div>
+      <div class="svc-eyebrow"><span class="svc-n">02</span><span class="svc-nline"></span></div>
+      <div class="svc-badge">📑</div>
+      <h2 class="svc-title reveal">IFTA <em>QUARTERLY</em><br>TAX FILINGS</h2>
+      <p class="svc-body reveal reveal-d1">We handle the full IFTA quarterly cycle — mileage and fuel tracking across every jurisdiction, tax calculations, return preparation, and direct submission to your base jurisdiction. Compliant every quarter, guaranteed on time.</p>
+      <ul class="feat-list reveal reveal-d1">
+        <li><span class="feat-check"></span>Complete quarterly IFTA tax preparation</li>
+        <li><span class="feat-check"></span>All US states & Canadian provinces covered</li>
+        <li><span class="feat-check"></span>Mileage & fuel tracking by jurisdiction</li>
+        <li><span class="feat-check"></span>Tax liability or credit calculations</li>
+        <li><span class="feat-check"></span>Direct submission to your base jurisdiction</li>
+        <li><span class="feat-check"></span>Audit-ready record keeping</li>
+      </ul>
+      <div class="perfect-for reveal reveal-d2">
+        <div class="pf-label">Perfect For</div>
+        <p class="pf-text">Interstate carriers who need reliable quarterly IFTA filing without the stress of tracking fuel and mileage across 60+ jurisdictions.</p>
+      </div>
+    </div>
+    <div class="reveal reveal-d2">
+      <div class="detail-box">
+        <div class="detail-box-hd">WHAT'S INCLUDED</div>
+        <div class="detail-item"><div class="di-title">Multi-Jurisdiction Expertise</div><p class="di-body">Every US state and Canadian province has unique IFTA requirements and tax rates. We know them all and handle the complexity so you don't have to.</p></div>
+        <div class="detail-item"><div class="di-title">Full Quarterly Preparation</div><p class="di-body">From gathering your fuel and mileage data to calculating exact tax liability or refund credits — every step handled accurately and completely.</p></div>
+        <div class="detail-item"><div class="di-title">Filing & Submission</div><p class="di-body">Returns submitted to your base jurisdiction correctly and on time — no penalties, no missed deadlines, no stress.</p></div>
+        <div class="detail-item"><div class="di-title">Audit-Ready Records</div><p class="di-body">Complete records of all IFTA filings, fuel purchases, and mileage data maintained on file. If you're ever audited, you're covered.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="service-detail" id="fuel-reports" style="background: white;">
-        <div class="service-content">
-            <div>
-                <div class="service-icon-large">📊</div>
-                <h2>Fuel Reporting Services</h2>
-                <p>We provide comprehensive fuel reporting that gives you complete visibility into your fuel spending. Simply share your fuel receipts or purchase data with us, and we'll deliver detailed, professional reports on your schedule.</p>
-                <ul class="features-list">
-                    <li>Weekly or monthly reporting (you choose)</li>
-                    <li>Detailed breakdowns by truck, driver, and route</li>
-                    <li>Cost analysis and spending trends</li>
-                    <li>Identification of inefficiencies and savings opportunities</li>
-                    <li>Clear, easy-to-understand format</li>
-                    <li>No software or apps required</li>
-                </ul>
-                <p><strong>Perfect for:</strong> Trucking companies of any size who want to understand their fuel costs without the hassle of manual tracking and spreadsheets.</p>
-            </div>
-            <div>
-                <div class="service-details-box">
-                    <h3>What's Included</h3>
-                    <div class="detail-item">
-                        <h4>Data Processing</h4>
-                        <p>We handle all data entry and organization. Send us receipts in any format - photos, PDFs, fuel card statements - we'll process everything.</p>
-                    </div>
-                    <div class="detail-item">
-                        <h4>Analysis & Insights</h4>
-                        <p>Every report includes analysis of your spending patterns, comparisons to previous periods, and actionable recommendations.</p>
-                    </div>
-                    <div class="detail-item">
-                        <h4>Custom Delivery Schedule</h4>
-                        <p>Choose weekly reports for tight monitoring or monthly reports for overview tracking. We adapt to your needs.</p>
-                    </div>
-                    <div class="detail-item">
-                        <h4>Ongoing Support</h4>
-                        <p>Questions about your reports? Need clarification on any data? We're here to help you understand every detail.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- SERVICE 03 -->
+<section class="svc-section" id="reefer-returns">
+  <div class="svc-layout">
+    <div>
+      <div class="svc-eyebrow"><span class="svc-n">03</span><span class="svc-nline"></span></div>
+      <div class="svc-badge">❄️</div>
+      <h2 class="svc-title reveal">REEFER DIESEL<br><em>TAX RETURNS</em></h2>
+      <p class="svc-body reveal reveal-d1">Maximum refunds on dyed diesel fuel for refrigerated carriers. We prepare and file state-level reefer diesel tax returns across all eligible states, communicate directly with tax authorities, and make sure you get every dollar back.</p>
+      <ul class="feat-list reveal reveal-d1">
+        <li><span class="feat-check"></span>All eligible US states covered</li>
+        <li><span class="feat-check"></span>Maximum refund calculations</li>
+        <li><span class="feat-check"></span>On-time filing for all state deadlines</li>
+        <li><span class="feat-check"></span>State-specific compliance requirements</li>
+        <li><span class="feat-check"></span>Direct tax authority communication</li>
+        <li><span class="feat-check"></span>Complete documentation & record keeping</li>
+      </ul>
+      <div class="perfect-for reveal reveal-d2">
+        <div class="pf-label">Perfect For</div>
+        <p class="pf-text">Refrigerated carriers operating across multiple states who are leaving refund money behind by not filing reefer diesel returns.</p>
+      </div>
+    </div>
+    <div class="reveal reveal-d2">
+      <div class="detail-box">
+        <div class="detail-box-hd">WHAT'S INCLUDED</div>
+        <div class="detail-item"><div class="di-title">Multi-State Expertise</div><p class="di-body">Every state has different eligibility rules and refund rates. We handle all of them and ensure you capture every eligible refund dollar.</p></div>
+        <div class="detail-item"><div class="di-title">Complete Preparation</div><p class="di-body">From collecting reefer fuel data to calculating eligible refund amounts — every step managed accurately on your behalf.</p></div>
+        <div class="detail-item"><div class="di-title">Filing & Submission</div><p class="di-body">Returns submitted to each state correctly and on time so you never miss a refund due to a late or incomplete filing.</p></div>
+        <div class="detail-item"><div class="di-title">Compliance Monitoring</div><p class="di-body">State tax laws change. We monitor regulatory updates and adjust your filings accordingly so you stay compliant without lifting a finger.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="service-detail" id="ifta-filings">
-        <div class="service-content">
-            <div>
-                <div class="service-icon-large">📑</div>
-                <h2>IFTA Quarterly Tax Filings</h2>
-                <p>We handle all aspects of your International Fuel Tax Agreement (IFTA) quarterly reporting and filing. From tracking mileage and fuel consumption by jurisdiction to calculating taxes owed or credits due, we manage the entire process so you stay compliant every quarter.</p>
-                <ul class="features-list">
-                    <li>Complete quarterly IFTA tax preparation</li>
-                    <li>Accurate calculations for all jurisdictions</li>
-                    <li>Detailed mileage and fuel tracking by state/province</li>
-                    <li>Timely filing to meet quarterly deadlines</li>
-                    <li>Compliance with IFTA requirements</li>
-                    <li>Direct submission to your base jurisdiction</li>
-                </ul>
-                <p><strong>Perfect for:</strong> Interstate carriers who need reliable quarterly IFTA tax filing without the stress of tracking fuel purchases and mileage across multiple jurisdictions.</p>
-            </div>
-            <div>
-                <div class="service-details-box">
-                    <h3>What's Included</h3>
-                    <div class="detail-item">
-                        <h4>Multi-Jurisdiction Expertise</h4>
-                        <p>We handle IFTA calculations for all U.S. states and Canadian provinces where you operate. Each jurisdiction has specific requirements - we know them all.</p>
-                    </div>
-                    <div class="detail-item">
-                        <h4>Quarterly Preparation</h4>
-                        <p>From gathering your fuel purchase data and trip logs to calculating tax liability or credits for each quarter, we handle every step of the preparation process.</p>
-                    </div>
-                    <div class="detail-item">
-                        <h4>Filing & Submissions</h4>
-                        <p>We submit all IFTA returns to your base jurisdiction on your behalf, ensuring they're filed correctly and on time to avoid penalties.</p>
-                    </div>
-                    <div class="detail-item">
-                        <h4>Record Keeping</h4>
-                        <p>We maintain detailed records of all your IFTA filings, fuel purchases, and mileage data to ensure you're audit-ready at all times.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="page-cta">
+  <div class="cta-inner">
+    <h2 class="cta-title reveal">READY TO <em>GET</em><br>STARTED?</h2>
+    <p class="cta-sub reveal reveal-d1">Contact us today and we'll have you set up within 24 hours. No contracts, no complications.</p>
+    <div class="cta-btns reveal reveal-d2">
+      <a href="mailto:info@nextgenexp.com?subject=Service Inquiry" class="btn-primary">Contact Us →</a>
+      <a href="mailto:info@nextgenexp.com?subject=Fuel Reporting Inquiry" class="btn-ghost">Fuel Reporting</a>
+      <a href="mailto:info@nextgenexp.com?subject=IFTA Filing Inquiry" class="btn-ghost">IFTA Filing</a>
+      <a href="mailto:info@nextgenexp.com?subject=Reefer Diesel Tax Return Inquiry" class="btn-ghost">Reefer Returns</a>
+    </div>
+  </div>
+</div>
 
-    <section class="service-detail" id="tax-returns" style="background: white;">
-        <div class="service-content">
-            <div>
-                <div class="service-icon-large">📋</div>
-                <h2>Reefer Diesel Tax Returns</h2>
-                <p>We handle all aspects of your reefer diesel tax return preparation and filing for states across the United States. From calculations to submissions, we manage the entire process so you can focus on your business.</p>
-                <ul class="features-list">
-                    <li>Complete tax return preparation for all U.S. states</li>
-                    <li>Accurate calculations for maximum refunds</li>
-                    <li>Timely filing to meet all deadlines</li>
-                    <li>Compliance with state-specific requirements</li>
-                    <li>Documentation and record keeping</li>
-                    <li>Direct communication with tax authorities if needed</li>
-                </ul>
-                <p><strong>Perfect for:</strong> Refrigerated trucking companies operating across multiple states who need reliable tax compliance without the administrative burden.</p>
-            </div>
-            <div>
-                <div class="service-details-box">
-                    <h3>What's Included</h3>
-                    <div class="detail-item">
-                        <h4>Multi-State Expertise</h4>
-                        <p>We handle tax returns for all states where you operate. Each state has different requirements - we know them all.</p>
-                    </div>
-                    <div class="detail-item">
-                        <h4>Complete Preparation</h4>
-                        <p>From gathering your reefer fuel data to calculating eligible refunds, we handle every step of the preparation process.</p>
-                    </div>
-                    <div class="detail-item">
-                        <h4>Filing & Submissions</h4>
-                        <p>We submit all returns on your behalf, ensuring they're filed correctly and on time to avoid penalties or missed refunds.</p>
-                    </div>
-                    <div class="detail-item">
-                        <h4>Compliance Assurance</h4>
-                        <p>Stay compliant with changing regulations. We monitor updates to state tax laws and adjust your filings accordingly.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<footer>
+  <div class="foot-brand"><a href="/" class="nav-logo">NEXT<span>GEN</span> EXPRESS</a><p>Professional trucking tax compliance. IFTA filings, fuel reporting, and reefer diesel returns — handled for you.</p></div>
+  <div class="foot-col"><h4>Services</h4><a href="#fuel-reports">Fuel Reporting</a><a href="#ifta-filings">IFTA Quarterly Filings</a><a href="#reefer-returns">Reefer Diesel Returns</a></div>
+  <div class="foot-col"><h4>Company</h4><a href="/">Home</a><a href="/services">Services</a><a href="/contact">Contact</a></div>
+  <div class="foot-col"><h4>Legal</h4><a href="/terms-of-service">Terms of Service</a><p>info@nextgenexp.com</p><p>nextgenexp.com</p></div>
+</footer>
+<div class="foot-btm"><p>© 2026 NextGen Express. All rights reserved.</p><p>nextgenexp.com</p></div>
 
-    <section class="cta-section">
-        <div class="cta-content">
-            <h2>Ready to Get Started?</h2>
-            <p>Contact us today to learn more about how our services can simplify your fuel reporting, IFTA, and tax compliance.</p>
-            <a href="/get-started" class="button-primary">Get Started Now</a>
-        </div>
-    </section>
+<script>
+function toggleNav(){const mn=document.getElementById('mn'),hb=document.getElementById('hb');const o=mn.classList.toggle('open');hb.classList.toggle('open');document.body.style.overflow=o?'hidden':'';}
+function closeNav(){document.getElementById('mn').classList.remove('open');document.getElementById('hb').classList.remove('open');document.body.style.overflow='';}
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>NextGen Express</h3>
-                <p>Professional fuel reporting, IFTA, and tax services for trucking companies across the United States.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Services</h3>
-                <a href="/services#fuel-reports">Fuel Reporting</a>
-                <a href="/services#ifta-filings">IFTA Quarterly Tax Filings</a>
-                <a href="/services#tax-returns">Reefer Diesel Tax Returns</a>
-            </div>
-            <div class="footer-section">
-                <h3>Company</h3>
-                <a href="/">Home</a>
-                <a href="/services">Services</a>
-                <a href="/contact">Contact</a>
-                <a href="/terms-of-service">Terms of Service</a>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <p>Email: info@nextgenexp.com</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 NextGen Express. All rights reserved.</p>
-        </div>
-    </footer>
+// Tab active on scroll
+const sections=document.querySelectorAll('.svc-section');
+const tabs=document.querySelectorAll('.svc-tab');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(scrollY>=s.offsetTop-160)cur=s.id;});
+  tabs.forEach(t=>{t.classList.remove('active');if(t.getAttribute('href')==='#'+cur)t.classList.add('active');});
+});
 
-    <script>
-        function toggleMenu() {
-            const menu = document.querySelector('.mobile-menu');
-            const overlay = document.querySelector('.mobile-overlay');
-            menu.classList.toggle('active');
-            overlay.classList.toggle('active');
-            
-            if (menu.classList.contains('active')) {
-                overlay.style.display = 'block';
-            } else {
-                setTimeout(() => overlay.style.display = 'none', 300);
-            }
-        }
-    </script>
+// Smooth scroll tabs
+tabs.forEach(t=>t.addEventListener('click',e=>{e.preventDefault();const el=document.querySelector(t.getAttribute('href'));if(el)el.scrollIntoView({behavior:'smooth'});}));
+
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
 </body>
 </html>
