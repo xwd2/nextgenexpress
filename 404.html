@@ -1,83 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Page Not Found — NextGen Express</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0f1e;--cyan:#38bdf8;--cyan2:#7dd3fc;--cyanDim:rgba(56,189,248,0.12);--cyanGlow:rgba(56,189,248,0.2);--border:rgba(255,255,255,0.09);--white:#fff;--text1:#f1f5f9;--text2:#cbd5e1;--text3:#94a3b8;--text4:#64748b;}
+:root{--bg:#0f1923;--bg2:#131f2e;--card:#1e2f44;--cyan:#2dd4bf;--cyan2:#5eead4;--cyanDim:rgba(45,212,191,0.12);--cyanGlow:rgba(45,212,191,0.25);--cyanBorder:rgba(45,212,191,0.3);--border:rgba(255,255,255,0.08);--white:#fff;--text1:#f0f6ff;--text2:#b8cfe8;--text3:#7a9cbd;--text4:#4d7399;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text1);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:24px;overflow:hidden;position:relative;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text1);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:24px;overflow:hidden;position:relative;cursor:none;}
+.cursor{position:fixed;width:10px;height:10px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid var(--cyan);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .1s ease;opacity:.6;}
+.cursor.hover{width:16px;height:16px;}.cursor-ring.hover{width:56px;height:56px;opacity:.3;}
+@media(max-width:768px){.cursor,.cursor-ring{display:none;}body{cursor:auto;}}
 
-.bg-mesh{position:fixed;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(56,189,248,.07),transparent 65%);pointer-events:none;}
-.bg-grid{position:fixed;inset:0;background-image:linear-gradient(rgba(56,189,248,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.03) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 90% 80% at 50% 50%,black,transparent);pointer-events:none;}
-.grain{position:fixed;inset:0;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none;}
+.bg-mesh{position:fixed;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(45,212,191,.06),transparent 65%);pointer-events:none;}
+.bg-grid{position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 90% 80% at 50% 50%,black,transparent);pointer-events:none;}
+.orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.orb1{width:400px;height:400px;background:rgba(45,212,191,.06);top:-10%;right:-5%;animation:orbF 8s ease-in-out infinite;}
+.orb2{width:300px;height:300px;background:rgba(45,212,191,.04);bottom:-5%;left:-5%;animation:orbF 8s ease-in-out 3s infinite;}
+@keyframes orbF{0%,100%{transform:translate(0,0);}50%{transform:translate(20px,-20px);}}
+.grain{position:fixed;inset:0;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none;}
 
-.logo{position:fixed;top:24px;left:48px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2.5px;color:var(--text3);text-decoration:none;z-index:10;transition:color .2s;}
-.logo span{color:var(--cyan);}
-.logo:hover{color:var(--white);}
+.logo-link{position:fixed;top:24px;left:48px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:rgba(240,246,255,.5);text-decoration:none;z-index:10;transition:color .2s;}
+.logo-link .accent{color:var(--cyan);}
+.logo-link:hover{color:var(--text1);}
 
-.content{position:relative;z-index:2;max-width:560px;}
+.content{position:relative;z-index:2;max-width:560px;opacity:0;animation:fadeUp .7s .1s forwards;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
 
-.err-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);padding:7px 14px;border-radius:100px;margin-bottom:24px;
-  opacity:0;animation:fadeUp .5s .1s forwards;}
-.err-tag-dot{width:6px;height:6px;background:#f87171;border-radius:50%;}
-.err-tag-text{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#fca5a5;}
+.err-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);padding:7px 14px;border-radius:100px;margin-bottom:24px;}
+.err-dot{width:6px;height:6px;background:#f87171;border-radius:50%;}
+.err-pill-text{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#fca5a5;}
 
-.err-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(120px,22vw,180px);line-height:.85;
-  background:linear-gradient(135deg,rgba(56,189,248,.3) 0%,rgba(56,189,248,.05) 100%);
+.err-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(120px,20vw,180px);line-height:.85;letter-spacing:8px;margin-bottom:6px;
+  background:linear-gradient(135deg,rgba(45,212,191,.4),rgba(45,212,191,.08));
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  -webkit-text-stroke:1px rgba(56,189,248,.2);
-  letter-spacing:6px;margin-bottom:6px;
-  opacity:0;animation:fadeUp .7s .2s forwards;}
-
-.err-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,6vw,52px);letter-spacing:1.5px;margin-bottom:14px;color:var(--text1);
-  opacity:0;animation:fadeUp .7s .3s forwards;}
+  -webkit-text-stroke:1px rgba(45,212,191,.18);}
+.err-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,6vw,52px);letter-spacing:1.5px;margin-bottom:14px;}
 .err-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--cyan);}
+.err-body{font-size:15px;color:var(--text3);line-height:1.75;margin-bottom:44px;font-weight:300;}
 
-.err-body{font-size:15px;color:var(--text3);line-height:1.75;margin-bottom:44px;font-weight:300;
-  opacity:0;animation:fadeUp .7s .4s forwards;}
-
-.err-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
-  opacity:0;animation:fadeUp .7s .5s forwards;}
-.btn-primary{background:var(--cyan);color:#050d1a;padding:14px 32px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:8px;}
-.btn-primary:hover{background:var(--cyan2);transform:translateY(-2px);box-shadow:0 12px 36px var(--cyanGlow);}
-.btn-ghost{color:var(--text2);padding:14px 28px;border:1px solid var(--border);border-radius:8px;font-size:14px;text-decoration:none;font-weight:500;transition:border-color .2s,color .2s,background .2s;display:inline-flex;align-items:center;gap:8px;}
-.btn-ghost:hover{border-color:rgba(56,189,248,.35);color:var(--cyan);background:var(--cyanDim);}
+.err-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn-cta{background:var(--cyan);color:#051a17;padding:14px 32px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-cta:hover{background:var(--cyan2);transform:translateY(-2px);box-shadow:0 16px 40px var(--cyanGlow);}
+.btn-outline{color:var(--text2);padding:14px 28px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;transition:border-color .2s,color .2s,background .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-outline:hover{border-color:var(--cyanBorder);color:var(--cyan);background:var(--cyanDim);}
 
 .foot-line{position:fixed;bottom:24px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text4);}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
-
 @media(max-width:480px){
-  .logo{left:20px;}
+  .logo-link{left:20px;}
   .err-actions{flex-direction:column;align-items:center;}
   .err-actions a{width:100%;max-width:280px;justify-content:center;}
 }
 </style>
 </head>
 <body>
-<div class="bg-mesh"></div>
-<div class="bg-grid"></div>
-<div class="grain"></div>
-<a href="/" class="logo">NEXT<span>GEN</span> EXPRESS</a>
+<div class="cursor" id="cursor"></div><div class="cursor-ring" id="cursorRing"></div>
+<div class="bg-mesh"></div><div class="bg-grid"></div>
+<div class="orb orb1"></div><div class="orb orb2"></div><div class="grain"></div>
+
+<a href="/" class="logo-link">NEXT<span class="accent">GEN</span> EXPRESS</a>
 
 <div class="content">
-  <div class="err-tag"><span class="err-tag-dot"></span><span class="err-tag-text">Error — Page Not Found</span></div>
+  <div class="err-pill"><span class="err-dot"></span><span class="err-pill-text">Error — Page Not Found</span></div>
   <div class="err-num">404</div>
   <h1 class="err-title">LOST ON THE <em>ROAD?</em></h1>
   <p class="err-body">This page doesn't exist or may have been moved. Let's get you back on track — head home or check out our services.</p>
   <div class="err-actions">
-    <a href="/" class="btn-primary">← Back to Home</a>
-    <a href="/services" class="btn-ghost">View Services</a>
-    <a href="mailto:info@nextgenexp.com" class="btn-ghost">Contact Us</a>
+    <a href="/" class="btn-cta">← Back to Home</a>
+    <a href="/services" class="btn-outline">View Services</a>
+    <a href="mailto:info@nextgenexp.com" class="btn-outline">Contact Us</a>
   </div>
 </div>
 
 <div class="foot-line">nextgenexp.com</div>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+if(cur&&ring){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});(function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();document.querySelectorAll('a').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.classList.add('hover');ring.classList.add('hover');});el.addEventListener('mouseleave',()=>{cur.classList.remove('hover');ring.classList.remove('hover');});});document.addEventListener('mousedown',()=>ring.classList.add('click'));document.addEventListener('mouseup',()=>ring.classList.remove('click'));}
+</script>
 </body>
 </html>
