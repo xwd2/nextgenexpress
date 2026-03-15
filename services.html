@@ -1,153 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Services — NextGen Express</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0f1e;--bg2:#0d1426;--bg3:#111827;--surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.07);--surface3:rgba(255,255,255,0.11);--cyan:#38bdf8;--cyan2:#7dd3fc;--cyanDim:rgba(56,189,248,0.12);--cyanGlow:rgba(56,189,248,0.2);--border:rgba(255,255,255,0.09);--border2:rgba(56,189,248,0.3);--white:#fff;--text1:#f1f5f9;--text2:#cbd5e1;--text3:#94a3b8;--text4:#64748b;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text1);overflow-x:hidden;line-height:1.6;}
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
-
-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,15,30,0.92);backdrop-filter:blur(24px);box-shadow:0 1px 0 var(--border);}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2.5px;color:var(--white);text-decoration:none;}
-.nav-logo span{color:var(--cyan);}
-.nav-links{display:flex;gap:32px;align-items:center;}
-.nav-links a{color:var(--text3);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s;position:relative;}
-.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform .25s;}
-.nav-links a:hover,.nav-links a.active{color:var(--white);}
-.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
-.nav-cta{background:var(--cyan)!important;color:#050d1a!important;padding:9px 22px;border-radius:6px;font-weight:700!important;transition:background .2s,box-shadow .2s!important;}
-.nav-cta::after{display:none!important;}
-.nav-cta:hover{background:var(--cyan2)!important;box-shadow:0 6px 20px var(--cyanGlow)!important;}
+:root{--bg:#0f1923;--bg2:#131f2e;--bg3:#1a2840;--card:#1e2f44;--card2:#243651;--cyan:#2dd4bf;--cyan2:#5eead4;--cyanDim:rgba(45,212,191,0.12);--cyanGlow:rgba(45,212,191,0.25);--cyanBorder:rgba(45,212,191,0.3);--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);--white:#fff;--text1:#f0f6ff;--text2:#b8cfe8;--text3:#7a9cbd;--text4:#4d7399;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text1);overflow-x:hidden;line-height:1.6;cursor:none;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.cursor{position:fixed;width:10px;height:10px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;mix-blend-mode:difference;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid var(--cyan);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .1s ease;opacity:.6;}
+.cursor.hover{width:16px;height:16px;}.cursor-ring.hover{width:56px;height:56px;opacity:.3;}.cursor-ring.click{width:28px;height:28px;opacity:.9;}
+@media(max-width:768px){.cursor,.cursor-ring{display:none;}body{cursor:auto;}}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:70px;padding:0 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(15,25,35,0.88);backdrop-filter:blur(28px);box-shadow:0 1px 0 var(--border);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:23px;letter-spacing:3px;color:var(--white);text-decoration:none;}
+.nav-logo .accent{color:var(--cyan);}
+.nav-links{display:flex;gap:36px;align-items:center;}
+.nav-links a{color:var(--text3);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.5px;transition:color .2s;position:relative;padding-bottom:4px;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--cyan);transition:width .3s;}
+.nav-links a:hover,.nav-links a.active{color:var(--text1);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-cta{background:var(--cyan)!important;color:#051a17!important;padding:10px 24px!important;border-radius:8px!important;font-weight:700!important;font-size:13px!important;transition:background .2s,transform .2s,box-shadow .2s!important;}
+.nav-cta::after{display:none!important;}.nav-cta:hover{background:var(--cyan2)!important;transform:translateY(-1px)!important;box-shadow:0 8px 24px var(--cyanGlow)!important;}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;}
 .hamburger span{display:block;width:22px;height:2px;background:var(--text2);border-radius:2px;transition:all .3s;}
 .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
-.hamburger.open span:nth-child(2){opacity:0;}
-.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
-.mobile-nav{display:none;position:fixed;inset:0;background:rgba(8,12,24,.97);z-index:190;flex-direction:column;align-items:center;justify-content:center;gap:40px;backdrop-filter:blur(20px);}
+.hamburger.open span:nth-child(2){opacity:0;}.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-nav{display:none;position:fixed;inset:0;z-index:490;background:rgba(10,18,28,.97);backdrop-filter:blur(24px);flex-direction:column;align-items:center;justify-content:center;gap:44px;}
 .mobile-nav.open{display:flex;}
-.mobile-nav a{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:2px;color:var(--text2);text-decoration:none;transition:color .2s,transform .2s;}
-.mobile-nav a:hover{color:var(--cyan);transform:translateX(8px);}
-.mobile-nav .mob-cta{font-size:28px;background:var(--cyan);color:#050d1a;padding:14px 48px;border-radius:8px;}
+.mobile-nav a{font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:3px;color:rgba(240,246,255,.6);text-decoration:none;transition:color .2s,transform .2s;}
+.mobile-nav a:hover{color:var(--cyan);transform:translateX(10px);}
+.mobile-nav .mob-cta{background:var(--cyan);color:#051a17;padding:16px 52px;border-radius:10px;font-size:30px;}
 
-.page-header{padding:120px 48px 72px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
-.ph-glow{position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(56,189,248,.08),transparent 70%);top:50%;left:-80px;transform:translateY(-50%);pointer-events:none;}
-.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(56,189,248,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.03) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 70% 80% at 15% 50%,black,transparent);pointer-events:none;}
-.ph-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;position:relative;z-index:2;opacity:.8;}
-.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,100px);line-height:.9;letter-spacing:.5px;margin-bottom:18px;position:relative;z-index:2;}
+.page-header{padding:130px 56px 80px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.ph-mesh{position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 15% 50%,rgba(45,212,191,.06),transparent 65%);pointer-events:none;}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 80% 80% at 15% 50%,black,transparent);pointer-events:none;}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:18px;position:relative;z-index:2;opacity:.9;}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,96px);line-height:.9;margin-bottom:20px;position:relative;z-index:2;}
 .ph-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--cyan);}
-.ph-sub{font-size:16px;color:var(--text3);max-width:480px;line-height:1.7;position:relative;z-index:2;font-weight:300;}
+.ph-sub{font-size:16px;color:var(--text2);max-width:480px;line-height:1.75;position:relative;z-index:2;font-weight:300;}
 
-.svc-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--bg2);overflow-x:auto;position:sticky;top:68px;z-index:100;}
-.svc-tab{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text4);text-decoration:none;padding:16px 28px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap;flex-shrink:0;}
+.svc-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--bg2);overflow-x:auto;position:sticky;top:70px;z-index:100;}
+.svc-tab{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text4);text-decoration:none;padding:16px 28px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s,background .2s;white-space:nowrap;}
 .svc-tab:hover{color:var(--text2);}
-.svc-tab.active{color:var(--cyan);border-bottom-color:var(--cyan);}
+.svc-tab.active{color:var(--cyan);border-bottom-color:var(--cyan);background:rgba(45,212,191,.04);}
 
-.svc-section{padding:96px 48px;border-bottom:1px solid var(--border);position:relative;z-index:2;}
-.svc-section:nth-child(even){background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);}
+.svc-section{padding:96px 56px;border-bottom:1px solid var(--border);}
+.svc-section:nth-child(even){background:var(--bg2);}
 .svc-layout{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;max-width:1100px;margin:0 auto;}
-
-.svc-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
-.svc-n{font-family:'DM Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:2px;opacity:.6;}
-.svc-nline{flex:1;max-width:40px;height:1px;background:var(--border2);opacity:.5;}
-
-.svc-badge{display:inline-flex;align-items:center;justify-content:center;width:68px;height:68px;background:var(--cyanDim);border:1px solid rgba(56,189,248,.2);border-radius:10px;font-size:30px;margin-bottom:26px;}
-.svc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,5vw,60px);line-height:.93;margin-bottom:18px;}
+.svc-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:22px;}
+.svc-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:2px;opacity:.7;}
+.svc-nline{width:36px;height:1px;background:var(--cyanBorder);}
+.svc-icon-box{width:66px;height:66px;background:var(--card2);border:1px solid var(--border2);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:24px;transition:background .3s,border-color .3s,transform .3s;}
+.svc-section:hover .svc-icon-box{background:var(--cyanDim);border-color:var(--cyanBorder);transform:scale(1.06);}
+.svc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,4.5vw,58px);line-height:.92;margin-bottom:18px;}
 .svc-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--cyan);}
 .svc-body{font-size:15px;color:var(--text3);line-height:1.8;margin-bottom:32px;font-weight:300;}
-
 .feat-list{list-style:none;display:flex;flex-direction:column;gap:0;margin-bottom:32px;}
 .feat-list li{display:flex;align-items:flex-start;gap:14px;padding:13px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--text2);line-height:1.6;transition:color .2s;}
 .feat-list li:last-child{border-bottom:none;}
 .feat-list li:hover{color:var(--text1);}
-.feat-check{width:20px;height:20px;flex-shrink:0;background:var(--cyanDim);border:1px solid rgba(56,189,248,.2);border-radius:4px;display:flex;align-items:center;justify-content:center;margin-top:1px;}
-.feat-check::after{content:'✓';font-size:10px;color:var(--cyan);font-weight:700;}
+.fcheck{width:22px;height:22px;flex-shrink:0;background:var(--cyanDim);border:1px solid rgba(45,212,191,.2);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.fcheck::after{content:'✓';font-size:10px;color:var(--cyan);font-weight:700;}
+.pfor-box{padding:18px 22px;background:var(--cyanDim);border:1px solid rgba(45,212,191,.15);border-left:3px solid var(--cyan);border-radius:0 8px 8px 0;}
+.pfor-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);opacity:.8;margin-bottom:7px;}
+.pfor-text{font-size:13px;color:var(--text2);line-height:1.7;}
 
-.perfect-for{padding:18px 22px;background:var(--cyanDim);border:1px solid rgba(56,189,248,.15);border-left:3px solid var(--cyan);border-radius:0 6px 6px 0;}
-.pf-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);opacity:.7;margin-bottom:6px;}
-.pf-text{font-size:13px;color:var(--text2);line-height:1.7;}
+.detail-card{background:var(--card);border:1px solid var(--border2);border-radius:16px;overflow:hidden;position:relative;box-shadow:0 16px 48px rgba(0,0,0,.3);}
+.detail-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--cyan2),transparent);}
+.dc-head{padding:22px 28px;border-bottom:1px solid var(--border);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--cyan);}
+.dc-item{padding:22px 28px;border-bottom:1px solid var(--border);transition:background .2s;}
+.dc-item:last-child{border-bottom:none;}
+.dc-item:hover{background:var(--card2);}
+.dc-t{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);opacity:.75;margin-bottom:8px;}
+.dc-b{font-size:13px;color:var(--text2);line-height:1.7;}
 
-.detail-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;position:relative;}
-.detail-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--cyan2),transparent);}
-.detail-box-hd{padding:24px 28px;border-bottom:1px solid var(--border);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--cyan);}
-.detail-item{padding:22px 28px;border-bottom:1px solid var(--border);transition:background .2s;}
-.detail-item:last-child{border-bottom:none;}
-.detail-item:hover{background:var(--surface2);}
-.di-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);opacity:.75;margin-bottom:7px;}
-.di-body{font-size:13px;color:var(--text2);line-height:1.7;}
+.page-cta{padding:100px 56px;text-align:center;background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);border-top:1px solid var(--border);}
+.pc-inner{max-width:680px;margin:0 auto;}
+.pc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6.5vw,80px);line-height:.92;margin-bottom:20px;}
+.pc-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--cyan);}
+.pc-sub{font-size:16px;color:var(--text3);margin-bottom:36px;line-height:1.75;font-weight:300;}
+.pc-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.btn-cta{background:var(--cyan);color:#051a17;padding:15px 34px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:9px;}
+.btn-cta:hover{background:var(--cyan2);transform:translateY(-2px);box-shadow:0 16px 40px var(--cyanGlow);}
+.btn-outline{color:var(--text1);padding:15px 30px;border:1.5px solid var(--border2);border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;transition:border-color .2s,color .2s,background .2s,transform .2s;display:inline-flex;align-items:center;gap:9px;}
+.btn-outline:hover{border-color:var(--cyanBorder);color:var(--cyan);background:var(--cyanDim);transform:translateY(-2px);}
 
-.page-cta{padding:100px 48px;text-align:center;background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);border-top:1px solid var(--border);}
-.cta-inner{max-width:680px;margin:0 auto;}
-.cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,82px);line-height:.93;margin-bottom:20px;}
-.cta-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--cyan);}
-.cta-sub{font-size:16px;color:var(--text3);margin-bottom:36px;line-height:1.75;font-weight:300;}
-.cta-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
-.btn-primary{background:var(--cyan);color:#050d1a;padding:15px 34px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:8px;}
-.btn-primary:hover{background:var(--cyan2);transform:translateY(-2px);box-shadow:0 12px 36px var(--cyanGlow);}
-.btn-ghost{color:var(--text2);padding:15px 30px;border:1px solid var(--border);border-radius:8px;font-size:14px;text-decoration:none;font-weight:500;transition:border-color .2s,color .2s,background .2s;display:inline-flex;align-items:center;gap:8px;}
-.btn-ghost:hover{border-color:var(--border2);color:var(--cyan);background:var(--cyanDim);}
+footer{padding:64px 56px 40px;border-top:1px solid var(--border);background:var(--bg2);display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;position:relative;z-index:2;}
+.foot-logo{display:block;margin-bottom:14px;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--white);text-decoration:none;}
+.foot-logo .accent{color:var(--cyan);}
+.foot-tagline{font-size:13px;color:var(--text4);line-height:1.7;max-width:240px;}
+.foot-col h4{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan);margin-bottom:18px;opacity:.8;}
+.foot-col a,.foot-col p{display:block;color:var(--text4);text-decoration:none;font-size:13px;margin-bottom:9px;transition:color .2s;}
+.foot-col a:hover{color:var(--text1);}
+.foot-bottom{padding:20px 56px;border-top:1px solid var(--border);background:var(--bg2);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2;}
+.foot-bottom p{font-size:11px;color:var(--text4);font-family:'DM Mono',monospace;}
 
-footer{padding:56px 48px 32px;border-top:1px solid var(--border);display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;position:relative;z-index:2;background:var(--bg2);}
-.foot-brand .nav-logo{display:block;margin-bottom:12px;font-size:22px;}
-.foot-brand p{font-size:13px;color:var(--text4);line-height:1.7;max-width:240px;}
-.foot-col h4{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;opacity:.8;}
-.foot-col a,.foot-col p{display:block;color:var(--text4);text-decoration:none;font-size:13px;margin-bottom:8px;transition:color .2s;}
-.foot-col a:hover{color:var(--text2);}
-.foot-btm{padding:18px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg2);z-index:2;position:relative;}
-.foot-btm p{font-size:11px;color:var(--text4);font-family:'DM Mono',monospace;}
-
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);}
 .reveal.visible{opacity:1;transform:none;}
-.reveal-d1{transition-delay:.1s;}.reveal-d2{transition-delay:.2s;}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.reveal-r{opacity:0;transform:translateX(28px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);}
+.reveal-r.visible{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
 
 @media(max-width:960px){
-  nav{padding:0 20px;}
-  .nav-links{display:none;}
-  .hamburger{display:flex;}
+  nav{padding:0 20px;}.nav-links{display:none;}.hamburger{display:flex;}
   .page-header{padding:100px 24px 56px;}
-  .svc-tabs{top:68px;padding:0 8px;}
-  .svc-tab{padding:14px 16px;font-size:10px;}
+  .svc-tabs{top:70px;}.svc-tab{padding:14px 16px;font-size:10px;}
   .svc-section{padding:72px 24px;}
   .svc-layout{grid-template-columns:1fr;gap:44px;}
   .page-cta{padding:72px 24px;}
-  .cta-btns{flex-direction:column;align-items:stretch;}
-  .cta-btns a{text-align:center;justify-content:center;}
+  .pc-btns{flex-direction:column;align-items:center;}.pc-btns a{width:100%;max-width:320px;justify-content:center;}
   footer{grid-template-columns:1fr 1fr;padding:36px 24px 20px;gap:28px;}
-  .foot-btm{padding:14px 24px;flex-direction:column;gap:4px;text-align:center;}
+  .foot-bottom{padding:14px 24px;flex-direction:column;gap:4px;text-align:center;}
 }
-@media(max-width:480px){
-  footer{grid-template-columns:1fr;}
-}
+@media(max-width:480px){footer{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 <nav>
-  <a href="/" class="nav-logo">NEXT<span>GEN</span> EXPRESS</a>
+  <a href="/" class="nav-logo">NEXT<span class="accent">GEN</span> EXPRESS</a>
   <div class="nav-links">
-    <a href="/">Home</a>
     <a href="/services" class="active">Services</a>
+    <a href="/#process">How It Works</a>
     <a href="/#why">Why Us</a>
     <a href="/contact" class="nav-cta">Contact</a>
   </div>
   <button class="hamburger" id="hb" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
-<div class="mobile-nav" id="mn">
-  <a href="/" onclick="closeNav()">Home</a>
+<div class="mobile-nav" id="mobileNav">
   <a href="/services" onclick="closeNav()">Services</a>
+  <a href="/#process" onclick="closeNav()">How It Works</a>
   <a href="/#why" onclick="closeNav()">Why Us</a>
   <a href="/contact" class="mob-cta" onclick="closeNav()">Contact</a>
 </div>
 
 <div class="page-header">
-  <div class="ph-grid"></div><div class="ph-glow"></div>
-  <div class="ph-label">What We Offer</div>
+  <div class="ph-mesh"></div><div class="ph-grid"></div>
+  <div class="ph-eyebrow">What We Offer</div>
   <h1 class="ph-title">OUR <em>THREE</em><br>CORE SERVICES</h1>
   <p class="ph-sub">Everything from data processing to filing submission — handled for you, on time, every quarter.</p>
 </div>
@@ -158,144 +151,133 @@ footer{padding:56px 48px 32px;border-top:1px solid var(--border);display:grid;gr
   <a href="#reefer-returns" class="svc-tab">03 — Reefer Diesel</a>
 </div>
 
-<!-- SERVICE 01 -->
 <section class="svc-section" id="fuel-reports">
   <div class="svc-layout">
     <div>
-      <div class="svc-eyebrow"><span class="svc-n">01</span><span class="svc-nline"></span></div>
-      <div class="svc-badge">⛽</div>
+      <div class="svc-eyebrow"><span class="svc-num">01</span><span class="svc-nline"></span></div>
+      <div class="svc-icon-box">⛽</div>
       <h2 class="svc-title reveal">FUEL <em>REPORTING</em><br>SERVICES</h2>
-      <p class="svc-body reveal reveal-d1">Complete visibility into your fuel spending. Send receipts in any format — photos, PDFs, fuel card exports — and we deliver detailed professional reports on your schedule. No spreadsheets, no software, no hassle.</p>
-      <ul class="feat-list reveal reveal-d1">
-        <li><span class="feat-check"></span>Weekly or monthly reporting — your choice</li>
-        <li><span class="feat-check"></span>Breakdown by truck, driver & route</li>
-        <li><span class="feat-check"></span>Cost trend analysis & period comparisons</li>
-        <li><span class="feat-check"></span>Inefficiency flags & savings opportunities</li>
-        <li><span class="feat-check"></span>PDF & CSV delivery</li>
-        <li><span class="feat-check"></span>No software or apps required</li>
+      <p class="svc-body reveal d1">Complete visibility into your fuel spending. Send receipts in any format — photos, PDFs, fuel card exports — and we deliver detailed professional reports on your schedule. No spreadsheets, no software, no hassle.</p>
+      <ul class="feat-list reveal d1">
+        <li><span class="fcheck"></span>Weekly or monthly reporting — your choice</li>
+        <li><span class="fcheck"></span>Breakdown by truck, driver & route</li>
+        <li><span class="fcheck"></span>Cost trend analysis & period comparisons</li>
+        <li><span class="fcheck"></span>Inefficiency flags & savings opportunities</li>
+        <li><span class="fcheck"></span>PDF & CSV delivery</li>
+        <li><span class="fcheck"></span>No software or apps required</li>
       </ul>
-      <div class="perfect-for reveal reveal-d2">
-        <div class="pf-label">Perfect For</div>
-        <p class="pf-text">Trucking companies of any size who want full visibility into fuel costs without the hassle of manual tracking or spreadsheets.</p>
+      <div class="pfor-box reveal d2">
+        <div class="pfor-label">Perfect For</div>
+        <p class="pfor-text">Trucking companies of any size who want full visibility into fuel costs without the hassle of manual tracking or spreadsheets.</p>
       </div>
     </div>
-    <div class="reveal reveal-d2">
-      <div class="detail-box">
-        <div class="detail-box-hd">WHAT'S INCLUDED</div>
-        <div class="detail-item"><div class="di-title">Data Processing</div><p class="di-body">Send receipts in any format — photos, PDFs, fuel card statements. We handle all data entry, organization, and cleanup so you never touch a spreadsheet.</p></div>
-        <div class="detail-item"><div class="di-title">Analysis & Insights</div><p class="di-body">Every report includes spending pattern analysis, period-over-period comparisons, and actionable insights to reduce fuel costs over time.</p></div>
-        <div class="detail-item"><div class="di-title">Custom Schedule</div><p class="di-body">Weekly for tight monitoring or monthly for overview tracking. Reports delivered on time, every time, in your preferred format.</p></div>
-        <div class="detail-item"><div class="di-title">Ongoing Support</div><p class="di-body">Questions about a line item? Our team is available to walk you through every detail of every report.</p></div>
+    <div class="reveal-r d1">
+      <div class="detail-card">
+        <div class="dc-head">WHAT'S INCLUDED</div>
+        <div class="dc-item"><div class="dc-t">Data Processing</div><p class="dc-b">Send receipts in any format — photos, PDFs, fuel card statements. We handle all data entry, organization, and cleanup so you never touch a spreadsheet.</p></div>
+        <div class="dc-item"><div class="dc-t">Analysis & Insights</div><p class="dc-b">Every report includes spending pattern analysis, period-over-period comparisons, and actionable insights to reduce fuel costs.</p></div>
+        <div class="dc-item"><div class="dc-t">Custom Schedule</div><p class="dc-b">Weekly for tight monitoring or monthly for overview tracking. Delivered on time, every time, in your preferred format.</p></div>
+        <div class="dc-item"><div class="dc-t">Ongoing Support</div><p class="dc-b">Questions about a line item? Our team walks you through every detail of every report.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICE 02 -->
 <section class="svc-section" id="ifta-filings">
   <div class="svc-layout">
     <div>
-      <div class="svc-eyebrow"><span class="svc-n">02</span><span class="svc-nline"></span></div>
-      <div class="svc-badge">📑</div>
+      <div class="svc-eyebrow"><span class="svc-num">02</span><span class="svc-nline"></span></div>
+      <div class="svc-icon-box">📑</div>
       <h2 class="svc-title reveal">IFTA <em>QUARTERLY</em><br>TAX FILINGS</h2>
-      <p class="svc-body reveal reveal-d1">We handle the full IFTA quarterly cycle — mileage and fuel tracking across every jurisdiction, tax calculations, return preparation, and direct submission to your base jurisdiction. Compliant every quarter, guaranteed on time.</p>
-      <ul class="feat-list reveal reveal-d1">
-        <li><span class="feat-check"></span>Complete quarterly IFTA tax preparation</li>
-        <li><span class="feat-check"></span>All US states & Canadian provinces covered</li>
-        <li><span class="feat-check"></span>Mileage & fuel tracking by jurisdiction</li>
-        <li><span class="feat-check"></span>Tax liability or credit calculations</li>
-        <li><span class="feat-check"></span>Direct submission to your base jurisdiction</li>
-        <li><span class="feat-check"></span>Audit-ready record keeping</li>
+      <p class="svc-body reveal d1">We handle the full IFTA quarterly cycle — mileage and fuel tracking across every jurisdiction, tax calculations, return preparation, and direct submission to your base jurisdiction. Compliant every quarter, guaranteed on time.</p>
+      <ul class="feat-list reveal d1">
+        <li><span class="fcheck"></span>Complete quarterly IFTA preparation</li>
+        <li><span class="fcheck"></span>All US states & Canadian provinces</li>
+        <li><span class="fcheck"></span>Mileage & fuel tracking by jurisdiction</li>
+        <li><span class="fcheck"></span>Tax liability or credit calculations</li>
+        <li><span class="fcheck"></span>Direct base jurisdiction submission</li>
+        <li><span class="fcheck"></span>Audit-ready record keeping</li>
       </ul>
-      <div class="perfect-for reveal reveal-d2">
-        <div class="pf-label">Perfect For</div>
-        <p class="pf-text">Interstate carriers who need reliable quarterly IFTA filing without the stress of tracking fuel and mileage across 60+ jurisdictions.</p>
+      <div class="pfor-box reveal d2">
+        <div class="pfor-label">Perfect For</div>
+        <p class="pfor-text">Interstate carriers who need reliable quarterly IFTA filing without the stress of tracking fuel and mileage across 60+ jurisdictions.</p>
       </div>
     </div>
-    <div class="reveal reveal-d2">
-      <div class="detail-box">
-        <div class="detail-box-hd">WHAT'S INCLUDED</div>
-        <div class="detail-item"><div class="di-title">Multi-Jurisdiction Expertise</div><p class="di-body">Every US state and Canadian province has unique IFTA requirements and tax rates. We know them all and handle the complexity so you don't have to.</p></div>
-        <div class="detail-item"><div class="di-title">Full Quarterly Preparation</div><p class="di-body">From gathering your fuel and mileage data to calculating exact tax liability or refund credits — every step handled accurately and completely.</p></div>
-        <div class="detail-item"><div class="di-title">Filing & Submission</div><p class="di-body">Returns submitted to your base jurisdiction correctly and on time — no penalties, no missed deadlines, no stress.</p></div>
-        <div class="detail-item"><div class="di-title">Audit-Ready Records</div><p class="di-body">Complete records of all IFTA filings, fuel purchases, and mileage data maintained on file. If you're ever audited, you're covered.</p></div>
+    <div class="reveal-r d1">
+      <div class="detail-card">
+        <div class="dc-head">WHAT'S INCLUDED</div>
+        <div class="dc-item"><div class="dc-t">Multi-Jurisdiction Expertise</div><p class="dc-b">Every US state and Canadian province has unique IFTA requirements. We know them all and handle the complexity so you don't have to.</p></div>
+        <div class="dc-item"><div class="dc-t">Full Quarterly Preparation</div><p class="dc-b">From gathering fuel and mileage data to calculating exact tax liability or refund credits — every step handled accurately.</p></div>
+        <div class="dc-item"><div class="dc-t">Filing & Submission</div><p class="dc-b">Returns submitted to your base jurisdiction correctly and on time — no penalties, no missed deadlines.</p></div>
+        <div class="dc-item"><div class="dc-t">Audit-Ready Records</div><p class="dc-b">Complete records of all IFTA filings, fuel purchases, and mileage data maintained. If you're ever audited, you're covered.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICE 03 -->
 <section class="svc-section" id="reefer-returns">
   <div class="svc-layout">
     <div>
-      <div class="svc-eyebrow"><span class="svc-n">03</span><span class="svc-nline"></span></div>
-      <div class="svc-badge">❄️</div>
+      <div class="svc-eyebrow"><span class="svc-num">03</span><span class="svc-nline"></span></div>
+      <div class="svc-icon-box">❄️</div>
       <h2 class="svc-title reveal">REEFER DIESEL<br><em>TAX RETURNS</em></h2>
-      <p class="svc-body reveal reveal-d1">Maximum refunds on dyed diesel fuel for refrigerated carriers. We prepare and file state-level reefer diesel tax returns across all eligible states, communicate directly with tax authorities, and make sure you get every dollar back.</p>
-      <ul class="feat-list reveal reveal-d1">
-        <li><span class="feat-check"></span>All eligible US states covered</li>
-        <li><span class="feat-check"></span>Maximum refund calculations</li>
-        <li><span class="feat-check"></span>On-time filing for all state deadlines</li>
-        <li><span class="feat-check"></span>State-specific compliance requirements</li>
-        <li><span class="feat-check"></span>Direct tax authority communication</li>
-        <li><span class="feat-check"></span>Complete documentation & record keeping</li>
+      <p class="svc-body reveal d1">Maximum refunds on dyed diesel fuel for refrigerated carriers. We prepare and file state-level reefer diesel tax returns across all eligible states, communicate directly with tax authorities, and make sure you get every dollar back.</p>
+      <ul class="feat-list reveal d1">
+        <li><span class="fcheck"></span>All eligible US states covered</li>
+        <li><span class="fcheck"></span>Maximum refund calculations</li>
+        <li><span class="fcheck"></span>On-time filing for all state deadlines</li>
+        <li><span class="fcheck"></span>State-specific compliance handled</li>
+        <li><span class="fcheck"></span>Direct tax authority communication</li>
+        <li><span class="fcheck"></span>Complete documentation & records</li>
       </ul>
-      <div class="perfect-for reveal reveal-d2">
-        <div class="pf-label">Perfect For</div>
-        <p class="pf-text">Refrigerated carriers operating across multiple states who are leaving refund money behind by not filing reefer diesel returns.</p>
+      <div class="pfor-box reveal d2">
+        <div class="pfor-label">Perfect For</div>
+        <p class="pfor-text">Refrigerated carriers operating across multiple states who are leaving refund money behind by not filing reefer diesel returns.</p>
       </div>
     </div>
-    <div class="reveal reveal-d2">
-      <div class="detail-box">
-        <div class="detail-box-hd">WHAT'S INCLUDED</div>
-        <div class="detail-item"><div class="di-title">Multi-State Expertise</div><p class="di-body">Every state has different eligibility rules and refund rates. We handle all of them and ensure you capture every eligible refund dollar.</p></div>
-        <div class="detail-item"><div class="di-title">Complete Preparation</div><p class="di-body">From collecting reefer fuel data to calculating eligible refund amounts — every step managed accurately on your behalf.</p></div>
-        <div class="detail-item"><div class="di-title">Filing & Submission</div><p class="di-body">Returns submitted to each state correctly and on time so you never miss a refund due to a late or incomplete filing.</p></div>
-        <div class="detail-item"><div class="di-title">Compliance Monitoring</div><p class="di-body">State tax laws change. We monitor regulatory updates and adjust your filings accordingly so you stay compliant without lifting a finger.</p></div>
+    <div class="reveal-r d1">
+      <div class="detail-card">
+        <div class="dc-head">WHAT'S INCLUDED</div>
+        <div class="dc-item"><div class="dc-t">Multi-State Expertise</div><p class="dc-b">Every state has different eligibility rules and refund rates. We handle all of them and ensure you capture every eligible dollar.</p></div>
+        <div class="dc-item"><div class="dc-t">Complete Preparation</div><p class="dc-b">From collecting reefer fuel data to calculating eligible refund amounts — every step managed accurately on your behalf.</p></div>
+        <div class="dc-item"><div class="dc-t">Filing & Submission</div><p class="dc-b">Returns submitted to each state correctly and on time so you never miss a refund due to a late or incomplete filing.</p></div>
+        <div class="dc-item"><div class="dc-t">Compliance Monitoring</div><p class="dc-b">State tax laws change. We monitor regulatory updates and adjust your filings accordingly.</p></div>
       </div>
     </div>
   </div>
 </section>
 
 <div class="page-cta">
-  <div class="cta-inner">
-    <h2 class="cta-title reveal">READY TO <em>GET</em><br>STARTED?</h2>
-    <p class="cta-sub reveal reveal-d1">Contact us today and we'll have you set up within 24 hours. No contracts, no complications.</p>
-    <div class="cta-btns reveal reveal-d2">
-      <a href="mailto:info@nextgenexp.com?subject=Service Inquiry" class="btn-primary">Contact Us →</a>
-      <a href="mailto:info@nextgenexp.com?subject=Fuel Reporting Inquiry" class="btn-ghost">Fuel Reporting</a>
-      <a href="mailto:info@nextgenexp.com?subject=IFTA Filing Inquiry" class="btn-ghost">IFTA Filing</a>
-      <a href="mailto:info@nextgenexp.com?subject=Reefer Diesel Tax Return Inquiry" class="btn-ghost">Reefer Returns</a>
+  <div class="pc-inner">
+    <h2 class="pc-title reveal">READY TO <em>GET</em><br>STARTED?</h2>
+    <p class="pc-sub reveal d1">Contact us today and we'll have you set up within 24 hours. No contracts, no complications.</p>
+    <div class="pc-btns reveal d2">
+      <a href="/get-started" class="btn-cta">Get Started →</a>
+      <a href="mailto:info@nextgenexp.com?subject=Fuel Reporting Inquiry" class="btn-outline">⛽ Fuel Reporting</a>
+      <a href="mailto:info@nextgenexp.com?subject=IFTA Filing Inquiry" class="btn-outline">📑 IFTA Filing</a>
+      <a href="mailto:info@nextgenexp.com?subject=Reefer Diesel Tax Return Inquiry" class="btn-outline">❄️ Reefer Returns</a>
     </div>
   </div>
 </div>
 
 <footer>
-  <div class="foot-brand"><a href="/" class="nav-logo">NEXT<span>GEN</span> EXPRESS</a><p>Professional trucking tax compliance. IFTA filings, fuel reporting, and reefer diesel returns — handled for you.</p></div>
+  <div><a href="/" class="foot-logo">NEXT<span class="accent">GEN</span> EXPRESS</a><p class="foot-tagline">Professional trucking tax compliance. IFTA filings, fuel reporting, and reefer diesel returns.</p></div>
   <div class="foot-col"><h4>Services</h4><a href="#fuel-reports">Fuel Reporting</a><a href="#ifta-filings">IFTA Quarterly Filings</a><a href="#reefer-returns">Reefer Diesel Returns</a></div>
   <div class="foot-col"><h4>Company</h4><a href="/">Home</a><a href="/services">Services</a><a href="/contact">Contact</a></div>
-  <div class="foot-col"><h4>Legal</h4><a href="/terms-of-service">Terms of Service</a><p>info@nextgenexp.com</p><p>nextgenexp.com</p></div>
+  <div class="foot-col"><h4>Legal</h4><a href="/terms-of-service">Terms of Service</a><p>info@nextgenexp.com</p></div>
 </footer>
-<div class="foot-btm"><p>© 2026 NextGen Express. All rights reserved.</p><p>nextgenexp.com</p></div>
+<div class="foot-bottom"><p>© 2026 NextGen Express. All rights reserved.</p><p>nextgenexp.com</p></div>
 
 <script>
-function toggleNav(){const mn=document.getElementById('mn'),hb=document.getElementById('hb');const o=mn.classList.toggle('open');hb.classList.toggle('open');document.body.style.overflow=o?'hidden':'';}
-function closeNav(){document.getElementById('mn').classList.remove('open');document.getElementById('hb').classList.remove('open');document.body.style.overflow='';}
-
-// Tab active on scroll
-const sections=document.querySelectorAll('.svc-section');
-const tabs=document.querySelectorAll('.svc-tab');
-window.addEventListener('scroll',()=>{
-  let cur='';
-  sections.forEach(s=>{if(scrollY>=s.offsetTop-160)cur=s.id;});
-  tabs.forEach(t=>{t.classList.remove('active');if(t.getAttribute('href')==='#'+cur)t.classList.add('active');});
-});
-
-// Smooth scroll tabs
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+if(cur&&ring){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});(function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.classList.add('hover');ring.classList.add('hover');});el.addEventListener('mouseleave',()=>{cur.classList.remove('hover');ring.classList.remove('hover');});});document.addEventListener('mousedown',()=>ring.classList.add('click'));document.addEventListener('mouseup',()=>ring.classList.remove('click'));}
+function toggleNav(){const mn=document.getElementById('mobileNav'),hb=document.getElementById('hb');const o=mn.classList.toggle('open');hb.classList.toggle('open');document.body.style.overflow=o?'hidden':'';}
+function closeNav(){document.getElementById('mobileNav').classList.remove('open');document.getElementById('hb').classList.remove('open');document.body.style.overflow='';}
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.08});
+document.querySelectorAll('.reveal,.reveal-r').forEach(el=>ro.observe(el));
+const secs=document.querySelectorAll('.svc-section'),tabs=document.querySelectorAll('.svc-tab');
+window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(scrollY>=s.offsetTop-160)c=s.id;});tabs.forEach(t=>{t.classList.remove('active');if(t.getAttribute('href')==='#'+c)t.classList.add('active');});});
 tabs.forEach(t=>t.addEventListener('click',e=>{e.preventDefault();const el=document.querySelector(t.getAttribute('href'));if(el)el.scrollIntoView({behavior:'smooth'});}));
-
-const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 </script>
 </body>
 </html>
