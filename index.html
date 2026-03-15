@@ -156,7 +156,7 @@ nav.scrolled{background:rgba(15,25,35,0.88);backdrop-filter:blur(28px);box-shado
 
 .hp-services{padding:20px 24px;}
 .hp-svc{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:10px;
-  margin-bottom:6px;transition:background .2s,transform .2s;cursor:default;}
+  margin-bottom:6px;transition:background .2s,transform .2s;cursor:pointer;}
 .hp-svc:last-child{margin-bottom:0;}
 .hp-svc:hover{background:var(--card2);transform:translateX(4px);}
 .hp-svc-icon{font-size:22px;width:44px;height:44px;background:var(--bg2);border-radius:10px;
@@ -421,17 +421,17 @@ footer{padding:64px 56px 40px;border-top:1px solid var(--border);background:var(
         </div>
       </div>
       <div class="hp-services">
-        <div class="hp-svc">
+        <div class="hp-svc" onclick="window.location='/services#fuel-reports'" style="cursor:pointer;">
           <div class="hp-svc-icon">⛽</div>
           <div><div class="hp-svc-name">Fuel Reporting</div><div class="hp-svc-desc">Weekly & monthly reports</div></div>
           <span class="hp-svc-arrow">→</span>
         </div>
-        <div class="hp-svc">
+        <div class="hp-svc" onclick="window.location='/services#ifta-filings'" style="cursor:pointer;">
           <div class="hp-svc-icon">📑</div>
           <div><div class="hp-svc-name">IFTA Quarterly Filing</div><div class="hp-svc-desc">All 60+ jurisdictions</div></div>
           <span class="hp-svc-arrow">→</span>
         </div>
-        <div class="hp-svc">
+        <div class="hp-svc" onclick="window.location='/services#reefer-returns'" style="cursor:pointer;">
           <div class="hp-svc-icon">❄️</div>
           <div><div class="hp-svc-name">Reefer Diesel Returns</div><div class="hp-svc-desc">Maximum refunds</div></div>
           <span class="hp-svc-arrow">→</span>
