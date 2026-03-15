@@ -139,6 +139,27 @@ body::before {
   .top-bar { padding: 14px 16px; }
   .bar-logo { font-size: 18px; }
 }
+.form-launch-card {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; position: relative; text-align: center;
+}
+.form-launch-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--cyan2), transparent); }
+.flc-inner { padding: 56px 40px; }
+.flc-icon { font-size: 44px; margin-bottom: 20px; display: block; }
+.flc-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; color: var(--text1); margin-bottom: 10px; }
+.flc-body { font-size: 14px; color: var(--text3); line-height: 1.75; max-width: 420px; margin: 0 auto 32px; }
+.flc-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--cyan); color: #050d1a;
+  padding: 16px 44px; border-radius: 8px;
+  font-weight: 700; font-size: 15px; text-decoration: none; letter-spacing: .3px;
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+.flc-btn:hover { background: var(--cyan2); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(56,189,248,.25); }
+.flc-note { margin-top: 16px; font-size: 12px; color: var(--text4); font-family: 'DM Mono', monospace; letter-spacing: .5px; }
+.flc-checklist { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0 auto 28px; max-width: 500px; }
+.flc-check { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2); background: rgba(56,189,248,.07); border: 1px solid rgba(56,189,248,.15); padding: 7px 14px; border-radius: 100px; }
+.flc-check::before { content: '✓'; color: var(--cyan); font-size: 11px; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -212,26 +233,23 @@ body::before {
         <div class="panel-sub">Complete the form below — we'll set up your reporting schedule within 24 hours</div>
       </div>
     </div>
-    <div class="gform-wrap">
-      <div class="gform-loading" id="loading-fuel">
-        <div class="loading-dot-row">
-          <div class="loading-dot"></div>
-          <div class="loading-dot"></div>
-          <div class="loading-dot"></div>
+    <div class="form-launch-card">
+      <div class="flc-inner">
+        <span class="flc-icon">⛽</span>
+        <div class="flc-title">Fuel Reporting Onboarding Form</div>
+        <p class="flc-body">Complete the secure Google Form to get your fuel reporting set up. Takes about 5 minutes — we'll follow up within 24 hours to confirm your schedule.</p>
+        <div class="flc-checklist">
+          <span class="flc-check">Company details</span>
+          <span class="flc-check">Fleet size</span>
+          <span class="flc-check">Report frequency</span>
+          <span class="flc-check">Data format</span>
         </div>
-        <div class="loading-text">Loading form...</div>
+        <a href="https://forms.gle/ZzyFvLsTAw2orrRF8" target="_blank" rel="noopener" class="flc-btn">
+          Open Onboarding Form →
+        </a>
+        <p class="flc-note">Opens securely in a new tab · Powered by Google Forms</p>
       </div>
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLSfQz6kEJcjxr1r0X0OFXwdp3ADNFAzqFRB28e1B87X7LTpbkQ/viewform?embedded=true&hl=en&usp=pp_url"
-        onload="hideLoader('loading-fuel')"
-        title="Fuel Reporting Onboarding Form"
-        loading="lazy">
-        Loading…
-      </iframe>
     </div>
-    <p style="font-size:12px; color:rgba(255,255,255,0.22); font-family:'DM Mono',monospace; margin-top:12px; text-align:center; letter-spacing:1px;">
-      Having trouble with the form? <a href="https://forms.gle/ZzyFvLsTAw2orrRF8" target="_blank" rel="noopener" style="color:var(--cyan); text-decoration:none;">Open in new tab →</a>
-    </p>
   </div>
 
   <!-- IFTA PANEL -->
@@ -243,26 +261,23 @@ body::before {
         <div class="panel-sub">Complete the form below — we'll prepare for your first quarterly filing within 24 hours</div>
       </div>
     </div>
-    <div class="gform-wrap">
-      <div class="gform-loading" id="loading-ifta">
-        <div class="loading-dot-row">
-          <div class="loading-dot"></div>
-          <div class="loading-dot"></div>
-          <div class="loading-dot"></div>
+    <div class="form-launch-card">
+      <div class="flc-inner">
+        <span class="flc-icon">📑</span>
+        <div class="flc-title">IFTA Quarterly Filing Onboarding Form</div>
+        <p class="flc-body">Complete the secure Google Form to get your IFTA quarterly filings set up. We'll need your base jurisdiction, fleet details, and mileage tracking method.</p>
+        <div class="flc-checklist">
+          <span class="flc-check">Base jurisdiction</span>
+          <span class="flc-check">Fleet & vehicles</span>
+          <span class="flc-check">States operated</span>
+          <span class="flc-check">Mileage tracking</span>
         </div>
-        <div class="loading-text">Loading form...</div>
+        <a href="https://forms.gle/of6nErXJ2RjhaK5U6" target="_blank" rel="noopener" class="flc-btn">
+          Open Onboarding Form →
+        </a>
+        <p class="flc-note">Opens securely in a new tab · Powered by Google Forms</p>
       </div>
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLSeJYz-RlWz5P4hK8GqWxNuFHxD_VBzuIrqJJK_tqVGlQ3Z2oA/viewform?embedded=true&hl=en&usp=pp_url"
-        onload="hideLoader('loading-ifta')"
-        title="IFTA Quarterly Filing Onboarding Form"
-        loading="lazy">
-        Loading…
-      </iframe>
     </div>
-    <p style="font-size:12px; color:rgba(255,255,255,0.22); font-family:'DM Mono',monospace; margin-top:12px; text-align:center; letter-spacing:1px;">
-      Having trouble with the form? <a href="https://forms.gle/of6nErXJ2RjhaK5U6" target="_blank" rel="noopener" style="color:var(--cyan); text-decoration:none;">Open in new tab →</a>
-    </p>
   </div>
 
   <!-- REEFER PANEL -->
@@ -274,26 +289,23 @@ body::before {
         <div class="panel-sub">Complete the form below — we'll identify your refund opportunities within 24 hours</div>
       </div>
     </div>
-    <div class="gform-wrap">
-      <div class="gform-loading" id="loading-reefer">
-        <div class="loading-dot-row">
-          <div class="loading-dot"></div>
-          <div class="loading-dot"></div>
-          <div class="loading-dot"></div>
+    <div class="form-launch-card">
+      <div class="flc-inner">
+        <span class="flc-icon">❄️</span>
+        <div class="flc-title">Reefer Diesel Tax Return Onboarding Form</div>
+        <p class="flc-body">Complete the secure Google Form to maximize your reefer diesel refunds. We'll need your reefer unit details, states operated, and fuel records information.</p>
+        <div class="flc-checklist">
+          <span class="flc-check">Reefer unit details</span>
+          <span class="flc-check">States operated</span>
+          <span class="flc-check">Fuel volume</span>
+          <span class="flc-check">Existing records</span>
         </div>
-        <div class="loading-text">Loading form...</div>
+        <a href="https://forms.gle/93XCEffkqh5vhiyT7" target="_blank" rel="noopener" class="flc-btn">
+          Open Onboarding Form →
+        </a>
+        <p class="flc-note">Opens securely in a new tab · Powered by Google Forms</p>
       </div>
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLSfoTHqnwFHT6OkDEqVcADJq8NW1bNpVhNqNJRJt_GIJ5bLpEw/viewform?embedded=true&hl=en&usp=pp_url"
-        onload="hideLoader('loading-reefer')"
-        title="Reefer Diesel Tax Return Onboarding Form"
-        loading="lazy">
-        Loading…
-      </iframe>
     </div>
-    <p style="font-size:12px; color:rgba(255,255,255,0.22); font-family:'DM Mono',monospace; margin-top:12px; text-align:center; letter-spacing:1px;">
-      Having trouble with the form? <a href="https://forms.gle/93XCEffkqh5vhiyT7" target="_blank" rel="noopener" style="color:var(--cyan); text-decoration:none;">Open in new tab →</a>
-    </p>
   </div>
 
 </div><!-- /main -->
@@ -317,10 +329,7 @@ function switchTab(svc, el) {
   }, 80);
 }
 
-function hideLoader(id) {
-  const loader = document.getElementById(id);
-  if (loader) loader.classList.add('hidden');
-}
+
 
 // Handle anchor links from get-started.html (#fuel, #ifta, #reefer)
 window.addEventListener('DOMContentLoaded', () => {
