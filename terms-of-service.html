@@ -7,20 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0a0f1e;--bg2:#0d1426;--bg3:#111827;
-  --surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.07);
-  --cyan:#38bdf8;--cyan2:#7dd3fc;--cyanDim:rgba(56,189,248,0.12);--cyanGlow:rgba(56,189,248,0.2);
-  --border:rgba(255,255,255,0.09);--border2:rgba(56,189,248,0.3);
-  --white:#fff;--text1:#f1f5f9;--text2:#cbd5e1;--text3:#94a3b8;--text4:#64748b;
-}
+:root{--bg:#0f1923;--bg2:#131f2e;--bg3:#1a2840;--card:#1e2f44;--card2:#243651;--cyan:#2dd4bf;--cyan2:#5eead4;--cyanDim:rgba(45,212,191,0.12);--cyanGlow:rgba(45,212,191,0.25);--cyanBorder:rgba(45,212,191,0.3);--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);--white:#fff;--text1:#f0f6ff;--text2:#b8cfe8;--text3:#7a9cbd;--text4:#4d7399;}
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
+  background:var(--bg);
   color: var(--white);
   overflow-x: hidden;
 }
@@ -75,7 +69,7 @@ nav {
 
 .mobile-nav {
   display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(8,12,24,.97); z-index: 150;
+  background:rgba(10,18,28,.97); z-index: 150;
   flex-direction: column; align-items: center; justify-content: center;
   gap: 36px; backdrop-filter: blur(20px);
 }
@@ -113,7 +107,7 @@ nav {
 .page-header-label {
   font-family: 'DM Mono', monospace; font-size: 11px;
   letter-spacing: 3px; text-transform: uppercase; color: var(--cyan);
-  margin-bottom: 20px; position: relative; z-index: 2; background: var(--bg2);
+  margin-bottom: 20px; position: relative; z-index: 2; background:var(--bg2);
 }
 .page-header h1 {
   font-family: 'Bebas Neue', sans-serif;
@@ -592,6 +586,9 @@ function closeMobileNav() {
   document.getElementById('hamburger').classList.remove('open');
   document.body.style.overflow = '';
 }
+
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+if(cur&&ring){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});(function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.classList.add('hover');ring.classList.add('hover');});el.addEventListener('mouseleave',()=>{cur.classList.remove('hover');ring.classList.remove('hover');});});}
 </script>
 </body>
 </html>
