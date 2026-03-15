@@ -34,7 +34,8 @@ nav.scrolled{background:rgba(10,15,30,0.92);backdrop-filter:blur(24px);
 .nav-links a{color:var(--text3);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.4px;transition:color .2s;position:relative;}
 .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform .25s;}
 .nav-links a:hover{color:var(--white);}
-.nav-links a:hover::after{transform:scaleX(1);}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-links a.active{color:var(--white);}
 .nav-cta{background:var(--cyan)!important;color:#050d1a!important;padding:9px 22px;border-radius:6px;font-weight:700!important;font-size:13px!important;transition:background .2s,transform .2s,box-shadow .2s!important;}
 .nav-cta::after{display:none!important;}
 .nav-cta:hover{background:var(--cyan2)!important;transform:translateY(-1px);box-shadow:0 6px 20px var(--cyanGlow)!important;}
@@ -278,6 +279,7 @@ footer{padding:60px 48px 36px;border-top:1px solid var(--border);
   footer{grid-template-columns:1fr;}
   .contact-actions{flex-direction:column;align-items:stretch;}
   .contact-actions a{text-align:center;justify-content:center;}
+  #contact .btn-ghost{justify-content:center;}
 }
 </style>
 </head>
@@ -286,16 +288,16 @@ footer{padding:60px 48px 36px;border-top:1px solid var(--border);
 <nav id="nav">
   <a href="/" class="nav-logo">NEXT<span>GEN</span> EXPRESS</a>
   <div class="nav-links">
-    <a href="#services">Services</a>
-    <a href="#process">How It Works</a>
-    <a href="#why">Why Us</a>
+    <a href="/services" id="nav-services">Services</a>
+    <a href="#process" id="nav-process">How It Works</a>
+    <a href="#why" id="nav-why">Why Us</a>
     <a href="/contact" class="nav-cta">Contact</a>
   </div>
   <button class="hamburger" id="hb" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mobile-nav" id="mobileNav">
-  <a href="#services" onclick="closeNav()">Services</a>
+  <a href="/services" onclick="closeNav()">Services</a>
   <a href="#process" onclick="closeNav()">How It Works</a>
   <a href="#why" onclick="closeNav()">Why Us</a>
   <a href="/contact" class="mob-cta" onclick="closeNav()">Contact</a>
@@ -314,7 +316,7 @@ footer{padding:60px 48px 36px;border-top:1px solid var(--border);
     <p class="hero-sub">Professional fuel reporting, IFTA quarterly filings, and reefer diesel tax returns — done for you, every quarter, on time.</p>
     <div class="hero-actions">
       <a href="/contact" class="btn-primary">Get Started Today →</a>
-      <a href="#services" class="btn-ghost">See Our Services</a>
+      <a href="/services" class="btn-ghost">See Our Services</a>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><div class="hero-stat-num" data-count="60">0</div><div class="hero-stat-label">Jurisdictions</div></div>
@@ -448,10 +450,14 @@ footer{padding:60px 48px 36px;border-top:1px solid var(--border);
       <div class="reveal reveal-d3">
         <a href="mailto:info@nextgenexp.com" class="contact-email">✉ info@nextgenexp.com</a>
       </div>
-      <div class="contact-actions reveal reveal-d4">
-        <a href="mailto:info@nextgenexp.com?subject=Fuel Reporting Inquiry" class="btn-primary">Fuel Reporting →</a>
-        <a href="mailto:info@nextgenexp.com?subject=IFTA Filing Inquiry" class="btn-ghost">IFTA Filing →</a>
-        <a href="mailto:info@nextgenexp.com?subject=Reefer Diesel Tax Return Inquiry" class="btn-ghost">Reefer Returns →</a>
+      <div class="reveal reveal-d4" style="display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:28px;">
+        <a href="/get-started" class="btn-primary" style="font-size:16px;padding:18px 52px;letter-spacing:.5px;">Get Started →</a>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+          <a href="mailto:info@nextgenexp.com?subject=Fuel Reporting Inquiry" class="btn-ghost" style="font-size:13px;padding:10px 20px;">⛽ Fuel Reporting</a>
+          <a href="mailto:info@nextgenexp.com?subject=IFTA Filing Inquiry" class="btn-ghost" style="font-size:13px;padding:10px 20px;">📑 IFTA Filing</a>
+          <a href="mailto:info@nextgenexp.com?subject=Reefer Diesel Tax Return Inquiry" class="btn-ghost" style="font-size:13px;padding:10px 20px;">❄️ Reefer Returns</a>
+        </div>
+        <p style="font-size:12px;color:var(--text4);font-family:'DM Mono',monospace;letter-spacing:.5px;">or email us directly at <a href="mailto:info@nextgenexp.com" style="color:var(--cyan);text-decoration:none;">info@nextgenexp.com</a></p>
       </div>
     </div>
   </div>
@@ -473,9 +479,23 @@ footer{padding:60px 48px 36px;border-top:1px solid var(--border);
 </div>
 
 <script>
-// Nav scroll
+// Nav scroll + active highlight
 const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50));
+const navLinks={process:document.getElementById('nav-process'),why:document.getElementById('nav-why')};
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',scrollY>50);
+  // Highlight nav link for current section
+  const sections=[
+    {id:'process',el:document.getElementById('process')},
+    {id:'why',el:document.getElementById('why')},
+    {id:'contact',el:document.getElementById('contact')}
+  ];
+  let active='';
+  sections.forEach(s=>{if(s.el&&scrollY>=s.el.offsetTop-120)active=s.id;});
+  Object.keys(navLinks).forEach(k=>{
+    if(navLinks[k])navLinks[k].classList.toggle('active',k===active);
+  });
+});
 
 // Mobile nav
 function toggleNav(){const mn=document.getElementById('mobileNav'),hb=document.getElementById('hb');const o=mn.classList.toggle('open');hb.classList.toggle('open');document.body.style.overflow=o?'hidden':'';}
