@@ -440,9 +440,9 @@ footer{padding:64px 56px 40px;border-top:1px solid var(--border);background:var(
       <div class="hp-deadline">
         <div>
           <div class="hp-dl-label">Next IFTA Deadline</div>
-          <div class="hp-dl-val">Q1 2026 → April 30</div>
+          <div class="hp-dl-val" id="nextDeadlineVal">—</div>
         </div>
-        <span class="hp-dl-badge">Coming Up</span>
+        <span class="hp-dl-badge" id="nextDeadlineBadge">—</span>
       </div>
     </div>
   </div>
@@ -685,6 +685,28 @@ function runCounters(parent){
 }
 const co=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){runCounters(e.target);co.unobserve(e.target);}}),{threshold:.3});
 document.querySelectorAll('.hp-stats,.pv-stats').forEach(el=>co.observe(el));
+
+/* ── AUTO IFTA DEADLINE ── */
+(function(){
+  const now=new Date(),y=now.getFullYear();
+  const deadlines=[
+    {label:`Q1 ${y} → April 30`,    date:new Date(y,3,30),  q:'Q1'},
+    {label:`Q2 ${y} → July 31`,     date:new Date(y,6,31),  q:'Q2'},
+    {label:`Q3 ${y} → October 31`,  date:new Date(y,9,31),  q:'Q3'},
+    {label:`Q4 ${y} → Jan 31 ${y+1}`,date:new Date(y+1,0,31),q:'Q4'},
+  ];
+  const next=deadlines.find(d=>d.date>=now);
+  if(!next)return;
+  const days=Math.ceil((next.date-now)/(864e5));
+  let badge,bg,bc,col;
+  if(days<=14){badge=`${days}d Left`;bg='rgba(239,68,68,.15)';bc='rgba(239,68,68,.3)';col='#f87171';}
+  else if(days<=30){badge=`${days}d Left`;bg='rgba(249,115,22,.15)';bc='rgba(249,115,22,.3)';col='#fb923c';}
+  else if(days<=60){badge=`${days}d Away`;bg='rgba(249,115,22,.12)';bc='rgba(249,115,22,.25)';col='#fb923c';}
+  else{badge=next.q+' Due';bg='rgba(45,212,191,.1)';bc='rgba(45,212,191,.25)';col='#2dd4bf';}
+  const v=document.getElementById('nextDeadlineVal'),b=document.getElementById('nextDeadlineBadge');
+  if(v)v.textContent=next.label;
+  if(b){b.textContent=badge;b.style.background=bg;b.style.borderColor=bc;b.style.color=col;}
+})();
 </script>
 </body>
 </html>
