@@ -1,177 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Contact — NextGen Express</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0f1e;--bg2:#0d1426;--bg3:#111827;--surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.07);--cyan:#38bdf8;--cyan2:#7dd3fc;--cyanDim:rgba(56,189,248,0.12);--cyanGlow:rgba(56,189,248,0.2);--border:rgba(255,255,255,0.09);--border2:rgba(56,189,248,0.3);--white:#fff;--text1:#f1f5f9;--text2:#cbd5e1;--text3:#94a3b8;--text4:#64748b;}
+:root{--bg:#0f1923;--bg2:#131f2e;--card:#1e2f44;--card2:#243651;--cyan:#2dd4bf;--cyan2:#5eead4;--cyanDim:rgba(45,212,191,0.12);--cyanGlow:rgba(45,212,191,0.25);--cyanBorder:rgba(45,212,191,0.3);--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);--white:#fff;--text1:#f0f6ff;--text2:#b8cfe8;--text3:#7a9cbd;--text4:#4d7399;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text1);overflow-x:hidden;line-height:1.6;min-height:100vh;display:flex;flex-direction:column;}
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,15,30,0.92);backdrop-filter:blur(24px);box-shadow:0 1px 0 var(--border);}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2.5px;color:var(--white);text-decoration:none;}
-.nav-logo span{color:var(--cyan);}
-.nav-links{display:flex;gap:32px;align-items:center;}
-.nav-links a{color:var(--text3);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s;position:relative;}
-.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform .25s;}
-.nav-links a:hover,.nav-links a.active{color:var(--white);}
-.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
-.nav-cta{background:var(--cyan)!important;color:#050d1a!important;padding:9px 22px;border-radius:6px;font-weight:700!important;transition:background .2s,box-shadow .2s!important;}
-.nav-cta::after{display:none!important;}
-.nav-cta:hover{background:var(--cyan2)!important;box-shadow:0 6px 20px var(--cyanGlow)!important;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text1);overflow-x:hidden;line-height:1.6;cursor:none;min-height:100vh;display:flex;flex-direction:column;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.cursor{position:fixed;width:10px;height:10px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;mix-blend-mode:difference;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid var(--cyan);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .1s ease;opacity:.6;}
+.cursor.hover{width:16px;height:16px;}.cursor-ring.hover{width:56px;height:56px;opacity:.3;}.cursor-ring.click{width:28px;height:28px;}
+@media(max-width:768px){.cursor,.cursor-ring{display:none;}body{cursor:auto;}}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:70px;padding:0 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(15,25,35,0.88);backdrop-filter:blur(28px);box-shadow:0 1px 0 var(--border);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:23px;letter-spacing:3px;color:var(--white);text-decoration:none;}
+.nav-logo .accent{color:var(--cyan);}
+.nav-links{display:flex;gap:36px;align-items:center;}
+.nav-links a{color:var(--text3);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.5px;transition:color .2s;position:relative;padding-bottom:4px;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--cyan);transition:width .3s;}
+.nav-links a:hover,.nav-links a.active{color:var(--text1);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-cta{background:var(--cyan)!important;color:#051a17!important;padding:10px 24px!important;border-radius:8px!important;font-weight:700!important;font-size:13px!important;transition:background .2s,transform .2s,box-shadow .2s!important;}
+.nav-cta::after{display:none!important;}.nav-cta:hover{background:var(--cyan2)!important;transform:translateY(-1px)!important;box-shadow:0 8px 24px var(--cyanGlow)!important;}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;}
 .hamburger span{display:block;width:22px;height:2px;background:var(--text2);border-radius:2px;transition:all .3s;}
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
-.hamburger.open span:nth-child(2){opacity:0;}
-.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
-.mobile-nav{display:none;position:fixed;inset:0;background:rgba(8,12,24,.97);z-index:190;flex-direction:column;align-items:center;justify-content:center;gap:40px;backdrop-filter:blur(20px);}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}.hamburger.open span:nth-child(2){opacity:0;}.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-nav{display:none;position:fixed;inset:0;z-index:490;background:rgba(10,18,28,.97);backdrop-filter:blur(24px);flex-direction:column;align-items:center;justify-content:center;gap:44px;}
 .mobile-nav.open{display:flex;}
-.mobile-nav a{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:2px;color:var(--text2);text-decoration:none;transition:color .2s,transform .2s;}
-.mobile-nav a:hover{color:var(--cyan);transform:translateX(8px);}
-.mobile-nav .mob-cta{font-size:28px;background:var(--cyan);color:#050d1a;padding:14px 48px;border-radius:8px;}
+.mobile-nav a{font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:3px;color:rgba(240,246,255,.6);text-decoration:none;transition:color .2s,transform .2s;}
+.mobile-nav a:hover{color:var(--cyan);transform:translateX(10px);}
+.mobile-nav .mob-cta{background:var(--cyan);color:#051a17;padding:16px 52px;border-radius:10px;font-size:30px;}
 
-.page-header{padding:120px 48px 72px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
-.ph-glow{position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(56,189,248,.08),transparent 70%);top:50%;left:-80px;transform:translateY(-50%);pointer-events:none;}
-.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(56,189,248,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.03) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 70% 80% at 15% 50%,black,transparent);pointer-events:none;}
-.ph-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;position:relative;z-index:2;opacity:.8;}
-.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,96px);line-height:.9;margin-bottom:18px;position:relative;z-index:2;}
+.page-header{padding:130px 56px 80px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.ph-mesh{position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 15% 50%,rgba(45,212,191,.06),transparent 65%);pointer-events:none;}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 80% 80% at 15% 50%,black,transparent);pointer-events:none;}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:18px;position:relative;z-index:2;opacity:.9;}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,96px);line-height:.9;margin-bottom:20px;position:relative;z-index:2;}
 .ph-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--cyan);}
-.ph-sub{font-size:16px;color:var(--text3);max-width:460px;line-height:1.7;position:relative;z-index:2;font-weight:300;}
+.ph-sub{font-size:16px;color:var(--text2);max-width:480px;line-height:1.75;position:relative;z-index:2;font-weight:300;}
 
-.contact-main{flex:1;padding:96px 48px 110px;position:relative;z-index:2;}
-.contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:72px;max-width:1060px;margin:0 auto;align-items:start;}
+.contact-main{flex:1;padding:96px 56px 110px;position:relative;z-index:2;}
+.contact-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:72px;max-width:1060px;margin:0 auto;align-items:start;}
 
-.info-col{}
-.response-pill{display:inline-flex;align-items:center;gap:10px;background:var(--cyanDim);border:1px solid rgba(56,189,248,.2);padding:9px 16px;border-radius:100px;margin-bottom:40px;}
-.pill-dot{width:7px;height:7px;background:var(--cyan);border-radius:50%;animation:pulseDot 2s infinite;}
-@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.7);}}
-.pill-text{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--text2);}
+.live-pill{display:inline-flex;align-items:center;gap:10px;background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.22);padding:9px 16px;border-radius:100px;margin-bottom:40px;}
+.pill-dot{width:7px;height:7px;background:var(--cyan);border-radius:50%;position:relative;}
+.pill-dot::after{content:'';position:absolute;inset:-3px;border:1.5px solid var(--cyan);border-radius:50%;animation:ripple 2s infinite;}
+@keyframes ripple{0%{transform:scale(1);opacity:.8;}100%{transform:scale(2.2);opacity:0;}}
+.pill-text{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan);}
 
 .info-block{margin-bottom:36px;}
 .ib-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan);opacity:.7;margin-bottom:8px;}
-.ib-val{font-size:16px;color:var(--text1);font-weight:400;}
-.ib-val a{color:var(--cyan);text-decoration:none;transition:opacity .2s;}
-.ib-val a:hover{opacity:.7;}
+.ib-val{font-size:16px;color:var(--text1);font-weight:500;}
+.ib-val a{color:var(--cyan);text-decoration:none;transition:opacity .2s;}.ib-val a:hover{opacity:.7;}
 .ib-sub{font-size:13px;color:var(--text4);margin-top:3px;}
 
-.quick-links{margin-top:8px;}
+.ql-section{margin-top:8px;}
 .ql-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text4);margin-bottom:12px;}
-.ql-link{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:1px solid var(--border);background:var(--surface);text-decoration:none;color:var(--text2);font-size:13px;margin-bottom:2px;border-radius:6px;transition:background .2s,border-color .2s,color .2s,transform .2s;}
-.ql-link:hover{background:var(--surface2);border-color:var(--border2);color:var(--cyan);transform:translateX(4px);}
-.ql-arrow{font-family:'DM Mono',monospace;font-size:12px;color:var(--cyan);opacity:.5;}
+.ql-link{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text2);font-size:13px;margin-bottom:6px;transition:background .2s,border-color .2s,color .2s,transform .2s;}
+.ql-link:hover{background:var(--card2);border-color:var(--cyanBorder);color:var(--cyan);transform:translateX(4px);}
+.ql-arrow{font-size:14px;color:var(--cyan);opacity:0;transition:opacity .2s,transform .2s;}
+.ql-link:hover .ql-arrow{opacity:1;transform:translateX(4px);}
 
-.form-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;position:relative;}
+.form-card{background:var(--card);border:1px solid var(--border2);border-radius:16px;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.35);}
 .form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--cyan2),transparent);}
 .form-hd{padding:28px 36px;border-bottom:1px solid var(--border);}
 .form-hd h2{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:var(--text1);}
 .form-hd p{font-size:13px;color:var(--text3);margin-top:4px;}
 .form-body{padding:36px;}
-
 .f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
 .f-row.full{grid-template-columns:1fr;}
 .field{display:flex;flex-direction:column;gap:7px;}
 .field label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);}
-.field input,.field select,.field textarea{background:var(--surface2);border:1px solid rgba(255,255,255,0.12);color:var(--text1);font-family:'DM Sans',sans-serif;font-size:14px;padding:13px 16px;border-radius:8px;outline:none;transition:border-color .2s,background .2s,box-shadow .2s;width:100%;}
+.field input,.field select,.field textarea{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:var(--text1);font-family:'DM Sans',sans-serif;font-size:14px;padding:13px 16px;border-radius:10px;outline:none;transition:border-color .2s,background .2s,box-shadow .2s;width:100%;}
 .field input::placeholder,.field textarea::placeholder{color:var(--text4);}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(56,189,248,.5);background:rgba(56,189,248,.06);box-shadow:0 0 0 3px rgba(56,189,248,.08);}
-.field select{appearance:none;cursor:pointer;}
-.field select option{background:#0d1426;color:var(--text1);}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(45,212,191,.5);background:rgba(45,212,191,.06);box-shadow:0 0 0 3px rgba(45,212,191,.08);}
+.field select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a9cbd' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;}
+.field select option{background:#1e2f44;color:var(--text1);}
 .field textarea{resize:vertical;min-height:120px;}
 .f-divider{height:1px;background:var(--border);margin:20px 0;}
-.btn-submit{width:100%;background:var(--cyan);color:#050d1a;padding:15px;border-radius:8px;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:6px;letter-spacing:.3px;}
+.btn-submit{width:100%;background:var(--cyan);color:#051a17;padding:16px;border-radius:10px;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:6px;letter-spacing:.3px;}
 .btn-submit:hover{background:var(--cyan2);transform:translateY(-2px);box-shadow:0 12px 36px var(--cyanGlow);}
 .form-note{font-size:12px;color:var(--text4);font-family:'DM Mono',monospace;text-align:center;margin-top:12px;letter-spacing:.3px;}
 
-footer{padding:56px 48px 32px;border-top:1px solid var(--border);display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;background:var(--bg2);position:relative;z-index:2;}
-.foot-brand .nav-logo{display:block;margin-bottom:12px;font-size:22px;}
-.foot-brand p{font-size:13px;color:var(--text4);line-height:1.7;max-width:240px;}
-.foot-col h4{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;opacity:.8;}
-.foot-col a,.foot-col p{display:block;color:var(--text4);text-decoration:none;font-size:13px;margin-bottom:8px;transition:color .2s;}
-.foot-col a:hover{color:var(--text2);}
-.foot-btm{padding:18px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg2);position:relative;z-index:2;}
-.foot-btm p{font-size:11px;color:var(--text4);font-family:'DM Mono',monospace;}
+footer{padding:64px 56px 40px;border-top:1px solid var(--border);background:var(--bg2);display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;position:relative;z-index:2;}
+.foot-logo{display:block;margin-bottom:14px;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--white);text-decoration:none;}
+.foot-logo .accent{color:var(--cyan);}
+.foot-tagline{font-size:13px;color:var(--text4);line-height:1.7;max-width:240px;}
+.foot-col h4{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan);margin-bottom:18px;opacity:.8;}
+.foot-col a,.foot-col p{display:block;color:var(--text4);text-decoration:none;font-size:13px;margin-bottom:9px;transition:color .2s;}
+.foot-col a:hover{color:var(--text1);}
+.foot-bottom{padding:20px 56px;border-top:1px solid var(--border);background:var(--bg2);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2;}
+.foot-bottom p{font-size:11px;color:var(--text4);font-family:'DM Mono',monospace;}
 
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);}
 .reveal.visible{opacity:1;transform:none;}
-.reveal-d1{transition-delay:.1s;}.reveal-d2{transition-delay:.2s;}
+.reveal-r{opacity:0;transform:translateX(28px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);}
+.reveal-r.visible{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}
 
 @media(max-width:960px){
-  nav{padding:0 20px;}
-  .nav-links{display:none;}
-  .hamburger{display:flex;}
+  nav{padding:0 20px;}.nav-links{display:none;}.hamburger{display:flex;}
   .page-header{padding:100px 24px 56px;}
   .contact-main{padding:64px 24px 80px;}
   .contact-grid{grid-template-columns:1fr;gap:48px;}
   .f-row{grid-template-columns:1fr;}
-  .form-hd{padding:22px 24px;}
-  .form-body{padding:24px;}
+  .form-hd{padding:22px 24px;}.form-body{padding:24px;}
   footer{grid-template-columns:1fr 1fr;padding:36px 24px 20px;gap:28px;}
-  .foot-btm{padding:14px 24px;flex-direction:column;gap:4px;text-align:center;}
+  .foot-bottom{padding:14px 24px;flex-direction:column;gap:4px;text-align:center;}
 }
 @media(max-width:480px){footer{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
+<div class="cursor" id="cursor"></div><div class="cursor-ring" id="cursorRing"></div>
 <nav>
-  <a href="/" class="nav-logo">NEXT<span>GEN</span> EXPRESS</a>
+  <a href="/" class="nav-logo">NEXT<span class="accent">GEN</span> EXPRESS</a>
   <div class="nav-links">
-    <a href="/">Home</a>
-    <a href="/services">Services</a>
-    <a href="/#why">Why Us</a>
+    <a href="/services">Services</a><a href="/#process">How It Works</a><a href="/#why">Why Us</a>
     <a href="/contact" class="active nav-cta">Contact</a>
   </div>
   <button class="hamburger" id="hb" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
-<div class="mobile-nav" id="mn">
-  <a href="/" onclick="closeNav()">Home</a>
-  <a href="/services" onclick="closeNav()">Services</a>
-  <a href="/#why" onclick="closeNav()">Why Us</a>
+<div class="mobile-nav" id="mobileNav">
+  <a href="/services" onclick="closeNav()">Services</a><a href="/#process" onclick="closeNav()">How It Works</a><a href="/#why" onclick="closeNav()">Why Us</a>
   <a href="/contact" class="mob-cta" onclick="closeNav()">Contact</a>
 </div>
 
 <div class="page-header">
-  <div class="ph-grid"></div><div class="ph-glow"></div>
-  <div class="ph-label">Reach Out</div>
+  <div class="ph-mesh"></div><div class="ph-grid"></div>
+  <div class="ph-eyebrow">Reach Out</div>
   <h1 class="ph-title">GET IN <em>TOUCH</em></h1>
   <p class="ph-sub">Have a question or ready to get started? We respond to every inquiry within 24 hours.</p>
 </div>
 
 <div class="contact-main">
   <div class="contact-grid">
-    <div class="info-col">
-      <div class="response-pill reveal">
+    <div>
+      <div class="live-pill reveal">
         <span class="pill-dot"></span>
-        <span class="pill-text">Typically responds within 24 hours</span>
+        <span class="pill-text">Responds within 24 hours</span>
       </div>
-      <div class="info-block reveal reveal-d1">
+      <div class="info-block reveal d1">
         <div class="ib-label">Email</div>
         <div class="ib-val"><a href="mailto:info@nextgenexp.com">info@nextgenexp.com</a></div>
       </div>
-      <div class="info-block reveal reveal-d1">
+      <div class="info-block reveal d1">
         <div class="ib-label">Business Hours</div>
         <div class="ib-val">Mon – Fri, 9am – 6pm PT</div>
         <div class="ib-sub">Extended hours during tax season</div>
       </div>
-      <div class="info-block reveal reveal-d2">
+      <div class="info-block reveal d2">
         <div class="ib-label">Service Area</div>
         <div class="ib-val">All 50 US States</div>
-        <div class="ib-sub">+ Canadian provinces</div>
+        <div class="ib-sub">+ All Canadian provinces</div>
       </div>
-      <div class="quick-links reveal reveal-d2">
+      <div class="ql-section reveal d2">
         <div class="ql-label">Quick Service Inquiries</div>
         <a href="mailto:info@nextgenexp.com?subject=Fuel Reporting Inquiry" class="ql-link">⛽ Fuel Reporting<span class="ql-arrow">→</span></a>
         <a href="mailto:info@nextgenexp.com?subject=IFTA Filing Inquiry" class="ql-link">📑 IFTA Quarterly Filing<span class="ql-arrow">→</span></a>
         <a href="mailto:info@nextgenexp.com?subject=Reefer Diesel Tax Return Inquiry" class="ql-link">❄️ Reefer Diesel Returns<span class="ql-arrow">→</span></a>
       </div>
     </div>
-
-    <div class="form-card reveal reveal-d1">
+    <div class="form-card reveal-r d1">
       <div class="form-hd">
         <h2>SEND US A MESSAGE</h2>
-        <p>We'll follow up at your email address within 24 hours</p>
+        <p>We'll follow up at your email within 24 hours</p>
       </div>
       <div class="form-body">
         <form action="https://formspree.io/f/xlggwyrj" method="POST">
@@ -187,17 +182,14 @@ footer{padding:56px 48px 32px;border-top:1px solid var(--border);display:grid;gr
             <div class="field"><label>Service You're Interested In</label>
               <select name="service">
                 <option value="" disabled selected>Select a service</option>
-                <option>Fuel Reporting</option>
-                <option>IFTA Quarterly Filing</option>
-                <option>Reefer Diesel Tax Returns</option>
-                <option>Multiple Services</option>
-                <option>Not Sure Yet</option>
+                <option>Fuel Reporting</option><option>IFTA Quarterly Filing</option>
+                <option>Reefer Diesel Tax Returns</option><option>Multiple Services</option><option>Not Sure Yet</option>
               </select>
             </div>
           </div>
           <div class="f-divider"></div>
           <div class="f-row full">
-            <div class="field"><label>Your Message *</label><textarea name="message" placeholder="Tell us about your fleet, what you need, or any questions you have..." required></textarea></div>
+            <div class="field"><label>Your Message *</label><textarea name="message" placeholder="Tell us about your fleet, what you need, or any questions..." required></textarea></div>
           </div>
           <input type="hidden" name="_subject" value="Website Contact — NextGen Express">
           <input type="text" name="_gotcha" style="display:none">
@@ -210,18 +202,20 @@ footer{padding:56px 48px 32px;border-top:1px solid var(--border);display:grid;gr
 </div>
 
 <footer>
-  <div class="foot-brand"><a href="/" class="nav-logo">NEXT<span>GEN</span> EXPRESS</a><p>Professional trucking tax compliance. IFTA filings, fuel reporting, and reefer diesel returns.</p></div>
-  <div class="foot-col"><h4>Services</h4><a href="/services#fuel-reports">Fuel Reporting</a><a href="/services#ifta-filings">IFTA Quarterly Filings</a><a href="/services#reefer-returns">Reefer Diesel Returns</a></div>
+  <div><a href="/" class="foot-logo">NEXT<span class="accent">GEN</span> EXPRESS</a><p class="foot-tagline">Professional trucking tax compliance. IFTA filings, fuel reporting, and reefer diesel returns.</p></div>
+  <div class="foot-col"><h4>Services</h4><a href="/services">Fuel Reporting</a><a href="/services">IFTA Quarterly Filings</a><a href="/services">Reefer Diesel Returns</a></div>
   <div class="foot-col"><h4>Company</h4><a href="/">Home</a><a href="/services">Services</a><a href="/contact">Contact</a></div>
   <div class="foot-col"><h4>Legal</h4><a href="/terms-of-service">Terms of Service</a><p>info@nextgenexp.com</p></div>
 </footer>
-<div class="foot-btm"><p>© 2026 NextGen Express. All rights reserved.</p><p>nextgenexp.com</p></div>
+<div class="foot-bottom"><p>© 2026 NextGen Express. All rights reserved.</p><p>nextgenexp.com</p></div>
 
 <script>
-function toggleNav(){const mn=document.getElementById('mn'),hb=document.getElementById('hb');const o=mn.classList.toggle('open');hb.classList.toggle('open');document.body.style.overflow=o?'hidden':'';}
-function closeNav(){document.getElementById('mn').classList.remove('open');document.getElementById('hb').classList.remove('open');document.body.style.overflow='';}
-const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+if(cur&&ring){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});(function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.classList.add('hover');ring.classList.add('hover');});el.addEventListener('mouseleave',()=>{cur.classList.remove('hover');ring.classList.remove('hover');});});document.addEventListener('mousedown',()=>ring.classList.add('click'));document.addEventListener('mouseup',()=>ring.classList.remove('click'));}
+function toggleNav(){const mn=document.getElementById('mobileNav'),hb=document.getElementById('hb');const o=mn.classList.toggle('open');hb.classList.toggle('open');document.body.style.overflow=o?'hidden':'';}
+function closeNav(){document.getElementById('mobileNav').classList.remove('open');document.getElementById('hb').classList.remove('open');document.body.style.overflow='';}
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.08});
+document.querySelectorAll('.reveal,.reveal-r').forEach(el=>ro.observe(el));
 </script>
 </body>
 </html>
