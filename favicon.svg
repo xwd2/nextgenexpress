@@ -1,0 +1,29 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background square with rounded corners, deep navy -->
+  <rect width="180" height="180" rx="40" fill="#0d1017"/>
+
+  <!-- Hexagon centered, slightly inset -->
+  <polygon
+    points="90,18 156,54 156,126 90,162 24,126 24,54"
+    fill="url(#hex-grad)"
+    stroke="rgba(255,255,255,0.12)"
+    stroke-width="2"
+  />
+
+  <!-- Signal / chevron mark — same proportions as the site logo -->
+  <polyline
+    points="57,104 76,79 102,113 121,88"
+    stroke="white"
+    stroke-width="11"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+
+  <defs>
+    <linearGradient id="hex-grad" x1="24" y1="18" x2="156" y2="162" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1e2a3a"/>
+      <stop offset="100%" stop-color="#0c1018"/>
+    </linearGradient>
+  </defs>
+</svg>
